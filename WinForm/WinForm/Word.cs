@@ -46,14 +46,15 @@ namespace WinForm
             agregarEncabezado(document, Textos.encabezadoBEV(plan),new Font("Times New Roman") , 12);
         }
 
-        private static void imagenesBEV(Plan plan, DocX document)
+        private static void imagenesBEV(Plan plan, DocX document, string gantrySetUp1, string tamSetUp1, string gantrySetUp2, string tamSetUp2)
         {
             List<string> imagenes = IO.obtenerImagenes(plan.nombre);
             for (int i=0;i<plan.cantidadDeCampos;i++)
             {
                 insertarImagen(document, imagenes[i], 11, Alignment.left, Textos.parametrosCampoTto(plan.listaCampos[i]));
             }
-
+            insertarImagen(document, imagenes[plan.cantidadDeCampos], 11, Alignment.left, Textos.parametrosCampoSetUp(gantrySetUp1, tamSetUp1));
+            insertarImagen(document, imagenes[plan.cantidadDeCampos+1], 11, Alignment.left, Textos.parametrosCampoSetUp(gantrySetUp2, tamSetUp2));
         }
 
         
@@ -61,7 +62,7 @@ namespace WinForm
         {
             DocX document = DocX.Create("BEV.doc");
             encabezadoBEV(plan, document);
-            imagenesBEV(plan, document);
+            imagenesBEV(plan, document,"180","10x10","270","15x10");
             string aux = IO.pathDestino + plan.nombre[0] + ", " + plan.nombre[1] + " " + plan.ID + "\\BEV.doc";
             salvarArchivo(document, aux);
         }
