@@ -15,8 +15,8 @@ namespace ConsoleApp1
 		public double dosisTotal {get;set;}
 		public int modalidad {get; set;} //0 para 3D, 1 para IMRT SyS, 2 para IMRT mod
 		public string equipo {get;set;}
-		public string isocentro {get;set;}
-		public int numeroDeCampos {get; set;}		
+		public int cantidadDeCampos {get; set;}
+		public int numeroParametros {et;
 		public List<campo> listaCampos {get;set;}
 	}
 }

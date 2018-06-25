@@ -17,7 +17,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            string[] lista = obtenerImagenes();
+           /* string[] lista = obtenerImagenes();
             using (DocX document = DocX.Create("prueba.docx"))
             {
                 Paragraph paragraph = document.InsertParagraph();
@@ -28,6 +28,14 @@ namespace ConsoleApp1
                 }
                 agregarEncabezado(document);
                 salvarArchivo(document, "prueba.docx");
+            }*/
+            
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Archivos ppf(.ppf)|*.ppf|All Files (*.*)|*.*";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string[] fid = extraer.cargar(openFileDialog1.FileName);
+                Extraer.extraerPlan(fid);
             }
         }
         private static DocX abrirArchivo(string pathAbrir)
