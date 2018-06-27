@@ -29,6 +29,8 @@ namespace WinForm
                 Plan plan = Extraer.extraerPlan(fid);
                 IO.crearCarpeta(plan.nombre[0]+", " + plan.nombre[1], plan.ID);
                 Word.crearArchivoBEV(plan);
+                Word.crearArchivoInforme(plan);
+
 
             }
         }

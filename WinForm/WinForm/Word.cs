@@ -28,12 +28,14 @@ namespace WinForm
             paragraph.InsertText(textoExtra);
             paragraph.Alignment = alineacion;
         }
-        private static void agregarEncabezado(DocX document, string texto, Font fuente, int tamaño)
+        private static void agregarEncabezado(DocX document, string texto, Font fuente, int tamaño, Alignment alineacion)
         {
-            document.AddHeaders();
-            document.Headers.Even.InsertParagraph().Font(fuente).FontSize(tamaño).InsertText(texto);
-            document.Headers.Odd.InsertParagraph().Font(fuente).FontSize(tamaño).InsertText(texto);
-            document.Headers.First.InsertParagraph().Font(fuente).FontSize(tamaño).InsertText(texto);
+            document.Headers.Odd.InsertParagraph().Font(fuente).FontSize(tamaño).Append(texto).Alignment = alineacion;
+        }
+
+        private static void agregarEncabezadoNegrita(DocX document, string texto, Font fuente, int tamaño, Alignment alineacion)
+        {
+            document.Headers.Odd.InsertParagraph().Font(fuente).FontSize(tamaño).Append(texto).Bold().Alignment = alineacion;
         }
 
         private static void salvarArchivo(DocX document, string pathGuardar)
@@ -43,7 +45,9 @@ namespace WinForm
 
         private static void encabezadoBEV(Plan plan, DocX document)
         {
-            agregarEncabezado(document, Textos.encabezadoBEV(plan),new Font("Times New Roman") , 12);
+            document.AddHeaders();
+            agregarEncabezado(document, Textos.encabezadoBEV1(plan),new Font("Times New Roman") , 12, Alignment.left);
+            agregarEncabezado(document, Textos.encabezadoBEV2(plan), new Font("Times New Roman"), 12, Alignment.center);
         }
 
         private static void imagenesBEV(Plan plan, DocX document, string gantrySetUp1, string tamSetUp1, string gantrySetUp2, string tamSetUp2)
@@ -61,12 +65,31 @@ namespace WinForm
         public static void crearArchivoBEV(Plan plan)
         {
             DocX document = DocX.Create("BEV.doc");
+            document.DifferentFirstPage = false;
+            document.DifferentFirstPage = false; //para que todos los encabezados sean iguales
             encabezadoBEV(plan, document);
             imagenesBEV(plan, document,"180","10x10","270","15x10");
             string aux = IO.pathDestino + plan.nombre[0] + ", " + plan.nombre[1] + " " + plan.ID + "\\BEV.doc";
             salvarArchivo(document, aux);
         }
 
+        private static void encabezadoInforme(Plan plan, DocX document)
+        {
+            document.AddHeaders();
+            agregarEncabezadoNegrita(document, Textos.encabezadoInformeLinea1(plan), new Font("Times New Roman"), 14, Alignment.left);
+            agregarEncabezado(document, Textos.encabezadoInformeLinea2(plan), new Font("Times New Roman"), 12, Alignment.left);
+            agregarEncabezado(document, Textos.encabezadoInformeLinea3(plan), new Font("Times New Roman"), 12, Alignment.center);
+        }
+
+        public static void crearArchivoInforme(Plan plan)
+        {
+            DocX document = DocX.Create("BEV.doc");
+            document.DifferentFirstPage = false;
+            document.DifferentFirstPage = false; //para que todos los encabezados sean iguales
+            encabezadoInforme(plan,document);
+            string aux = IO.pathDestino + plan.nombre[0] + ", " + plan.nombre[1] + " " + plan.ID + "\\Informe.doc";
+            salvarArchivo(document, aux);
+        }
        
     }
 }

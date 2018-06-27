@@ -13,12 +13,12 @@ namespace WinForm
     {
         public static string encabezadoBEV1(Plan plan) //cambiar tabulado
         {
-            return "Nombre: " + plan.nombre[0] + ", " + plan.nombre[1] + "\t HC: " + plan.ID + "\t" + DateTime.Today.ToShortDateString();
+            return "Nombre: " + plan.nombre[0] + ", " + plan.nombre[1] + "                       HC: " + plan.ID + "                      " + DateTime.Today.ToShortDateString();
         }
         
-        public static string encabezadooBEV(Plan plan) //centrado
+        public static string encabezadoBEV2(Plan plan) //centrado
         {
-            return "\n etapa " + "etapaPONER" + " – " + "isoPoner" + " – Equipo " + plan.equipo;
+            return "etapa " + "etapaPONER" + " – " + "isoPoner" + " – Equipo " + plan.equipo;
         }
         
         public static string parametrosCampoTto(Campo campo)
@@ -35,35 +35,43 @@ namespace WinForm
             return "G=" + gantry + ", " + tamanoCampo;
         }
         
-        public satic string encabezadoInformeLinea1(Plan plan) //Times 14, negrita
+        public static string encabezadoInformeLinea1(Plan plan) //Times 14, negrita
         {
+            string mod = "";
             if (plan.modalidad==0)
             {
-                string mod = "T3DC";
-                //string modalidad = "tridimensional conformado"
+                mod = "T3DC";
             }
             else
             {
-                string mod = "TIMRT";
-                //string modalidad = "con intensidad modulada"
+                mod = "IMRT";
             }
             
             return mod + "	                        Centro Médico Mevaterapia		" + DateTime.Today.ToShortDateString();
         }
         
-        public satic string encabezadoInformeLinea2(Plan plan) //Times 12
+        public static string encabezadoInformeLinea2(Plan plan) //Times 12
         {
             return "Paciente: " + plan.nombre[0] + ", " + plan.nombre[1] + "	             HC: " + plan.ID;
         }
         
         public static string encabezadoInformeLinea3(Plan plan) //Times 12 // centrado
         {
-            return "Tratamiento tridimensional conformado de " plan.patologia;
+            string mod = "";
+            if (plan.modalidad == 0)
+            {
+                mod = "tridimensional conformado de ";
+            }
+            else
+            {
+                mod = "con intensidad modulada de ";
+            }
+            return "Tratamiento " + mod  + plan.patologia;
         }
         
         public static string axialInforme(Plan plan)
         {
-            return "Corte axial en isocentro de la lesión y planificación del tratamiento en una etapa, con campos de radiación conformados. Las curvas representan niveles de dosis en \% donde el 100\% representa "
+            return "Corte axial en isocentro de la lesión y planificación del tratamiento en una etapa, con campos de radiación conformados. Las curvas representan niveles de dosis en % donde el 100% representa "
                 + (plan.dosisTotal/10).ToString() +"Gy, indicados con diferentes colores.";
         }
         

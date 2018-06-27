@@ -9,7 +9,8 @@ namespace WinForm
     class IO
     {
         public static string pathDestino = @"..\..\";
-        public static string pathImagenes = "C:\\Users\\Casa\\source\\repos\\editarWord\\WinForm\\WinForm\\Abramidis";
+        //public static string pathImagenes = "C:\\Users\\Casa\\source\\repos\\editarWord\\WinForm\\WinForm\\Abramidis";
+        public static string pathImagenes = "C:\\Users\\Pablo\\Source\\Repos\\editarWord\\WinForm\\WinForm\\Abramidis";
         public static string pathProtocolos = @"..\..\";
 
         public static void crearCarpeta(string nombre, string ID)
