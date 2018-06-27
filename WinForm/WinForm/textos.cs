@@ -28,5 +28,35 @@ namespace WinForm
         {
             return "G=" + gantry + ", " + tamanoCampo;
         }
+        
+        public satic string encabezadoInformeLinea1(Plan plan) //Times 14, negrita
+        {
+            if (plan.modalidad==0)
+            {
+                string mod = "T3DC";
+                //string modalidad = "tridimensional conformado"
+            }
+            else
+            {
+                string mod = "TIMRT";
+                //string modalidad = "con intensidad modulada"
+            }
+            
+            return mod + "	                        Centro Médico Mevaterapia		" + DateTime.Today.ToShortDateString();
+        }
+        
+        public satic string encabezadoInformeLinea2(Plan plan) //Times 12
+        {
+            return "Paciente: " + plan.nombre[0] + ", " + plan.nombre[1] + "	             HC: " + plan.ID;
+        }
+        
+        public static string encabezadoInformeLinea3(Plan plan) //Times 12 // centrado
+        {
+            return "Tratamiento tridimensional conformado de " plan.patologia;
+        }
+        
+        
+Tratamiento tridimensional conformado de 
+
     }
 }
