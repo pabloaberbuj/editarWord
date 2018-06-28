@@ -9,14 +9,14 @@ namespace WinForm
 {
     class Word
     {
-        private static readonly double RelPtaCm = 40;
+        private static readonly double RelPtaCm = 37.8;
 
         private static void agregarParrafo(DocX document, string texto, Font fuente, int tamaño)
         {
             document.InsertParagraph().Font(fuente).FontSize(tamaño).InsertText(texto);
         }
 
-        private static void insertarImagen(DocX document, string pathImagen, int tamaño, Alignment alineacion, string textoExtra = "")
+        private static void insertarImagen(DocX document, string pathImagen, double tamaño, Alignment alineacion, string textoExtra = "")
         {
             var image = document.AddImage(pathImagen);
             var picture = image.CreatePicture();
@@ -28,6 +28,24 @@ namespace WinForm
             paragraph.InsertText(textoExtra);
             paragraph.Alignment = alineacion;
         }
+
+        private static void insertarDosImagenes(DocX document, string pathImagen1, string pathImagen2, double tamaño, Alignment alineacion)
+        {
+            var image1 = document.AddImage(pathImagen1);
+            var image2 = document.AddImage(pathImagen2);
+            var picture1 = image1.CreatePicture();
+            var picture2 = image2.CreatePicture();
+            double relacionAspecto = Convert.ToDouble(picture1.Width) / Convert.ToDouble(picture1.Height);
+            picture1.Height = Convert.ToInt32(tamaño * RelPtaCm);
+            picture2.Height = picture1.Height;
+            picture1.Width = Convert.ToInt32(tamaño * relacionAspecto * RelPtaCm);
+            picture2.Width = picture1.Width;
+            Paragraph paragraph = document.InsertParagraph();
+            paragraph.AppendPicture(picture1).AppendPicture(picture2);
+            
+            paragraph.Alignment = alineacion;
+        }
+
         private static void agregarEncabezado(DocX document, string texto, Font fuente, int tamaño, Alignment alineacion)
         {
             document.Headers.Odd.InsertParagraph().Font(fuente).FontSize(tamaño).Append(texto).Alignment = alineacion;
@@ -81,12 +99,25 @@ namespace WinForm
             agregarEncabezado(document, Textos.encabezadoInformeLinea3(plan), new Font("Times New Roman"), 12, Alignment.center);
         }
 
+        private static void textoEImagenesInforme(Plan plan, DocX document)
+        {
+            List<string> imagenes = IO.obtenerImagenes(plan.nombre);
+            insertarImagen(document, imagenes[plan.cantidadDeCampos + 2], 11, Alignment.center);
+            agregarParrafo(document, Textos.axialInforme(plan), new Font("Times New Roman"), 12);
+            insertarDosImagenes(document, imagenes[plan.cantidadDeCampos + 3], imagenes[plan.cantidadDeCampos + 4], 8, Alignment.center);
+            agregarParrafo(document, Textos.coronalSagitalInforme(), new Font("Times New Roman"), 12);
+            insertarImagen(document, imagenes[plan.cantidadDeCampos + 5], 11, Alignment.center);
+            agregarParrafo(document, Textos.tresDInforme(plan), new Font("Times New Roman"), 12);
+            insertarImagen(document, imagenes[plan.cantidadDeCampos + 6], 11, Alignment.center);
+            agregarParrafo(document, Textos.dvhInforme(plan), new Font("Times New Roman"), 12);
+        }
         public static void crearArchivoInforme(Plan plan)
         {
             DocX document = DocX.Create("BEV.doc");
             document.DifferentFirstPage = false;
             document.DifferentFirstPage = false; //para que todos los encabezados sean iguales
             encabezadoInforme(plan,document);
+            textoEImagenesInforme(plan, document);
             string aux = IO.pathDestino + plan.nombre[0] + ", " + plan.nombre[1] + " " + plan.ID + "\\Informe.doc";
             salvarArchivo(document, aux);
         }
