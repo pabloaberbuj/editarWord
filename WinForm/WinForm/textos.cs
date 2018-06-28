@@ -13,7 +13,7 @@ namespace WinForm
     {
         public static string encabezadoBEV1(Plan plan) //cambiar tabulado
         {
-            return "Nombre: " + plan.nombre[0] + ", " + plan.nombre[1] + "                       HC: " + plan.ID + "                      " + DateTime.Today.ToShortDateString();
+            return "Nombre: " + plan.nombre[0] + ", " + plan.nombre[1] + "                       HC:" + plan.ID + "                      " + DateTime.Today.ToShortDateString();
         }
         
         public static string encabezadoBEV2(Plan plan) //centrado

@@ -10,10 +10,13 @@ namespace WinForm
     class Word
     {
         private static readonly double RelPtaCm = 37.8;
+        private static Font FuenteTexto = new Font("Times New Roman");
+        
 
-        private static void agregarParrafo(DocX document, string texto, Font fuente, int tamaño)
+        private static void agregarParrafo(DocX document, string texto, Font fuente, int tamaño=12)
         {
-            document.InsertParagraph().Font(fuente).FontSize(tamaño).InsertText(texto);
+            document.InsertParagraph().InsertText(texto);
+            document.Paragraphs.Last().Font(fuente).FontSize(tamaño);
         }
 
         private static void insertarImagen(DocX document, string pathImagen, double tamaño, Alignment alineacion, string textoExtra = "")
@@ -48,12 +51,15 @@ namespace WinForm
 
         private static void agregarEncabezado(DocX document, string texto, Font fuente, int tamaño, Alignment alineacion)
         {
-            document.Headers.Odd.InsertParagraph().Font(fuente).FontSize(tamaño).Append(texto).Alignment = alineacion;
+            document.Headers.Odd.InsertParagraph().Append(texto).Alignment = alineacion;
+            document.Headers.Odd.Paragraphs.Last().Font(fuente).FontSize(tamaño);
         }
 
         private static void agregarEncabezadoNegrita(DocX document, string texto, Font fuente, int tamaño, Alignment alineacion)
         {
-            document.Headers.Odd.InsertParagraph().Font(fuente).FontSize(tamaño).Append(texto).Bold().Alignment = alineacion;
+            document.Headers.Odd.InsertParagraph().Append(texto).Alignment = alineacion;
+            document.Headers.Odd.Paragraphs.Last().Font(fuente).FontSize(tamaño).Bold();
+
         }
 
         private static void salvarArchivo(DocX document, string pathGuardar)
@@ -64,8 +70,8 @@ namespace WinForm
         private static void encabezadoBEV(Plan plan, DocX document)
         {
             document.AddHeaders();
-            agregarEncabezado(document, Textos.encabezadoBEV1(plan),new Font("Times New Roman") , 12, Alignment.left);
-            agregarEncabezado(document, Textos.encabezadoBEV2(plan), new Font("Times New Roman"), 12, Alignment.center);
+            agregarEncabezado(document, Textos.encabezadoBEV1(plan), FuenteTexto, 12, Alignment.left);
+            agregarEncabezado(document, Textos.encabezadoBEV2(plan), FuenteTexto, 12, Alignment.center);
         }
 
         private static void imagenesBEV(Plan plan, DocX document, string gantrySetUp1, string tamSetUp1, string gantrySetUp2, string tamSetUp2)
@@ -94,22 +100,22 @@ namespace WinForm
         private static void encabezadoInforme(Plan plan, DocX document)
         {
             document.AddHeaders();
-            agregarEncabezadoNegrita(document, Textos.encabezadoInformeLinea1(plan), new Font("Times New Roman"), 14, Alignment.left);
-            agregarEncabezado(document, Textos.encabezadoInformeLinea2(plan), new Font("Times New Roman"), 12, Alignment.left);
-            agregarEncabezado(document, Textos.encabezadoInformeLinea3(plan), new Font("Times New Roman"), 12, Alignment.center);
+            agregarEncabezadoNegrita(document, Textos.encabezadoInformeLinea1(plan), FuenteTexto, 14, Alignment.left);
+            agregarEncabezado(document, Textos.encabezadoInformeLinea2(plan), FuenteTexto, 12, Alignment.left);
+            agregarEncabezado(document, Textos.encabezadoInformeLinea3(plan), FuenteTexto, 12, Alignment.center);
         }
 
         private static void textoEImagenesInforme(Plan plan, DocX document)
         {
             List<string> imagenes = IO.obtenerImagenes(plan.nombre);
             insertarImagen(document, imagenes[plan.cantidadDeCampos + 2], 11, Alignment.center);
-            agregarParrafo(document, Textos.axialInforme(plan), new Font("Times New Roman"), 12);
+            agregarParrafo(document, Textos.axialInforme(plan), FuenteTexto);
             insertarDosImagenes(document, imagenes[plan.cantidadDeCampos + 3], imagenes[plan.cantidadDeCampos + 4], 8, Alignment.center);
-            agregarParrafo(document, Textos.coronalSagitalInforme(), new Font("Times New Roman"), 12);
+            agregarParrafo(document, Textos.coronalSagitalInforme(), FuenteTexto);
             insertarImagen(document, imagenes[plan.cantidadDeCampos + 5], 11, Alignment.center);
-            agregarParrafo(document, Textos.tresDInforme(plan), new Font("Times New Roman"), 12);
+            agregarParrafo(document, Textos.tresDInforme(plan), FuenteTexto);
             insertarImagen(document, imagenes[plan.cantidadDeCampos + 6], 11, Alignment.center);
-            agregarParrafo(document, Textos.dvhInforme(plan), new Font("Times New Roman"), 12);
+            agregarParrafo(document, Textos.dvhInforme(plan), FuenteTexto);
         }
         public static void crearArchivoInforme(Plan plan)
         {
@@ -118,6 +124,10 @@ namespace WinForm
             document.DifferentFirstPage = false; //para que todos los encabezados sean iguales
             encabezadoInforme(plan,document);
             textoEImagenesInforme(plan, document);
+          /*  foreach (Paragraph p in document.Paragraphs)
+            {
+                p.Font(FuenteTexto);
+            }*/
             string aux = IO.pathDestino + plan.nombre[0] + ", " + plan.nombre[1] + " " + plan.ID + "\\Informe.doc";
             salvarArchivo(document, aux);
         }

@@ -19,5 +19,7 @@ namespace WinForm
 		public int numeroParametros { get; set; }
 		public List<Campo> listaCampos {get;set;}
 	    public string patologia {get;set;}
+        public string etapa { get; set; }
+        public string iso { get; set; }
 	}
 }
