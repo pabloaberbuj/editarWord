@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Xceed.Words.NET;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace WinForm
 {
@@ -19,6 +21,8 @@ namespace WinForm
         {
             InitializeComponent();
             BT_HacerDocumentos.Enabled = false;
+            
+            
         }
 
         private void BT_CargarClick(object sender, EventArgs e)
@@ -31,6 +35,27 @@ namespace WinForm
                 plan = Extraer.extraerPlan(fid);
                 BT_HacerDocumentos.Enabled = true;
                 cargarPropiedades(plan);
+                PropertyInfo[] propiedades = plan.GetType().GetProperties();
+                DGV.ColumnCount = 2;
+                foreach (PropertyInfo propiedad in propiedades)
+                {
+                    Type tipo = propiedad.PropertyType;
+                    if (tipo.Equals(typeof(string)))
+                    {
+                        string[] fila = { propiedad.Name, (string)propiedad.GetValue(plan, null)};
+                        DGV.Rows.Add(fila);
+                    }
+                    else if (tipo.Equals(typeof(double)) || tipo.Equals(typeof(Int32)))
+                    {
+                        string[] fila = { propiedad.Name, propiedad.GetValue(plan, null).ToString() };
+                        DGV.Rows.Add(fila);
+                    }
+                    else
+                    {
+
+                    }
+
+                }
             }
         }
 
@@ -51,7 +76,7 @@ namespace WinForm
 
         private void guardarPropiedad(TextBox tb, string propiedad)
         {
-            propiedad = tb.Text;
+            propiedad = tb.Text;   
         }
 
         private void guardarPropiedad(TextBox tb, double propiedad)
@@ -70,16 +95,18 @@ namespace WinForm
             cargarPropiedad(TB_DosisFraccion, plan.dosisFraccion);
             cargarPropiedad(TB_DosisTotal, plan.dosisTotal);
             cargarPropiedad(TB_Equipo, plan.equipo);
-            //cargarPropiedad(TB_Etapa,)
+            cargarPropiedad(TB_Etapa, plan.etapa);
             cargarPropiedad(TB_ID, plan.ID);
-            //cargarPropiedad(TB_ISO,)
+            cargarPropiedad(TB_ISO, plan.iso);
             cargarPropiedad(TB_Modalidad, plan.modalidad);
             cargarPropiedad(TB_Nombre, plan.nombre[0]+", " + plan.nombre[1]);
-            //cargarPropiedad(TB_Patología)
+            cargarPropiedad(TB_Patología, plan.patologia);
         }
 
         private void guardarPropiedades(Plan plan)
         {
+            PropertyInfo[] propiedades = plan.GetType().GetProperties();
+            
             guardarPropiedad(TB_CantidadDeCampos, plan.cantidadDeCampos);
             guardarPropiedad(TB_DosisFraccion, plan.dosisFraccion);
             guardarPropiedad(TB_DosisTotal, plan.dosisTotal);

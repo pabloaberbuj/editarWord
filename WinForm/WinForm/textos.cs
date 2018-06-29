@@ -18,12 +18,16 @@ namespace WinForm
         
         public static string encabezadoBEV2(Plan plan) //centrado
         {
-            return "etapa " + "etapaPONER" + " – " + "isoPoner" + " – Equipo " + plan.equipo;
+            return "etapa " + plan.etapa + " – " + plan.iso + " – Equipo " + plan.equipo;
         }
         
         public static string parametrosCampoTto(Campo campo)
         {
-            string aux = "G=" + campo.gantry + ", Col=" + campo.col;
+            string aux = "G=" + campo.gantry;
+            if (Convert.ToInt32(campo.col) != 180 && Convert.ToInt32(campo.col) != 0)
+            {
+                aux+= ", Col=" + campo.col;
+            }
             if (Convert.ToInt32(campo.camilla) != 180 && Convert.ToInt32(campo.camilla) != 0)
             {
                 aux += ", Camilla=" + campo.camilla;

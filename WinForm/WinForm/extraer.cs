@@ -143,6 +143,7 @@ namespace WinForm
 				{
 					plan.listaCampos.Add(extraerCampo(fid,i+1,plan.numeroParametros));
 				};
+                plan.iso = Plan.obtenerIso(plan);
 				return plan;
             }
             
