@@ -50,8 +50,8 @@
             this.TB_CantidadDeCampos = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.BT_HacerDocumentos = new System.Windows.Forms.Button();
-            this.DGV = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
+            this.DGV_DatosPaciente = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).BeginInit();
             this.SuspendLayout();
             // 
             // BT_Cargar
@@ -235,20 +235,23 @@
             this.BT_HacerDocumentos.UseVisualStyleBackColor = true;
             this.BT_HacerDocumentos.Click += new System.EventHandler(this.BT_HacerDocumentos_Click);
             // 
-            // DGV
+            // DGV_DatosPaciente
             // 
-            this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV.Location = new System.Drawing.Point(335, 9);
-            this.DGV.Name = "DGV";
-            this.DGV.Size = new System.Drawing.Size(435, 388);
-            this.DGV.TabIndex = 22;
+            this.DGV_DatosPaciente.AllowUserToAddRows = false;
+            this.DGV_DatosPaciente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_DatosPaciente.Location = new System.Drawing.Point(335, 9);
+            this.DGV_DatosPaciente.Name = "DGV_DatosPaciente";
+            this.DGV_DatosPaciente.RowHeadersVisible = false;
+            this.DGV_DatosPaciente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.DGV_DatosPaciente.Size = new System.Drawing.Size(435, 388);
+            this.DGV_DatosPaciente.TabIndex = 22;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.DGV);
+            this.Controls.Add(this.DGV_DatosPaciente);
             this.Controls.Add(this.BT_HacerDocumentos);
             this.Controls.Add(this.TB_Patología);
             this.Controls.Add(this.label10);
@@ -273,7 +276,7 @@
             this.Controls.Add(this.BT_Cargar);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,7 +306,7 @@
         private System.Windows.Forms.TextBox TB_CantidadDeCampos;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button BT_HacerDocumentos;
-        private System.Windows.Forms.DataGridView DGV;
+        private System.Windows.Forms.DataGridView DGV_DatosPaciente;
     }
 }
 

@@ -34,33 +34,63 @@ namespace WinForm
                 string[] fid = Extraer.cargar(openFileDialog1.FileName);
                 plan = Extraer.extraerPlan(fid);
                 BT_HacerDocumentos.Enabled = true;
-                cargarPropiedades(plan);
-                PropertyInfo[] propiedades = plan.GetType().GetProperties();
-                DGV.ColumnCount = 2;
-                foreach (PropertyInfo propiedad in propiedades)
-                {
-                    Type tipo = propiedad.PropertyType;
-                    if (tipo.Equals(typeof(string)))
-                    {
-                        string[] fila = { propiedad.Name, (string)propiedad.GetValue(plan, null)};
-                        DGV.Rows.Add(fila);
-                    }
-                    else if (tipo.Equals(typeof(double)) || tipo.Equals(typeof(Int32)))
-                    {
-                        string[] fila = { propiedad.Name, propiedad.GetValue(plan, null).ToString() };
-                        DGV.Rows.Add(fila);
-                    }
-                    else
-                    {
+                //cargarPropiedades(plan);
+                cargarDGVdePan(plan);
+                
+            }
+        }
 
-                    }
+        private void cargarDGVdePan(Plan plan)
+        {
+            PropertyInfo[] propiedades = plan.GetType().GetProperties();
+            DGV_DatosPaciente.ColumnCount = 2;
+            foreach (PropertyInfo propiedad in propiedades)
+            {
+                Type tipo = propiedad.PropertyType;
+                if (tipo.Equals(typeof(string)))
+                {
+                    string[] fila = { propiedad.Name, (string)propiedad.GetValue(plan, null) };
+                    DGV_DatosPaciente.Rows.Add(fila);
+                }
+                else if (tipo.Equals(typeof(double)) || tipo.Equals(typeof(Int32)))
+                {
+                    string[] fila = { propiedad.Name, propiedad.GetValue(plan, null).ToString() };
+                    DGV_DatosPaciente.Rows.Add(fila);
+                }
+                else
+                {
+                }
+            }
+        }
+        private void guardarDGVenPlan(Plan plan)
+        {
+            PropertyInfo[] propiedades = plan.GetType().GetProperties();
+            Type tipoPlan = plan.GetType();
+            foreach (DataGridViewRow fila in DGV_DatosPaciente.Rows)
+            {
+                PropertyInfo propiedad = tipoPlan.GetProperty(fila.Cells[0].Value.ToString());
+
+                Type tipoProp = propiedad.PropertyType;
+                if (tipoProp.Equals(typeof(string)))
+                {
+                    propiedad.SetValue(plan, fila.Cells[1].Value.ToString(), null);
+                }
+                else if (tipoProp.Equals(typeof(double)))
+                {
+                    propiedad.SetValue(plan, Convert.ToDouble(fila.Cells[1].Value), null);
+                }
+                else if (tipoProp.Equals(typeof(int)))
+                {
+                    propiedad.SetValue(plan, Convert.ToInt32(fila.Cells[1].Value), null);
+                }
+                else
+                {
 
                 }
             }
         }
-
-
-
+    
+        /*
         private void cargarPropiedad(TextBox tb, string propiedad)
         {
             tb.Text = propiedad;
@@ -117,11 +147,12 @@ namespace WinForm
             guardarPropiedad(TB_Modalidad, plan.modalidad);
             guardarPropiedad(TB_Nombre, plan.nombre[0] + ", " + plan.nombre[1]);
             guardarPropiedad(TB_Patología, plan.patologia);
-        }
+        }*/
 
         private void BT_HacerDocumentos_Click(object sender, EventArgs e)
         {
-            guardarPropiedades(plan);
+            //guardarPropiedades(plan);
+            guardarDGVenPlan(plan);
             IO.crearCarpeta(plan.nombre[0] + ", " + plan.nombre[1], plan.ID);
             Word.crearArchivoBEV(plan);
             Word.crearArchivoInforme(plan);
