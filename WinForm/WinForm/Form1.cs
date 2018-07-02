@@ -154,6 +154,14 @@ namespace WinForm
         private void ActualizarNumeroImagenes(object sender, EventArgs e)
         {
             escribirLabels(plan);
+            if (CHB_SinImagenesSetUp.Checked)
+            {
+                GB_CamposSetUp.Enabled = false;
+            }
+            else
+            {
+                GB_CamposSetUp.Enabled = true;
+            }
         }
     }
 }
