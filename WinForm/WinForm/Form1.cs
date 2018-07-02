@@ -21,8 +21,10 @@ namespace WinForm
         {
             InitializeComponent();
             BT_HacerDocumentos.Enabled = false;
-            
-            
+            L_ImagenesEsperadas.Visible = false;
+            L_ImagenesEncontradas.Visible = false;
+
+
         }
 
         private void BT_CargarClick(object sender, EventArgs e)
@@ -35,6 +37,7 @@ namespace WinForm
                 plan = Extraer.extraerPlan(fid);
                 BT_HacerDocumentos.Enabled = true;
                 cargarDGVdePan(plan);
+                escribirLabels(plan);
             }
         }
 
@@ -96,8 +99,49 @@ namespace WinForm
         {
             guardarDGVenPlan(plan);
             IO.crearCarpeta(plan.apellidoNombre, plan.ID);
-            Word.crearArchivoBEV(plan);
-            Word.crearArchivoInforme(plan);
+            Word.crearArchivoBEV(plan,hayImagenesSetUp());
+            Word.crearArchivoInforme(plan,hayDosImagenes3D());
+        }
+
+        private bool hayImagenesSetUp()
+        {
+            return !CHB_SinImagenesSetUp.Checked;
+        }
+        
+        private bool hayDosImagenes3D()
+        {
+            return CHB_DosImagenes3D.Checked;
+        }
+        private int imagenesEncontradas(Plan plan)
+        {
+            return Word.cantidadDeImagenes(plan);
+        }
+
+        private int imagenesEsperadas(Plan plan)
+        {
+            int aux = plan.cantidadDeCampos+5;
+            if (hayImagenesSetUp())
+            {
+                aux += 2;
+            }
+            if(hayDosImagenes3D())
+            {
+                aux += 1;
+            }
+            return aux;
+        }
+
+        private void escribirLabels(Plan plan)
+        {
+            L_ImagenesEsperadas.Text = imagenesEsperadas(plan).ToString();
+            L_ImagenesEsperadas.Visible = true;
+            L_ImagenesEncontradas.Text = imagenesEncontradas(plan).ToString();
+            L_ImagenesEncontradas.Visible = true;
+        }
+
+        private void ActualizarNumeroImagenes(object sender, EventArgs e)
+        {
+            escribirLabels(plan);
         }
     }
 }
