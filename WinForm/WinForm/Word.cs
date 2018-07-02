@@ -24,21 +24,26 @@ namespace WinForm
 
         private static List<string> imagenesBEVCampos(Plan plan)
         {
-            return imagenes(plan).GetRange(0, plan.cantidadDeCampos - 1);
+            return imagenes(plan).GetRange(0, plan.cantidadDeCampos);
         }
         private static List<string> imagenesBEVSetUp(Plan plan, bool hayImagenesSetup)
         {
-            return imagenes(plan).GetRange(plan.cantidadDeCampos, plan.cantidadDeCampos + 2);
+            return imagenes(plan).GetRange(plan.cantidadDeCampos, 2);
         }
-        private static List<string> imagenesInforme(Plan plan, bool hayDosImagenes3D)
+        private static List<string> imagenesInforme(Plan plan, bool hayDosImagenes3D, bool hayImagenesSetup)
         {
+            int cantidadCamposTotales = plan.cantidadDeCampos;
+            if(hayImagenesSetup)
+            {
+                cantidadCamposTotales += 2;
+            }
             if (hayDosImagenes3D)
             {
-                return imagenes(plan).GetRange(plan.cantidadDeCampos+3, plan.cantidadDeCampos + 8);
+                return imagenes(plan).GetRange(cantidadCamposTotales, 6);
             }
             else
             {
-                return imagenes(plan).GetRange(plan.cantidadDeCampos + 3, plan.cantidadDeCampos + 8);
+                return imagenes(plan).GetRange(cantidadCamposTotales, 5);
             }
         }
         
@@ -137,35 +142,35 @@ namespace WinForm
             agregarEncabezado(document, Textos.encabezadoInformeLinea3(plan), FuenteTexto, 12, Alignment.center);
         }
 
-        private static void textoEImagenesInforme(Plan plan, DocX document, bool hayDosImagenes3D)
+        private static void textoEImagenesInforme(Plan plan, DocX document, bool hayDosImagenes3D,bool hayImagenesSetUp)
         {
-            insertarImagen(document, imagenesInforme(plan,hayDosImagenes3D)[0], 11, Alignment.center);
+            insertarImagen(document, imagenesInforme(plan,hayDosImagenes3D, hayImagenesSetUp)[0], 11, Alignment.center);
             agregarParrafo(document, Textos.axialInforme(plan), FuenteTexto);
-            insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D)[1], imagenesInforme(plan, hayDosImagenes3D)[2], 8, Alignment.center);
+            insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[1], imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[2], 8, Alignment.center);
             agregarParrafo(document, Textos.coronalSagitalInforme(), FuenteTexto);
             if (hayDosImagenes3D)
             {
-                insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D)[3], imagenesInforme(plan, hayDosImagenes3D)[4], 8, Alignment.center);
+                insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[3], imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[4], 8, Alignment.center);
                 agregarParrafo(document, Textos.tresDInforme(plan), FuenteTexto);
-                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D)[5], 11, Alignment.center);
+                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[5], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(plan), FuenteTexto);
             }
             else
             {
-                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D)[3], 11, Alignment.center);
+                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[3], 11, Alignment.center);
                 agregarParrafo(document, Textos.tresDInforme(plan), FuenteTexto);
-                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D)[4], 11, Alignment.center);
+                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[4], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(plan), FuenteTexto);
             }
             
         }
-        public static void crearArchivoInforme(Plan plan, bool hayDosImagenes3D)
+        public static void crearArchivoInforme(Plan plan, bool hayDosImagenes3D,bool hayImagenesSetUp)
         {
             DocX document = DocX.Create("Informe.doc");
             document.DifferentFirstPage = false;
             document.DifferentFirstPage = false; //para que todos los encabezados sean iguales
             encabezadoInforme(plan,document);
-            textoEImagenesInforme(plan, document,hayDosImagenes3D);
+            textoEImagenesInforme(plan, document,hayDosImagenes3D, hayImagenesSetUp);
             string aux = IO.pathDestino + plan.apellidoNombre + " " + plan.ID + "\\Informe.doc";
             salvarArchivo(document, aux);
         }

@@ -11,9 +11,9 @@ namespace WinForm
 {
     public class Chequear
     {
-        public static bool numeroDeImagenes(int numeroDeImagenes, int numeroDeImagenesNoCampos, int numeroDeCampos)
+        public static bool numeroDeImagenes(int numeroDeImagenesEsperadas, int numeroDeImagenesEncontradas)
         {
-            return numeroDeCampos == numeroDeImagenes - numeroDeImagenesNoCampos;
+            return numeroDeImagenesEsperadas == numeroDeImagenesEncontradas;
         }
         public static bool field0(int numeroDeCampo1)
         {

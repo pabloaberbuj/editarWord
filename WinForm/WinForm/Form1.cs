@@ -29,6 +29,11 @@ namespace WinForm
 
         private void BT_CargarClick(object sender, EventArgs e)
         {
+            CHB_DosImagenes3D.Checked = false;
+            CHB_SinImagenesSetUp.Checked = false;
+            L_ImagenesEsperadas.Visible = false;
+            L_ImagenesEncontradas.Visible = false;
+            DGV_DatosPaciente.Rows.Clear();
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "Archivos ppf(.ppf)|*.ppf|All Files (*.*)|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -66,6 +71,7 @@ namespace WinForm
                 {
                 }
             }
+            DGV_DatosPaciente.AutoResizeColumns();
         }
         private void guardarDGVenPlan(Plan plan)
         {
@@ -93,14 +99,20 @@ namespace WinForm
             }
         }
     
-        
-
         private void BT_HacerDocumentos_Click(object sender, EventArgs e)
         {
-            guardarDGVenPlan(plan);
-            IO.crearCarpeta(plan.apellidoNombre, plan.ID);
-            Word.crearArchivoBEV(plan,hayImagenesSetUp());
-            Word.crearArchivoInforme(plan,hayDosImagenes3D());
+            if(Chequear.numeroDeImagenes(imagenesEsperadas(plan),imagenesEncontradas(plan)))
+            {
+                guardarDGVenPlan(plan);
+                IO.crearCarpeta(plan.apellidoNombre, plan.ID);
+                Word.crearArchivoBEV(plan, hayImagenesSetUp());
+                Word.crearArchivoInforme(plan, hayDosImagenes3D(),hayImagenesSetUp());
+                MessageBox.Show("Se generaron los documentos");
+            }
+            else
+            {
+                MessageBox.Show("El número de imágenes encontradas difiere del esperado");
+            }
         }
 
         private bool hayImagenesSetUp()
