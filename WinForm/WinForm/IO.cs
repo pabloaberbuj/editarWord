@@ -19,9 +19,9 @@ namespace WinForm
             Directory.CreateDirectory(pathDestino + aux);
         }
 
-        public static List<string> obtenerImagenes(string[] nombre)
+        public static List<string> obtenerImagenes(string apellido)
         {
-            string patron = nombre[0] + "*.bmp";
+            string patron = apellido + "*.bmp";
             return Directory.GetFiles(pathImagenes, patron).ToList();
         }
     }

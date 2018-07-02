@@ -76,7 +76,7 @@ namespace WinForm
 
         private static void imagenesBEV(Plan plan, DocX document, string gantrySetUp1, string tamSetUp1, string gantrySetUp2, string tamSetUp2)
         {
-            List<string> imagenes = IO.obtenerImagenes(plan.nombre);
+            List<string> imagenes = IO.obtenerImagenes(plan.apellido);
             for (int i=0;i<plan.cantidadDeCampos;i++)
             {
                 insertarImagen(document, imagenes[i], 11, Alignment.left, Textos.parametrosCampoTto(plan.listaCampos[i]));
@@ -93,7 +93,7 @@ namespace WinForm
             document.DifferentFirstPage = false; //para que todos los encabezados sean iguales
             encabezadoBEV(plan, document);
             imagenesBEV(plan, document,"180","10x10","270","15x10");
-            string aux = IO.pathDestino + plan.nombre[0] + ", " + plan.nombre[1] + " " + plan.ID + "\\BEV.doc";
+            string aux = IO.pathDestino + plan.apellidoNombre + " " + plan.ID + "\\BEV.doc";
             salvarArchivo(document, aux);
         }
 
@@ -107,7 +107,7 @@ namespace WinForm
 
         private static void textoEImagenesInforme(Plan plan, DocX document)
         {
-            List<string> imagenes = IO.obtenerImagenes(plan.nombre);
+            List<string> imagenes = IO.obtenerImagenes(plan.apellido);
             insertarImagen(document, imagenes[plan.cantidadDeCampos + 2], 11, Alignment.center);
             agregarParrafo(document, Textos.axialInforme(plan), FuenteTexto);
             insertarDosImagenes(document, imagenes[plan.cantidadDeCampos + 3], imagenes[plan.cantidadDeCampos + 4], 8, Alignment.center);
@@ -119,7 +119,7 @@ namespace WinForm
         }
         public static void crearArchivoInforme(Plan plan)
         {
-            DocX document = DocX.Create("BEV.doc");
+            DocX document = DocX.Create("Informe.doc");
             document.DifferentFirstPage = false;
             document.DifferentFirstPage = false; //para que todos los encabezados sean iguales
             encabezadoInforme(plan,document);
@@ -128,7 +128,7 @@ namespace WinForm
             {
                 p.Font(FuenteTexto);
             }*/
-            string aux = IO.pathDestino + plan.nombre[0] + ", " + plan.nombre[1] + " " + plan.ID + "\\Informe.doc";
+            string aux = IO.pathDestino + plan.apellidoNombre + " " + plan.ID + "\\Informe.doc";
             salvarArchivo(document, aux);
         }
        

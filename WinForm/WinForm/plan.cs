@@ -8,12 +8,14 @@ namespace WinForm
 {
     public class Plan
     {
-        public string[] nombre {get; set;}
+        public string apellido { get; set; }
+        public string nombre {get; set;}
+        public string apellidoNombre { get; set; }
         public string ID { get; set; }
-		public double dosisFraccion {get;set;}
-		public int numeroFracciones {get;set;}
-		public double dosisTotal {get;set;}
-		public int modalidad {get; set;} //0 para 3D, 1 para IMRT SyS, 2 para IMRT mod
+		public string dosisFraccion {get;set;}
+		public string numeroFracciones {get;set;}
+		public string dosisTotal {get;set;}
+		public string modalidad {get; set;} //0 para 3D, 1 para IMRT SyS, 2 para IMRT mod
 		public string equipo {get;set;}
 		public int cantidadDeCampos {get; set;}
 		public int numeroParametros { get; set; }

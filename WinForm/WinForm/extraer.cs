@@ -27,7 +27,7 @@ namespace WinForm
 		public static string extraerString(string[] fid, int linea, char sep = '=')
         {
             string aux = fid[linea]; string[] aux2 = aux.Split(sep); string salida = aux2[1];
-            return salida;
+            return salida.Trim();
         }
 
         public static string extraerStringSinSep(string[] fid, int linea)
@@ -49,50 +49,60 @@ namespace WinForm
 			return Convert.ToInt32(extraerDouble(fid,5));
 		}
 		
-		public static double dosisFraccion (string[] fid)
+		public static string dosisFraccion (string[] fid)
 		{
-			return extraerDouble(fid,6);
+			return extraerString(fid,6);
 		}
 		
-		public static int numeroFracciones(string[] fid)
+		public static string numeroFracciones(string[] fid)
 		{
-			return Convert.ToInt32(extraerDouble(fid,8));
+			return extraerString(fid,8);
 		}
 		
-		public static double dosisTotal(string[] fid)
+		public static string dosisTotal(string[] fid)
 		{
-			return dosisFraccion(fid)*numeroFracciones(fid);
+			return (Convert.ToDouble(dosisFraccion(fid))*Convert.ToDouble(numeroFracciones(fid))).ToString();
 		}
-		public static int modalidad(string[] fid)
+		public static string modalidad(string[] fid)
 		{
 			if (extraerString(fid,10)=="CRT-3D")
 			{
-				return 0;
+				return "T3DC";
 			}
 			else if (extraerString(fid,10)=="IMRT(s&s)")
 			{
-				return 1;
+				return "IMRT";
 			}
 			else if (extraerString(fid,10)=="IMRT(mod)")
 			{
-				return 2;
+				return "IMRT";
 			}
             else //no debería caer acá
             {
-                return 3;
+                return "";
             }
             
 		}
 			
-		public static string[] nombrePaciente(string[] fid)
+		public static string apellidoPaciente(string[] fid)
 		{
 			string aux = extraerString(fid,12).Trim();
             string[] aux2 = aux.Split('^');
-            aux2[0]=aux2[0].ToUpper();
-            return aux2;
+            return aux2[0].ToUpper();
 		}
-		
-		public static string IDPaciente (string[] fid)
+        public static string nombrePaciente(string[] fid)
+        {
+            string aux = extraerString(fid, 12).Trim();
+            string[] aux2 = aux.Split('^');
+            return aux2[1];
+        }
+
+        public static string apellidoNombrePaciente(string[] fid)
+        {
+            return apellidoPaciente(fid) + ", " + nombrePaciente(fid);
+        }
+
+        public static string IDPaciente (string[] fid)
 		{
 			return extraerString(fid,13);
 		}
@@ -127,7 +137,9 @@ namespace WinForm
             {
             Plan plan = new Plan()
             {
+                apellido = apellidoPaciente(fid),
                 nombre = nombrePaciente(fid),
+                apellidoNombre = apellidoNombrePaciente(fid),
                 ID = IDPaciente(fid),
                 dosisFraccion = dosisFraccion(fid),
                 numeroFracciones = numeroFracciones(fid),
