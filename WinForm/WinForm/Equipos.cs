@@ -18,10 +18,6 @@ namespace WinForm
                 Diccionario.Add(aux[0], aux[1]);
             }
             return Diccionario;
-
         }
-        
-        
-        
     }
 }

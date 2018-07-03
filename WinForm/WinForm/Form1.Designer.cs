@@ -38,10 +38,10 @@
             this.CHB_SinImagenesSetUp = new System.Windows.Forms.CheckBox();
             this.CHB_DosImagenes3D = new System.Windows.Forms.CheckBox();
             this.GB_CamposSetUp = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TB_SetUp2Tam = new System.Windows.Forms.TextBox();
+            this.TB_SetUp2Gantry = new System.Windows.Forms.TextBox();
+            this.TB_SetUp1Tam = new System.Windows.Forms.TextBox();
+            this.TB_SetUp1Gantry = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -75,12 +75,15 @@
             // 
             this.DGV_DatosPaciente.AllowUserToAddRows = false;
             this.DGV_DatosPaciente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_DatosPaciente.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_DatosPaciente.Location = new System.Drawing.Point(332, 12);
             this.DGV_DatosPaciente.Name = "DGV_DatosPaciente";
             this.DGV_DatosPaciente.RowHeadersVisible = false;
             this.DGV_DatosPaciente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.DGV_DatosPaciente.Size = new System.Drawing.Size(435, 388);
             this.DGV_DatosPaciente.TabIndex = 22;
+            this.DGV_DatosPaciente.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
+            this.DGV_DatosPaciente.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
             // 
             // label1
             // 
@@ -144,10 +147,10 @@
             // 
             // GB_CamposSetUp
             // 
-            this.GB_CamposSetUp.Controls.Add(this.textBox4);
-            this.GB_CamposSetUp.Controls.Add(this.textBox3);
-            this.GB_CamposSetUp.Controls.Add(this.textBox2);
-            this.GB_CamposSetUp.Controls.Add(this.textBox1);
+            this.GB_CamposSetUp.Controls.Add(this.TB_SetUp2Tam);
+            this.GB_CamposSetUp.Controls.Add(this.TB_SetUp2Gantry);
+            this.GB_CamposSetUp.Controls.Add(this.TB_SetUp1Tam);
+            this.GB_CamposSetUp.Controls.Add(this.TB_SetUp1Gantry);
             this.GB_CamposSetUp.Controls.Add(this.label6);
             this.GB_CamposSetUp.Controls.Add(this.label5);
             this.GB_CamposSetUp.Controls.Add(this.label4);
@@ -159,33 +162,33 @@
             this.GB_CamposSetUp.TabStop = false;
             this.GB_CamposSetUp.Text = "Campos SetUp";
             // 
-            // textBox4
+            // TB_SetUp2Tam
             // 
-            this.textBox4.Location = new System.Drawing.Point(173, 60);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(59, 20);
-            this.textBox4.TabIndex = 44;
+            this.TB_SetUp2Tam.Location = new System.Drawing.Point(173, 60);
+            this.TB_SetUp2Tam.Name = "TB_SetUp2Tam";
+            this.TB_SetUp2Tam.Size = new System.Drawing.Size(59, 20);
+            this.TB_SetUp2Tam.TabIndex = 44;
             // 
-            // textBox3
+            // TB_SetUp2Gantry
             // 
-            this.textBox3.Location = new System.Drawing.Point(108, 60);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(59, 20);
-            this.textBox3.TabIndex = 43;
+            this.TB_SetUp2Gantry.Location = new System.Drawing.Point(108, 60);
+            this.TB_SetUp2Gantry.Name = "TB_SetUp2Gantry";
+            this.TB_SetUp2Gantry.Size = new System.Drawing.Size(59, 20);
+            this.TB_SetUp2Gantry.TabIndex = 43;
             // 
-            // textBox2
+            // TB_SetUp1Tam
             // 
-            this.textBox2.Location = new System.Drawing.Point(173, 36);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(59, 20);
-            this.textBox2.TabIndex = 42;
+            this.TB_SetUp1Tam.Location = new System.Drawing.Point(173, 36);
+            this.TB_SetUp1Tam.Name = "TB_SetUp1Tam";
+            this.TB_SetUp1Tam.Size = new System.Drawing.Size(59, 20);
+            this.TB_SetUp1Tam.TabIndex = 42;
             // 
-            // textBox1
+            // TB_SetUp1Gantry
             // 
-            this.textBox1.Location = new System.Drawing.Point(108, 36);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(59, 20);
-            this.textBox1.TabIndex = 41;
+            this.TB_SetUp1Gantry.Location = new System.Drawing.Point(108, 36);
+            this.TB_SetUp1Gantry.Name = "TB_SetUp1Gantry";
+            this.TB_SetUp1Gantry.Size = new System.Drawing.Size(59, 20);
+            this.TB_SetUp1Gantry.TabIndex = 41;
             // 
             // label6
             // 
@@ -260,10 +263,10 @@
         private System.Windows.Forms.CheckBox CHB_SinImagenesSetUp;
         private System.Windows.Forms.CheckBox CHB_DosImagenes3D;
         private System.Windows.Forms.GroupBox GB_CamposSetUp;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TB_SetUp2Tam;
+        private System.Windows.Forms.TextBox TB_SetUp2Gantry;
+        private System.Windows.Forms.TextBox TB_SetUp1Tam;
+        private System.Windows.Forms.TextBox TB_SetUp1Gantry;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;

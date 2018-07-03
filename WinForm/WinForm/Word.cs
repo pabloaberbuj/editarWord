@@ -10,7 +10,9 @@ namespace WinForm
     class Word
     {
         private static readonly double RelPtaCm = 37.8;
+        private static readonly double factor = 0.75; //para que den los margenes
         private static Font FuenteTexto = new Font("Times New Roman");
+
         
         private static List<string> imagenes(Plan plan)
         {
@@ -123,13 +125,17 @@ namespace WinForm
         }
 
         
-        public static void crearArchivoBEV(Plan plan,bool hayImagenesSetup)
+        public static void crearArchivoBEV(Plan plan,bool hayImagenesSetup, string SetUp1Gantry, string SetUp2Gantry, string SetUp1Tam, string SetUp2Tam)
         {
             DocX document = DocX.Create("BEV.doc");
             document.DifferentFirstPage = false;
             document.DifferentFirstPage = false; //para que todos los encabezados sean iguales
+            document.MarginTop = Convert.ToInt32(1.41* RelPtaCm*factor);
+            document.MarginBottom = Convert.ToInt32(0.95* RelPtaCm * factor);
+            document.MarginLeft = Convert.ToInt32(0.95* RelPtaCm * factor);
+            document.MarginRight = Convert.ToInt32(0.95* RelPtaCm * factor);
             encabezadoBEV(plan, document);
-            imagenesBEV(plan, document,"180","10x10","270","15x10",hayImagenesSetup);
+            imagenesBEV(plan, document,SetUp1Gantry,SetUp1Tam,SetUp2Gantry,SetUp2Tam,hayImagenesSetup);
             string aux = IO.pathDestino + plan.apellidoNombre + " " + plan.ID + "\\BEV.doc";
             salvarArchivo(document, aux);
         }
@@ -151,14 +157,14 @@ namespace WinForm
             if (hayDosImagenes3D)
             {
                 insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[3], imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[4], 8, Alignment.center);
-                agregarParrafo(document, Textos.tresDInforme(plan), FuenteTexto);
+                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
                 insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[5], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(plan), FuenteTexto);
             }
             else
             {
                 insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[3], 11, Alignment.center);
-                agregarParrafo(document, Textos.tresDInforme(plan), FuenteTexto);
+                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
                 insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[4], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(plan), FuenteTexto);
             }
@@ -169,6 +175,10 @@ namespace WinForm
             DocX document = DocX.Create("Informe.doc");
             document.DifferentFirstPage = false;
             document.DifferentFirstPage = false; //para que todos los encabezados sean iguales
+            document.MarginTop = Convert.ToInt32(1.56 * RelPtaCm * factor);
+            document.MarginBottom = Convert.ToInt32(1.9 * RelPtaCm * factor);
+            document.MarginLeft = Convert.ToInt32(0.63 * RelPtaCm * factor);
+            document.MarginRight = Convert.ToInt32(0.68 * RelPtaCm * factor);
             encabezadoInforme(plan,document);
             textoEImagenesInforme(plan, document,hayDosImagenes3D, hayImagenesSetUp);
             string aux = IO.pathDestino + plan.apellidoNombre + " " + plan.ID + "\\Informe.doc";

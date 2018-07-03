@@ -23,8 +23,10 @@ namespace WinForm
             BT_HacerDocumentos.Enabled = false;
             L_ImagenesEsperadas.Visible = false;
             L_ImagenesEncontradas.Visible = false;
-
-
+            TB_SetUp1Gantry.Text = "180";
+            TB_SetUp2Gantry.Text = "270";
+            TB_SetUp1Tam.Text = "10x10";
+            TB_SetUp2Tam.Text = "10x10";
         }
 
         private void BT_CargarClick(object sender, EventArgs e)
@@ -72,6 +74,7 @@ namespace WinForm
                 }
             }
             DGV_DatosPaciente.AutoResizeColumns();
+            colorCeldaVacia();
         }
         private void guardarDGVenPlan(Plan plan)
         {
@@ -105,7 +108,7 @@ namespace WinForm
             {
                 guardarDGVenPlan(plan);
                 IO.crearCarpeta(plan.apellidoNombre, plan.ID);
-                Word.crearArchivoBEV(plan, hayImagenesSetUp());
+                Word.crearArchivoBEV(plan, hayImagenesSetUp(),TB_SetUp1Gantry.Text,TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text,TB_SetUp2Tam.Text);
                 Word.crearArchivoInforme(plan, hayDosImagenes3D(),hayImagenesSetUp());
                 MessageBox.Show("Se generaron los documentos");
             }
@@ -162,6 +165,26 @@ namespace WinForm
             {
                 GB_CamposSetUp.Enabled = true;
             }
+        }
+
+        private void colorCeldaVacia()
+        {
+            foreach (DataGridViewRow fila in DGV_DatosPaciente.Rows)
+            {
+                if (fila.Cells[1].Value == null)
+                {
+                    fila.Cells[1].Style.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    fila.Cells[1].Style.BackColor = DefaultBackColor;
+                }
+            }
+        }
+
+        private void DGV_DatosPaciente_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            colorCeldaVacia();
         }
     }
 }
