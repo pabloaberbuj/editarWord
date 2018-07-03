@@ -109,7 +109,16 @@ namespace WinForm
 		
 		public static string equipo (string[] fid)
 		{
-			return extraerString(fid,19);
+            string aux = extraerString(fid, 19);
+            if (Equipos.diccionario().ContainsKey(aux))
+            {
+                return Equipos.diccionario()[aux];
+            }
+            else
+            {
+                return aux;
+            }
+            
 		}
 
 
