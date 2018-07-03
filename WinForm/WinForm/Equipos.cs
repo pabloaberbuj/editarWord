@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace WinForm
 {
@@ -10,8 +11,12 @@ namespace WinForm
         public static Dictionary<string,string> diccionario()
         {
             Dictionary<string, string> Diccionario = new Dictionary<string, string>();
-            Diccionario.Add("CETRO_Fotones_06MV", "Cetro");
-
+            string[] equiposTxt = File.ReadAllLines("Equipos.txt");
+            foreach (string eq in equiposTxt)
+            {
+                string[] aux = eq.Split('\t');
+                Diccionario.Add(aux[0], aux[1]);
+            }
             return Diccionario;
 
         }
