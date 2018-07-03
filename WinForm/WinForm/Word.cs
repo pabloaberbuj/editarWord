@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -100,7 +101,16 @@ namespace WinForm
 
         private static void salvarArchivo(DocX document, string pathGuardar)
         {
-            document.SaveAs(pathGuardar);
+            try
+            {
+                document.SaveAs(pathGuardar);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se puede guardar. Es posible que alguno de los documentos esté abierto");
+                //throw;
+            }
+            
         }
 
         private static void encabezadoBEV(Plan plan, DocX document)

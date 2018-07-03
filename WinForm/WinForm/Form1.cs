@@ -37,6 +37,7 @@ namespace WinForm
             L_ImagenesEncontradas.Visible = false;
             DGV_DatosPaciente.Rows.Clear();
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Title = "Abrir archivo PPF";
             openFileDialog1.Filter = "Archivos ppf(.ppf)|*.ppf|All Files (*.*)|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -106,11 +107,19 @@ namespace WinForm
         {
             if(Chequear.numeroDeImagenes(imagenesEsperadas(plan),imagenesEncontradas(plan)))
             {
-                guardarDGVenPlan(plan);
-                IO.crearCarpeta(plan.apellidoNombre, plan.ID);
-                Word.crearArchivoBEV(plan, hayImagenesSetUp(),TB_SetUp1Gantry.Text,TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text,TB_SetUp2Tam.Text);
-                Word.crearArchivoInforme(plan, hayDosImagenes3D(),hayImagenesSetUp());
-                MessageBox.Show("Se generaron los documentos");
+                try
+                {
+                    guardarDGVenPlan(plan);
+                    IO.crearCarpeta(plan.apellidoNombre, plan.ID);
+                    Word.crearArchivoBEV(plan, hayImagenesSetUp(), TB_SetUp1Gantry.Text, TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text, TB_SetUp2Tam.Text);
+                    Word.crearArchivoInforme(plan, hayDosImagenes3D(), hayImagenesSetUp());
+                    MessageBox.Show("Se generaron los documentos");
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                
             }
             else
             {
