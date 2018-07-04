@@ -65,7 +65,7 @@ namespace WinForm
         
         public static string axialInforme(Plan plan)
         {
-            string aux = "Corte axial en isocentro de la lesión y planificación del tratamiento en una etapa, con campos de radiación ";
+            string aux = "Corte axial en isocentro de la lesión y planificación del tratamiento en una etapa, con " + plan.cantidadDeCampos.ToString() + " campos de radiación ";
             if (plan.modalidad== "T3DC")
             {
                 aux += "conformados";

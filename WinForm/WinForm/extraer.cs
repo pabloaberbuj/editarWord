@@ -130,7 +130,7 @@ namespace WinForm
             int aux = Convert.ToInt32(extraerStringSinSep(fid, 21 + tab));
             if (aux == 0)
             {
-                MessageBox.Show("Quedó el Field0");
+                MessageBox.Show("Quedó activado el Field 0");
             }
             else
             {
