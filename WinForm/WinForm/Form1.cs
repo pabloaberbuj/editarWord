@@ -52,6 +52,7 @@ namespace WinForm
                 BT_HacerDocumentos.Enabled = true;
                 cargarDGVdePan(plan);
                 escribirLabels(plan);
+                cargarListaImagenes(plan);
             }
         }
 
@@ -138,7 +139,16 @@ namespace WinForm
                 MessageBox.Show("El número de imágenes encontradas difiere del esperado");
             }
         }
-
+        private void cargarListaImagenes(Plan plan)
+        {
+            List<string> listaImagenes = IO.obtenerImagenes(plan.apellido);
+            foreach(string imagen in listaImagenes)
+            {
+                string aux = imagen.TrimStart(IO.pathImagenes());
+                LB_Imágenes.Items.Add(imagen);
+            }
+            
+        }
         private bool hayImagenesSetUp()
         {
             return (!CHB_SinImagenesSetUp.Checked && !RB_SoloInforme.Checked);
