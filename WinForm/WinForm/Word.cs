@@ -65,7 +65,8 @@ namespace WinForm
             picture.Width = Convert.ToInt32(tamaño * relacionAspecto* RelPtaCm);
             Paragraph paragraph = document.InsertParagraph();
             paragraph.AppendPicture(picture);
-            paragraph.InsertText(textoExtra);
+            paragraph.Append(textoExtra);
+            paragraph.Font(FuenteTexto).FontSize(12);
             paragraph.Alignment = alineacion;
         }
 
@@ -82,7 +83,6 @@ namespace WinForm
             picture2.Width = picture1.Width;
             Paragraph paragraph = document.InsertParagraph();
             paragraph.AppendPicture(picture1).AppendPicture(picture2);
-            
             paragraph.Alignment = alineacion;
         }
 
