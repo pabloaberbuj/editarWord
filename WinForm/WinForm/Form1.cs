@@ -21,8 +21,6 @@ namespace WinForm
         {
             InitializeComponent();
             BT_HacerDocumentos.Enabled = false;
-            L_ImagenesEsperadas.Visible = false;
-            L_ImagenesEncontradas.Visible = false;
             TB_SetUp1Gantry.Text = "180";
             TB_SetUp2Gantry.Text = "270";
             TB_SetUp1Tam.Text = "10x10";
@@ -30,6 +28,8 @@ namespace WinForm
             RB_AmbosDocumentos.Checked = true;
             RB_SoloBEV.Checked = false;
             RB_SoloInforme.Checked = false;
+            L_ImagenesEsperadas.Visible = false;
+            L_ImagenesEncontradas.Visible = false;
         }
 
         private void BT_CargarClick(object sender, EventArgs e)
@@ -116,7 +116,7 @@ namespace WinForm
                 try
                 {
                     guardarDGVenPlan(plan);
-                    IO.crearCarpeta(plan.apellidoNombre, plan.ID);
+                    IO.crearCarpetas(plan.apellidoNombre, plan.ID);
                     if (imprimirBEV())
                     {
                         Word.crearArchivoBEV(plan, hayImagenesSetUp(), TB_SetUp1Gantry.Text, TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text, TB_SetUp2Tam.Text);

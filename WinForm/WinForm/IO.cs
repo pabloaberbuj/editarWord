@@ -19,10 +19,11 @@ namespace WinForm
         {
             return (paths[0].Split('\t'))[1];
         }
-        public static void crearCarpeta(string nombre, string ID)
+        public static void crearCarpetas(string nombre, string ID)
         {
             string aux = nombre + " " + ID;
             Directory.CreateDirectory(pathDestino + aux);
+            Directory.CreateDirectory(pathDestino + aux + "\\Plan");
         }
 
         public static List<string> obtenerImagenes(string apellido)
