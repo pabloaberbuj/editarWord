@@ -27,6 +27,9 @@ namespace WinForm
             TB_SetUp2Gantry.Text = "270";
             TB_SetUp1Tam.Text = "10x10";
             TB_SetUp2Tam.Text = "10x10";
+            RB_AmbosDocumentos.Checked = true;
+            RB_SoloBEV.Checked = false;
+            RB_SoloInforme.Checked = false;
         }
 
         private void BT_CargarClick(object sender, EventArgs e)
@@ -35,6 +38,9 @@ namespace WinForm
             CHB_SinImagenesSetUp.Checked = false;
             L_ImagenesEsperadas.Visible = false;
             L_ImagenesEncontradas.Visible = false;
+            RB_AmbosDocumentos.Checked = true;
+            RB_SoloBEV.Checked = false;
+            RB_SoloInforme.Checked = false;
             DGV_DatosPaciente.Rows.Clear();
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Abrir archivo PPF";
@@ -111,8 +117,14 @@ namespace WinForm
                 {
                     guardarDGVenPlan(plan);
                     IO.crearCarpeta(plan.apellidoNombre, plan.ID);
-                    Word.crearArchivoBEV(plan, hayImagenesSetUp(), TB_SetUp1Gantry.Text, TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text, TB_SetUp2Tam.Text);
-                    Word.crearArchivoInforme(plan, hayDosImagenes3D(), hayImagenesSetUp());
+                    if (imprimirBEV())
+                    {
+                        Word.crearArchivoBEV(plan, hayImagenesSetUp(), TB_SetUp1Gantry.Text, TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text, TB_SetUp2Tam.Text);
+                    }
+                    if (imprimirInforme())
+                    {
+                        Word.crearArchivoInforme(plan, hayDosImagenes3D(), hayImagenesSetUp(),imprimirBEV());
+                    }
                     MessageBox.Show("Se generaron los documentos");
                 }
                 catch (Exception)
@@ -129,9 +141,19 @@ namespace WinForm
 
         private bool hayImagenesSetUp()
         {
-            return !CHB_SinImagenesSetUp.Checked;
+            return (!CHB_SinImagenesSetUp.Checked && !RB_SoloInforme.Checked);
         }
         
+        private bool imprimirBEV()
+        {
+            return (RB_AmbosDocumentos.Checked || RB_SoloBEV.Checked);
+        }
+
+        private bool imprimirInforme()
+        {
+            return (RB_AmbosDocumentos.Checked || RB_SoloInforme.Checked);
+        }
+
         private bool hayDosImagenes3D()
         {
             return CHB_DosImagenes3D.Checked;
@@ -143,14 +165,22 @@ namespace WinForm
 
         private int imagenesEsperadas(Plan plan)
         {
-            int aux = plan.cantidadDeCampos+5;
-            if (hayImagenesSetUp())
+            int aux = 0;
+            if (imprimirBEV())
             {
-                aux += 2;
+                aux += plan.cantidadDeCampos;
+                if (hayImagenesSetUp())
+                {
+                    aux += 2;
+                }
             }
-            if(hayDosImagenes3D())
+            if (imprimirInforme())
             {
-                aux += 1;
+                aux += 5;
+                if (hayDosImagenes3D())
+                {
+                    aux += 1;
+                }
             }
             return aux;
         }
@@ -166,7 +196,7 @@ namespace WinForm
         private void ActualizarNumeroImagenes(object sender, EventArgs e)
         {
             escribirLabels(plan);
-            if (CHB_SinImagenesSetUp.Checked)
+            if (CHB_SinImagenesSetUp.Checked || RB_SoloInforme.Checked)
             {
                 GB_CamposSetUp.Enabled = false;
             }

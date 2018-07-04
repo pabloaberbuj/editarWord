@@ -14,7 +14,7 @@ namespace WinForm
         private static readonly double factor = 0.75; //para que den los margenes
         private static Font FuenteTexto = new Font("Times New Roman");
 
-        
+
         private static List<string> imagenes(Plan plan)
         {
             return IO.obtenerImagenes(plan.apellido);
@@ -33,12 +33,16 @@ namespace WinForm
         {
             return imagenes(plan).GetRange(plan.cantidadDeCampos, 2);
         }
-        private static List<string> imagenesInforme(Plan plan, bool hayDosImagenes3D, bool hayImagenesSetup)
+        private static List<string> imagenesInforme(Plan plan, bool hayDosImagenes3D, bool hayImagenesSetup, bool imprimirBEV)
         {
-            int cantidadCamposTotales = plan.cantidadDeCampos;
-            if(hayImagenesSetup)
+            int cantidadCamposTotales = 0;
+            if (imprimirBEV)
             {
-                cantidadCamposTotales += 2;
+                cantidadCamposTotales += plan.cantidadDeCampos;
+                if (hayImagenesSetup)
+                {
+                    cantidadCamposTotales += 2;
+                }
             }
             if (hayDosImagenes3D)
             {
@@ -49,6 +53,7 @@ namespace WinForm
                 return imagenes(plan).GetRange(cantidadCamposTotales, 5);
             }
         }
+    
         
         private static void agregarParrafo(DocX document, string texto, Font fuente, int tamaño=12)
         {
@@ -61,6 +66,11 @@ namespace WinForm
             var image = document.AddImage(pathImagen);
             var picture = image.CreatePicture();
             double relacionAspecto = Convert.ToDouble(picture.Width) / Convert.ToDouble(picture.Height);
+            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
+            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
+            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
+            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
+            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
             picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
             picture.Width = Convert.ToInt32(tamaño * relacionAspecto* RelPtaCm);
             Paragraph paragraph = document.InsertParagraph();
@@ -158,29 +168,29 @@ namespace WinForm
             agregarEncabezado(document, Textos.encabezadoInformeLinea3(plan), FuenteTexto, 12, Alignment.center);
         }
 
-        private static void textoEImagenesInforme(Plan plan, DocX document, bool hayDosImagenes3D,bool hayImagenesSetUp)
+        private static void textoEImagenesInforme(Plan plan, DocX document, bool hayDosImagenes3D,bool hayImagenesSetUp, bool imprimirBEV)
         {
-            insertarImagen(document, imagenesInforme(plan,hayDosImagenes3D, hayImagenesSetUp)[0], 11, Alignment.center);
+            insertarImagen(document, imagenesInforme(plan,hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[0], 11, Alignment.center);
             agregarParrafo(document, Textos.axialInforme(plan), FuenteTexto);
-            insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[1], imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[2], 8, Alignment.center);
+            insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[1], imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[2], 8, Alignment.center);
             agregarParrafo(document, Textos.coronalSagitalInforme(), FuenteTexto);
             if (hayDosImagenes3D)
             {
-                insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[3], imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[4], 8, Alignment.center);
+                insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[3], imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 8, Alignment.center);
                 agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
-                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[5], 11, Alignment.center);
+                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[5], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(plan), FuenteTexto);
             }
             else
             {
-                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[3], 11, Alignment.center);
+                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[3], 11, Alignment.center);
                 agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
-                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp)[4], 11, Alignment.center);
+                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(plan), FuenteTexto);
             }
             
         }
-        public static void crearArchivoInforme(Plan plan, bool hayDosImagenes3D,bool hayImagenesSetUp)
+        public static void crearArchivoInforme(Plan plan, bool hayDosImagenes3D,bool hayImagenesSetUp, bool imprimirBEV)
         {
             DocX document = DocX.Create("Informe.doc");
             document.DifferentFirstPage = false;
@@ -190,7 +200,7 @@ namespace WinForm
             document.MarginLeft = Convert.ToInt32(0.63 * RelPtaCm * factor);
             document.MarginRight = Convert.ToInt32(0.68 * RelPtaCm * factor);
             encabezadoInforme(plan,document);
-            textoEImagenesInforme(plan, document,hayDosImagenes3D, hayImagenesSetUp);
+            textoEImagenesInforme(plan, document,hayDosImagenes3D, hayImagenesSetUp, imprimirBEV);
             string aux = IO.pathDestino + plan.apellidoNombre + " " + plan.ID + "\\Informe.doc";
             salvarArchivo(document, aux);
         }
