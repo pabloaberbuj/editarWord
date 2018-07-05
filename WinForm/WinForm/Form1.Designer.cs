@@ -40,11 +40,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GB_Documentos = new System.Windows.Forms.GroupBox();
             this.RB_SoloInforme = new System.Windows.Forms.RadioButton();
             this.RB_SoloBEV = new System.Windows.Forms.RadioButton();
             this.RB_AmbosDocumentos = new System.Windows.Forms.RadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.GB_Imagenes = new System.Windows.Forms.GroupBox();
             this.LB_Imágenes = new System.Windows.Forms.ListBox();
             this.CHB_DosImagenes3D = new System.Windows.Forms.CheckBox();
             this.CHB_SinImagenesSetUp = new System.Windows.Forms.CheckBox();
@@ -55,8 +55,8 @@
             this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).BeginInit();
             this.GB_CamposSetUp.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.GB_Documentos.SuspendLayout();
+            this.GB_Imagenes.SuspendLayout();
             this.SuspendLayout();
             // 
             // BT_Cargar
@@ -178,18 +178,18 @@
             this.label2.TabIndex = 37;
             this.label2.Text = "Campo SetUp 1";
             // 
-            // groupBox1
+            // GB_Documentos
             // 
-            this.groupBox1.Controls.Add(this.RB_SoloInforme);
-            this.groupBox1.Controls.Add(this.RB_SoloBEV);
-            this.groupBox1.Controls.Add(this.RB_AmbosDocumentos);
-            this.groupBox1.Controls.Add(this.BT_HacerDocumentos);
-            this.groupBox1.Location = new System.Drawing.Point(412, 341);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(188, 133);
-            this.groupBox1.TabIndex = 38;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Documentos";
+            this.GB_Documentos.Controls.Add(this.RB_SoloInforme);
+            this.GB_Documentos.Controls.Add(this.RB_SoloBEV);
+            this.GB_Documentos.Controls.Add(this.RB_AmbosDocumentos);
+            this.GB_Documentos.Controls.Add(this.BT_HacerDocumentos);
+            this.GB_Documentos.Location = new System.Drawing.Point(412, 341);
+            this.GB_Documentos.Name = "GB_Documentos";
+            this.GB_Documentos.Size = new System.Drawing.Size(188, 133);
+            this.GB_Documentos.TabIndex = 38;
+            this.GB_Documentos.TabStop = false;
+            this.GB_Documentos.Text = "Documentos";
             // 
             // RB_SoloInforme
             // 
@@ -227,22 +227,22 @@
             this.RB_AmbosDocumentos.UseVisualStyleBackColor = true;
             this.RB_AmbosDocumentos.CheckedChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
             // 
-            // groupBox2
+            // GB_Imagenes
             // 
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.LB_Imágenes);
-            this.groupBox2.Controls.Add(this.CHB_DosImagenes3D);
-            this.groupBox2.Controls.Add(this.CHB_SinImagenesSetUp);
-            this.groupBox2.Controls.Add(this.L_ImagenesEncontradas);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.L_ImagenesEsperadas);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 156);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(382, 179);
-            this.groupBox2.TabIndex = 40;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Imágenes";
+            this.GB_Imagenes.Controls.Add(this.label7);
+            this.GB_Imagenes.Controls.Add(this.LB_Imágenes);
+            this.GB_Imagenes.Controls.Add(this.CHB_DosImagenes3D);
+            this.GB_Imagenes.Controls.Add(this.CHB_SinImagenesSetUp);
+            this.GB_Imagenes.Controls.Add(this.L_ImagenesEncontradas);
+            this.GB_Imagenes.Controls.Add(this.label3);
+            this.GB_Imagenes.Controls.Add(this.L_ImagenesEsperadas);
+            this.GB_Imagenes.Controls.Add(this.label1);
+            this.GB_Imagenes.Location = new System.Drawing.Point(12, 156);
+            this.GB_Imagenes.Name = "GB_Imagenes";
+            this.GB_Imagenes.Size = new System.Drawing.Size(382, 179);
+            this.GB_Imagenes.TabIndex = 40;
+            this.GB_Imagenes.TabStop = false;
+            this.GB_Imagenes.Text = "Imágenes";
             // 
             // LB_Imágenes
             // 
@@ -327,21 +327,21 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 477);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.GB_Imagenes);
+            this.Controls.Add(this.GB_Documentos);
             this.Controls.Add(this.GB_CamposSetUp);
             this.Controls.Add(this.DGV_DatosPaciente);
             this.Controls.Add(this.BT_Cargar);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Armado de carpetas";
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).EndInit();
             this.GB_CamposSetUp.ResumeLayout(false);
             this.GB_CamposSetUp.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.GB_Documentos.ResumeLayout(false);
+            this.GB_Documentos.PerformLayout();
+            this.GB_Imagenes.ResumeLayout(false);
+            this.GB_Imagenes.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -360,11 +360,11 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox GB_Documentos;
         private System.Windows.Forms.RadioButton RB_SoloInforme;
         private System.Windows.Forms.RadioButton RB_SoloBEV;
         private System.Windows.Forms.RadioButton RB_AmbosDocumentos;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox GB_Imagenes;
         private System.Windows.Forms.ListBox LB_Imágenes;
         private System.Windows.Forms.CheckBox CHB_DosImagenes3D;
         private System.Windows.Forms.CheckBox CHB_SinImagenesSetUp;

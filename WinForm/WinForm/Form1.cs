@@ -31,6 +31,9 @@ namespace WinForm
             L_ImagenesEsperadas.Visible = false;
             L_ImagenesEncontradas.Visible = false;
             LB_Imágenes.Items.Clear();
+            GB_Imagenes.Enabled = false;
+            GB_CamposSetUp.Enabled = false;
+            GB_Documentos.Enabled = false;
         }
 
         private void BT_CargarClick(object sender, EventArgs e)
@@ -54,6 +57,9 @@ namespace WinForm
                 cargarDGVdePan(plan);
                 escribirLabels(plan);
                 cargarListaImagenes(plan);
+                GB_Imagenes.Enabled = true;
+                GB_CamposSetUp.Enabled = true;
+                GB_Documentos.Enabled = true;
             }
         }
 
