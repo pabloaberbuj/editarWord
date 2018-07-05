@@ -30,6 +30,7 @@ namespace WinForm
             RB_SoloInforme.Checked = false;
             L_ImagenesEsperadas.Visible = false;
             L_ImagenesEncontradas.Visible = false;
+            LB_Imágenes.Items.Clear();
         }
 
         private void BT_CargarClick(object sender, EventArgs e)
@@ -41,7 +42,7 @@ namespace WinForm
             RB_AmbosDocumentos.Checked = true;
             RB_SoloBEV.Checked = false;
             RB_SoloInforme.Checked = false;
-            DGV_DatosPaciente.Rows.Clear();
+            
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Abrir archivo PPF";
             openFileDialog1.Filter = "Archivos ppf(.ppf)|*.ppf|All Files (*.*)|*.*";
@@ -58,6 +59,7 @@ namespace WinForm
 
         private void cargarDGVdePan(Plan plan)
         {
+            DGV_DatosPaciente.Rows.Clear();
             PropertyInfo[] propiedades = plan.GetType().GetProperties();
             DGV_DatosPaciente.ColumnCount = 2;
             foreach (PropertyInfo propiedad in propiedades)
@@ -83,6 +85,7 @@ namespace WinForm
             }
             DGV_DatosPaciente.AutoResizeColumns();
             colorCeldaVacia();
+            DGV_DatosPaciente.Columns[0].ReadOnly = true;
         }
         private void guardarDGVenPlan(Plan plan)
         {
@@ -141,11 +144,11 @@ namespace WinForm
         }
         private void cargarListaImagenes(Plan plan)
         {
+            LB_Imágenes.Items.Clear();
             List<string> listaImagenes = IO.obtenerImagenes(plan.apellido);
             foreach(string imagen in listaImagenes)
             {
-                string aux = imagen.TrimStart(IO.pathImagenes());
-                LB_Imágenes.Items.Add(imagen);
+                LB_Imágenes.Items.Add(Path.GetFileName(imagen));
             }
             
         }

@@ -60,7 +60,7 @@ namespace WinForm
             {
                 mod = "con intensidad modulada de ";
             }
-            return "Tratamiento " + mod  + plan.patologia;
+            return "Tratamiento " + mod  + plan.tratemiento_de;
         }
         
         public static string axialInforme(Plan plan)

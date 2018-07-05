@@ -41,17 +41,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.RB_AmbosDocumentos = new System.Windows.Forms.RadioButton();
-            this.RB_SoloBEV = new System.Windows.Forms.RadioButton();
             this.RB_SoloInforme = new System.Windows.Forms.RadioButton();
+            this.RB_SoloBEV = new System.Windows.Forms.RadioButton();
+            this.RB_AmbosDocumentos = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.LB_Imágenes = new System.Windows.Forms.ListBox();
             this.CHB_DosImagenes3D = new System.Windows.Forms.CheckBox();
             this.CHB_SinImagenesSetUp = new System.Windows.Forms.CheckBox();
             this.L_ImagenesEncontradas = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.L_ImagenesEsperadas = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.LB_Imágenes = new System.Windows.Forms.ListBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).BeginInit();
             this.GB_CamposSetUp.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -73,7 +74,7 @@
             this.BT_HacerDocumentos.Enabled = false;
             this.BT_HacerDocumentos.Location = new System.Drawing.Point(15, 89);
             this.BT_HacerDocumentos.Name = "BT_HacerDocumentos";
-            this.BT_HacerDocumentos.Size = new System.Drawing.Size(144, 23);
+            this.BT_HacerDocumentos.Size = new System.Drawing.Size(144, 35);
             this.BT_HacerDocumentos.TabIndex = 21;
             this.BT_HacerDocumentos.Text = "Crear Documentos";
             this.BT_HacerDocumentos.UseVisualStyleBackColor = true;
@@ -82,6 +83,9 @@
             // DGV_DatosPaciente
             // 
             this.DGV_DatosPaciente.AllowUserToAddRows = false;
+            this.DGV_DatosPaciente.AllowUserToDeleteRows = false;
+            this.DGV_DatosPaciente.AllowUserToResizeColumns = false;
+            this.DGV_DatosPaciente.AllowUserToResizeRows = false;
             this.DGV_DatosPaciente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_DatosPaciente.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_DatosPaciente.Location = new System.Drawing.Point(400, 12);
@@ -180,36 +184,12 @@
             this.groupBox1.Controls.Add(this.RB_SoloBEV);
             this.groupBox1.Controls.Add(this.RB_AmbosDocumentos);
             this.groupBox1.Controls.Add(this.BT_HacerDocumentos);
-            this.groupBox1.Location = new System.Drawing.Point(12, 341);
+            this.groupBox1.Location = new System.Drawing.Point(412, 341);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(174, 124);
+            this.groupBox1.Size = new System.Drawing.Size(188, 133);
             this.groupBox1.TabIndex = 38;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Documentos";
-            // 
-            // RB_AmbosDocumentos
-            // 
-            this.RB_AmbosDocumentos.AutoSize = true;
-            this.RB_AmbosDocumentos.Location = new System.Drawing.Point(15, 20);
-            this.RB_AmbosDocumentos.Name = "RB_AmbosDocumentos";
-            this.RB_AmbosDocumentos.Size = new System.Drawing.Size(145, 17);
-            this.RB_AmbosDocumentos.TabIndex = 22;
-            this.RB_AmbosDocumentos.TabStop = true;
-            this.RB_AmbosDocumentos.Text = "Crear ambos documentos";
-            this.RB_AmbosDocumentos.UseVisualStyleBackColor = true;
-            this.RB_AmbosDocumentos.CheckedChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
-            // 
-            // RB_SoloBEV
-            // 
-            this.RB_SoloBEV.AutoSize = true;
-            this.RB_SoloBEV.Location = new System.Drawing.Point(15, 43);
-            this.RB_SoloBEV.Name = "RB_SoloBEV";
-            this.RB_SoloBEV.Size = new System.Drawing.Size(96, 17);
-            this.RB_SoloBEV.TabIndex = 23;
-            this.RB_SoloBEV.TabStop = true;
-            this.RB_SoloBEV.Text = "Crear sólo BEV";
-            this.RB_SoloBEV.UseVisualStyleBackColor = true;
-            this.RB_SoloBEV.CheckedChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
             // 
             // RB_SoloInforme
             // 
@@ -223,8 +203,33 @@
             this.RB_SoloInforme.UseVisualStyleBackColor = true;
             this.RB_SoloInforme.CheckedChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
             // 
+            // RB_SoloBEV
+            // 
+            this.RB_SoloBEV.AutoSize = true;
+            this.RB_SoloBEV.Location = new System.Drawing.Point(15, 43);
+            this.RB_SoloBEV.Name = "RB_SoloBEV";
+            this.RB_SoloBEV.Size = new System.Drawing.Size(96, 17);
+            this.RB_SoloBEV.TabIndex = 23;
+            this.RB_SoloBEV.TabStop = true;
+            this.RB_SoloBEV.Text = "Crear sólo BEV";
+            this.RB_SoloBEV.UseVisualStyleBackColor = true;
+            this.RB_SoloBEV.CheckedChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
+            // 
+            // RB_AmbosDocumentos
+            // 
+            this.RB_AmbosDocumentos.AutoSize = true;
+            this.RB_AmbosDocumentos.Location = new System.Drawing.Point(15, 20);
+            this.RB_AmbosDocumentos.Name = "RB_AmbosDocumentos";
+            this.RB_AmbosDocumentos.Size = new System.Drawing.Size(145, 17);
+            this.RB_AmbosDocumentos.TabIndex = 22;
+            this.RB_AmbosDocumentos.TabStop = true;
+            this.RB_AmbosDocumentos.Text = "Crear ambos documentos";
+            this.RB_AmbosDocumentos.UseVisualStyleBackColor = true;
+            this.RB_AmbosDocumentos.CheckedChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.LB_Imágenes);
             this.groupBox2.Controls.Add(this.CHB_DosImagenes3D);
             this.groupBox2.Controls.Add(this.CHB_SinImagenesSetUp);
@@ -234,10 +239,19 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(12, 156);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(362, 179);
+            this.groupBox2.Size = new System.Drawing.Size(382, 179);
             this.groupBox2.TabIndex = 40;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Imágenes";
+            // 
+            // LB_Imágenes
+            // 
+            this.LB_Imágenes.FormattingEnabled = true;
+            this.LB_Imágenes.HorizontalScrollbar = true;
+            this.LB_Imágenes.Location = new System.Drawing.Point(206, 39);
+            this.LB_Imágenes.Name = "LB_Imágenes";
+            this.LB_Imágenes.Size = new System.Drawing.Size(170, 134);
+            this.LB_Imágenes.TabIndex = 40;
             // 
             // CHB_DosImagenes3D
             // 
@@ -299,13 +313,14 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "Imagenes esperadas";
             // 
-            // LB_Imágenes
+            // label7
             // 
-            this.LB_Imágenes.FormattingEnabled = true;
-            this.LB_Imágenes.Location = new System.Drawing.Point(206, 19);
-            this.LB_Imágenes.Name = "LB_Imágenes";
-            this.LB_Imágenes.Size = new System.Drawing.Size(136, 147);
-            this.LB_Imágenes.TabIndex = 40;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(203, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(131, 13);
+            this.label7.TabIndex = 41;
+            this.label7.Text = "Lista imágenes (chequear)";
             // 
             // Form1
             // 
@@ -357,6 +372,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label L_ImagenesEsperadas;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label7;
     }
 }
 
