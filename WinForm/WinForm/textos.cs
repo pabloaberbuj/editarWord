@@ -104,6 +104,25 @@ namespace WinForm
             return "Histograma de distribución de dosis en los diferentes volúmenes delimitados en la tomografía.";
         }
         
+        public static string profundidadesEfectivas(string textoCrudo)
+        {
+            string[] aux = textoCrudo.Split('\n');
+            List<string> textoLimpio = new List<string>();
+            string[] lineasQuedan = new string[] { "Effective", "Fields", "REF", "ISO1" };
+            foreach (string linea in aux)
+            {
+                string lineaNueva=linea.Trim();
+                //lineaNueva=lineaNueva.Replace("-","");
+                foreach (string lineaQueda in lineasQuedan)
+                {
+                    if (lineaNueva.StartsWith(lineaQueda))
+                    {
+                        textoLimpio.Add(lineaNueva);
+                    }
+                }
+            }
+            return string.Join("\n", textoLimpio.ToArray<string>());
+        }
 
 
     }

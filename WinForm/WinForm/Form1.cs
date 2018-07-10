@@ -129,7 +129,7 @@ namespace WinForm
                     IO.crearCarpetas(plan.apellidoNombre, plan.ID);
                     if (imprimirBEV())
                     {
-                        Word.crearArchivoBEV(plan, hayImagenesSetUp(), TB_SetUp1Gantry.Text, TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text, TB_SetUp2Tam.Text);
+                        Word.crearArchivoBEV(plan, hayImagenesSetUp(), TB_SetUp1Gantry.Text, TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text, TB_SetUp2Tam.Text,TB_ProfundidadesEfectivas.Text);
                     }
                     if (imprimirInforme())
                     {

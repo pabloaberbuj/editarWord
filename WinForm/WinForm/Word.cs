@@ -130,6 +130,14 @@ namespace WinForm
             agregarEncabezado(document, Textos.encabezadoBEV2(plan), FuenteTexto, 12, Alignment.center);
         }
 
+        private static void profundidadesEfectivasBEV(DocX document, string textoCrudo)
+        {
+            if (textoCrudo!=null || textoCrudo !="")
+            {
+                agregarParrafo(document, Textos.profundidadesEfectivas(textoCrudo), FuenteTexto);
+            }
+        }
+
         private static void imagenesBEV(Plan plan, DocX document, string gantrySetUp1, string tamSetUp1, string gantrySetUp2, string tamSetUp2, bool hayImagenesSetup)
         {
             if (hayImagenesSetup)
@@ -145,7 +153,7 @@ namespace WinForm
         }
 
         
-        public static void crearArchivoBEV(Plan plan,bool hayImagenesSetup, string SetUp1Gantry, string SetUp2Gantry, string SetUp1Tam, string SetUp2Tam)
+        public static void crearArchivoBEV(Plan plan,bool hayImagenesSetup, string SetUp1Gantry, string SetUp2Gantry, string SetUp1Tam, string SetUp2Tam,string textoCrudo)
         {
             DocX document = DocX.Create("BEV.doc");
             document.DifferentFirstPage = false;
@@ -156,6 +164,8 @@ namespace WinForm
             document.MarginRight = Convert.ToInt32(0.95* RelPtaCm * factor);
             encabezadoBEV(plan, document);
             imagenesBEV(plan, document,SetUp1Gantry,SetUp1Tam,SetUp2Gantry,SetUp2Tam,hayImagenesSetup);
+            agregarParrafo(document, "", FuenteTexto);
+            profundidadesEfectivasBEV(document, textoCrudo);
             string aux = IO.pathDestino + plan.apellidoNombre + " " + plan.ID + "\\BEV.doc";
             salvarArchivo(document, aux);
         }
