@@ -135,7 +135,11 @@ namespace WinForm
                     {
                         Word.crearArchivoInforme(plan, hayDosImagenes3D(), hayImagenesSetUp(),imprimirBEV());
                     }
-                    MessageBox.Show("Se generaron los documentos");
+                    if (MessageBox.Show("Se generaron los documentos.\n¿Desea mover las imágenes?", "Mover Imágenes", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        IO.moverImagenes(plan);
+                        MessageBox.Show("Se movieron las imágenes");
+                    }
                 }
                 catch (Exception)
                 {

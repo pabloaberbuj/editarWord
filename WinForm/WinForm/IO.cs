@@ -31,5 +31,17 @@ namespace WinForm
             string patron = apellido + "*.bmp";
             return Directory.GetFiles(pathImagenes(), patron).ToList();
         }
+
+        public static void moverImagenes(Plan plan)
+        {
+            string aux = plan.apellidoNombre + " " + plan.ID;
+            
+            foreach (string imagen in obtenerImagenes(plan.apellido))
+            {
+                string auxOrigen = imagen;
+                string auxDestino = pathDestino + aux + Path.GetFileName(imagen);
+                File.Move(imagen, pathDestino + aux + "\\" + Path.GetFileName(imagen));
+            }
+        }
     }
 }
