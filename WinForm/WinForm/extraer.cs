@@ -19,7 +19,7 @@ namespace WinForm
             }
             catch (Exception e)
             {
-                MessageBox.Show("No se ha podido abrir. Posiblemente el archivo est?? en uso por otra aplicaci??n\n\n" + e.ToString(), "Error abriendo el archivo");
+                MessageBox.Show("No se ha podido abrir. Posiblemente el archivo esté en uso por otra aplicación" + e.ToString(), "Error abriendo el archivo");
                 throw;
             }
         }

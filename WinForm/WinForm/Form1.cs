@@ -38,6 +38,29 @@ namespace WinForm
             TB_ProfundidadesEfectivas.Enabled = false;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (!Chequear.archivoConfiguracion())
+            {
+                MessageBox.Show("No se encuentra el archivo Configuración.txt. El programa se cerrará");
+                this.Close();
+            }
+            else
+            {
+                if (!Chequear.directorioExport())
+                {
+                    MessageBox.Show("No se encuentra la carpeta Export en la dirección indicada.\nRevise el archivo Configuracion.txt");
+                    this.Close();
+                }
+            }
+            if (!Chequear.archivoEquipos())
+            {
+                MessageBox.Show("No se encuentra el archivo Equipos.txt. El programa se cerrará");
+                this.Close();
+            }
+            
+        }
+
         private void BT_CargarClick(object sender, EventArgs e)
         {
             CHB_DosImagenes3D.Checked = false;
@@ -57,6 +80,7 @@ namespace WinForm
                 string[] fid = Extraer.cargar(openFileDialog1.FileName);
                 plan = Extraer.extraerPlan(fid);
                 BT_HacerDocumentos.Enabled = true;
+                hayMasDeUnISO();
                 cargarDGVdePan(plan);
                 escribirLabels(plan);
                 cargarListaImagenes(plan);
@@ -262,5 +286,16 @@ namespace WinForm
         {
             celdaVacia();
         }
+
+        private void hayMasDeUnISO()
+        {
+            if (plan.iso == "Hay más de un ISO")
+            {
+                MessageBox.Show("El plan tiene más de un iso");
+                plan.iso = null;
+            }
+        }
+
+        
     }
 }

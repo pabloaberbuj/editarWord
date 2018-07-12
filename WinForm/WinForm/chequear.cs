@@ -19,8 +19,21 @@ namespace WinForm
         {
             return numeroDeCampo1 != 0;
         }
-        
-        
+
+        public static bool archivoConfiguracion()
+        {
+            return (File.Exists("Configuracion.txt"));
+        }
+
+        public static bool archivoEquipos()
+        {
+            return (File.Exists("Equipos.txt"));
+        }
+
+        public static bool directorioExport()
+        {
+            return (Directory.Exists(IO.pathImagenes()));
+        }
     }
 }
 		
