@@ -23,8 +23,8 @@ namespace WinForm
                 throw;
             }
         }
-		
-		public static string extraerString(string[] fid, int linea, char sep = '=')
+
+        public static string extraerString(string[] fid, int linea, char sep = '=')
         {
             string aux = fid[linea]; string[] aux2 = aux.Split(sep); string salida = aux2[1];
             return salida.Trim();
@@ -39,57 +39,57 @@ namespace WinForm
         {
             return Convert.ToDouble(extraerString(fid, linea));
         }
-		
-		public static int numeroParametros(string[] fid)
-		{
-			return Convert.ToInt32(extraerString(fid,4));
-		}
-		public static int numeroCampos(string[] fid)
-		{
-			return Convert.ToInt32(extraerDouble(fid,5));
-		}
-		
-		public static string dosisFraccion (string[] fid)
-		{
-			return extraerString(fid,6);
-		}
-		
-		public static string numeroFracciones(string[] fid)
-		{
-			return extraerString(fid,8);
-		}
-		
-		public static string dosisTotal(string[] fid)
-		{
-			return (Convert.ToDouble(dosisFraccion(fid))*Convert.ToDouble(numeroFracciones(fid))).ToString();
-		}
-		public static string modalidad(string[] fid)
-		{
-			if (extraerString(fid,10)=="CRT-3D")
-			{
-				return "T3DC";
-			}
-			else if (extraerString(fid,10)=="IMRT(s&s)")
-			{
-				return "IMRT";
-			}
-			else if (extraerString(fid,10)=="IMRT(mod)")
-			{
-				return "IMRT";
-			}
+
+        public static int numeroParametros(string[] fid)
+        {
+            return Convert.ToInt32(extraerString(fid, 4));
+        }
+        public static int numeroCampos(string[] fid)
+        {
+            return Convert.ToInt32(extraerDouble(fid, 5));
+        }
+
+        public static string dosisFraccion(string[] fid)
+        {
+            return extraerString(fid, 6);
+        }
+
+        public static string numeroFracciones(string[] fid)
+        {
+            return extraerString(fid, 8);
+        }
+
+        public static string dosisTotal(string[] fid)
+        {
+            return (Convert.ToDouble(dosisFraccion(fid)) * Convert.ToDouble(numeroFracciones(fid))).ToString();
+        }
+        public static string modalidad(string[] fid)
+        {
+            if (extraerString(fid, 10) == "CRT-3D")
+            {
+                return "T3DC";
+            }
+            else if (extraerString(fid, 10) == "IMRT(s&s)")
+            {
+                return "IMRT";
+            }
+            else if (extraerString(fid, 10) == "IMRT(mod)")
+            {
+                return "IMRT";
+            }
             else //no debería caer acá
             {
                 return "";
             }
-            
-		}
-			
-		public static string apellidoPaciente(string[] fid)
-		{
-			string aux = extraerString(fid,12).Trim();
+
+        }
+
+        public static string apellidoPaciente(string[] fid)
+        {
+            string aux = extraerString(fid, 12).Trim();
             string[] aux2 = aux.Split('^');
             return aux2[0].ToUpper();
-		}
+        }
         public static string nombrePaciente(string[] fid)
         {
             string aux = extraerString(fid, 12).Trim();
@@ -102,13 +102,13 @@ namespace WinForm
             return apellidoPaciente(fid) + ", " + nombrePaciente(fid);
         }
 
-        public static string IDPaciente (string[] fid)
-		{
-			return extraerString(fid,13);
-		}
-		
-		public static string equipo (string[] fid)
-		{
+        public static string IDPaciente(string[] fid)
+        {
+            return extraerString(fid, 13);
+        }
+
+        public static string equipo(string[] fid)
+        {
             string aux = extraerString(fid, 19);
             if (Equipos.diccionario().ContainsKey(aux))
             {
@@ -118,8 +118,8 @@ namespace WinForm
             {
                 return aux;
             }
-            
-		}
+
+        }
 
 
 
@@ -130,20 +130,19 @@ namespace WinForm
             int aux = Convert.ToInt32(extraerStringSinSep(fid, 21 + tab));
             if (aux == 0)
             {
-                MessageBox.Show("Quedó activado el Field 0");
+                MessageBox.Show("Quedó activado el Field 0. Se cargaran los otros campos");
+                tab += parametros + 1;
             }
-            else
-            {
-                campo.numero = numeroDeCampo;
-                campo.iso = extraerStringSinSep(fid, 22 + tab);
-                campo.gantry = extraerStringSinSep(fid, 26 + tab);
-                campo.col = extraerStringSinSep(fid, 28 + tab);
-                campo.camilla = extraerStringSinSep(fid, 25 + tab);
-            }
+            campo.numero = numeroDeCampo;
+            campo.iso = extraerStringSinSep(fid, 22 + tab);
+            campo.gantry = extraerStringSinSep(fid, 26 + tab);
+            campo.col = extraerStringSinSep(fid, 28 + tab);
+            campo.camilla = extraerStringSinSep(fid, 25 + tab);
+
             return campo;
         }
-            public static Plan extraerPlan(string[] fid)
-            {
+        public static Plan extraerPlan(string[] fid)
+        {
             Plan plan = new Plan()
             {
                 apellido = apellidoPaciente(fid),
@@ -158,18 +157,17 @@ namespace WinForm
                 cantidadDeCampos = numeroCampos(fid),
                 numeroParametros = numeroParametros(fid),
             };
-                
-                plan.listaCampos = new List<Campo>();
-				for (int i=0;i<plan.cantidadDeCampos;i++)
-				{
-					plan.listaCampos.Add(extraerCampo(fid,i+1,plan.numeroParametros));
-				};
-                plan.iso = Plan.obtenerIso(plan);
-				return plan;
-            }
-            
-            
+
+            plan.listaCampos = new List<Campo>();
+            for (int i = 0; i < plan.cantidadDeCampos; i++)
+            {
+                plan.listaCampos.Add(extraerCampo(fid, i + 1, plan.numeroParametros));
+            };
+            plan.iso = Plan.obtenerIso(plan);
+            return plan;
         }
-	}
-	
-	
+
+
+    }
+}
+

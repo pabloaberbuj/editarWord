@@ -1,0 +1,134 @@
+[Version]
+PPF_VER = 3
+CAT3D_VER = 7.12.17
+[Header]
+PARAM = 21
+FIELDS = 3
+TDOSE =  300.0
+TPERCENT =  100.0
+NUMFRACTIONS = 10
+NORMALDOSE =  105.0
+MODALITY = CRT-3D
+[GenData]
+PATNAME = Ramirez^Rene                  
+PATID = 1-71275-1
+DIAGNOSIS = holocraneo
+DATE = 04072018
+DRNAME = 
+PHYSNAME = 
+HOSPNAME = Mevaterapia
+MACHINE = CETRO_Fotones_06MV
+[Titles]
+Field #
+Isocenter
+INPLANE   
+CROSSPLANE
+Table Ang
+Gantry Ang
+Gantry Rot
+Collim Ang
+Weight
+Wedge Filt
+Wedge  Pos
+ShieldFile
+TrayFactor
+HEAD-JAW  
+FEET-JAW  
+RIGHT-JAW 
+LEFT-JAW  
+SSD
+Device
+Beam Type
+MON. UNITS
+[FIELD_0]
+0
+ISO1
+100
+100
+180
+180
+0
+180
+0.000
+NONE
+----
+
+1.000
+0
+0
+0
+0
+0.0
+0
+Photon
+0.0
+[FIELD_1]
+1
+ISO1
+200
+170
+180
+270
+0
+220
+0.400
+NONE
+----
+Ramirez_Re1cd81
+1.000
+0
+0
+100
+70
+916.0
+0
+Photon
+129.8
+[FIELD_2]
+2
+ISO1
+200
+170
+180
+90
+0
+140
+0.500
+NONE
+----
+Ramirez_Re1cd82
+1.000
+0
+0
+70
+100
+914.7
+0
+Photon
+162.7
+[FIELD_3]
+3
+ISO1
+200
+170
+180
+270
+0
+220
+0.100
+NONE
+----
+Ramirez_Re1cd93
+1.000
+0
+0
+100
+70
+916.0
+0
+Photon
+32.7
+[Footer]
+Dose Computation Mode: Convolution - Pencil Beam 8x8mm
+Normalized at isocenter
+Density correction ON
