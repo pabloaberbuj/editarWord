@@ -28,6 +28,7 @@ namespace WinForm
 
         public static List<string> obtenerImagenes(string apellido)
         {
+            apellido = apellido.Replace(' ', '_');
             string patron = apellido + "*.bmp";
             return Directory.GetFiles(pathImagenes(), patron).ToList();
         }

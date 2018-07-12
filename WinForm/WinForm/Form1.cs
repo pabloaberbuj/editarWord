@@ -17,6 +17,7 @@ namespace WinForm
     public partial class Form1 : Form
     {
         Plan plan = new Plan();
+
         public Form1()
         {
             InitializeComponent();
@@ -225,14 +226,17 @@ namespace WinForm
 
         private void ActualizarNumeroImagenes(object sender, EventArgs e)
         {
-            escribirLabels(plan);
-            if (CHB_SinImagenesSetUp.Checked || RB_SoloInforme.Checked)
+            if (plan.cantidadDeCampos >0)
             {
-                GB_CamposSetUp.Enabled = false;
-            }
-            else
-            {
-                GB_CamposSetUp.Enabled = true;
+                escribirLabels(plan);
+                if (CHB_SinImagenesSetUp.Checked || RB_SoloInforme.Checked)
+                {
+                    GB_CamposSetUp.Enabled = false;
+                }
+                else
+                {
+                    GB_CamposSetUp.Enabled = true;
+                }
             }
         }
 
