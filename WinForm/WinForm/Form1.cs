@@ -45,6 +45,7 @@ namespace WinForm
             RB_AmbosDocumentos.Checked = true;
             RB_SoloBEV.Checked = false;
             RB_SoloInforme.Checked = false;
+            TB_ProfundidadesEfectivas.Clear();
             
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Abrir archivo PPF";
