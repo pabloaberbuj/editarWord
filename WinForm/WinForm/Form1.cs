@@ -34,6 +34,7 @@ namespace WinForm
             GB_Imagenes.Enabled = false;
             GB_CamposSetUp.Enabled = false;
             GB_Documentos.Enabled = false;
+            TB_ProfundidadesEfectivas.Enabled = false;
         }
 
         private void BT_CargarClick(object sender, EventArgs e)
@@ -46,7 +47,7 @@ namespace WinForm
             RB_SoloBEV.Checked = false;
             RB_SoloInforme.Checked = false;
             TB_ProfundidadesEfectivas.Clear();
-            
+
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Abrir archivo PPF";
             openFileDialog1.Filter = "Archivos ppf(.ppf)|*.ppf|All Files (*.*)|*.*";
@@ -61,6 +62,7 @@ namespace WinForm
                 GB_Imagenes.Enabled = true;
                 GB_CamposSetUp.Enabled = true;
                 GB_Documentos.Enabled = true;
+                TB_ProfundidadesEfectivas.Enabled = true;
             }
         }
 
@@ -72,7 +74,7 @@ namespace WinForm
             foreach (PropertyInfo propiedad in propiedades)
             {
                 Type tipo = propiedad.PropertyType;
-                if (propiedad.Name=="apellidoNombre"|| propiedad.Name == "numeroParametros" )
+                if (propiedad.Name == "apellidoNombre" || propiedad.Name == "numeroParametros")
                 {
 
                 }
@@ -91,7 +93,7 @@ namespace WinForm
                 }
             }
             DGV_DatosPaciente.AutoResizeColumns();
-            colorCeldaVacia();
+            celdaVacia();
             DGV_DatosPaciente.Columns[0].ReadOnly = true;
         }
         private void guardarDGVenPlan(Plan plan)
@@ -100,7 +102,7 @@ namespace WinForm
             Type tipoPlan = plan.GetType();
             foreach (DataGridViewRow fila in DGV_DatosPaciente.Rows)
             {
-                if (fila.Cells[1].Value!=null)
+                if (fila.Cells[1].Value != null)
                 {
                     PropertyInfo propiedad = tipoPlan.GetProperty(fila.Cells[0].Value.ToString());
 
@@ -119,55 +121,59 @@ namespace WinForm
                 }
             }
         }
-    
+
         private void BT_HacerDocumentos_Click(object sender, EventArgs e)
         {
-            if(Chequear.numeroDeImagenes(imagenesEsperadas(plan),imagenesEncontradas(plan)))
+            if (Chequear.numeroDeImagenes(imagenesEsperadas(plan), imagenesEncontradas(plan)))
             {
-                try
+                if (!celdaVacia() || (celdaVacia() && MessageBox.Show("Hay datos sin completar ¿desea continuar?", "", MessageBoxButtons.YesNo) == DialogResult.Yes))
                 {
-                    guardarDGVenPlan(plan);
-                    IO.crearCarpetas(plan.apellidoNombre, plan.ID);
-                    if (imprimirBEV())
+                    try
                     {
-                        Word.crearArchivoBEV(plan, hayImagenesSetUp(), TB_SetUp1Gantry.Text, TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text, TB_SetUp2Tam.Text,TB_ProfundidadesEfectivas.Text);
+                        guardarDGVenPlan(plan);
+                        IO.crearCarpetas(plan.apellidoNombre, plan.ID);
+                        if (imprimirBEV())
+                        {
+                            Word.crearArchivoBEV(plan, hayImagenesSetUp(), TB_SetUp1Gantry.Text, TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text, TB_SetUp2Tam.Text, TB_ProfundidadesEfectivas.Text);
+                        }
+                        if (imprimirInforme())
+                        {
+                            Word.crearArchivoInforme(plan, hayDosImagenes3D(), hayImagenesSetUp(), imprimirBEV());
+                        }
+                        if (MessageBox.Show("Se generaron los documentos.\n¿Desea mover las imágenes?", "Mover Imágenes", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            IO.moverImagenes(plan);
+                            MessageBox.Show("Se movieron las imágenes");
+                        }
                     }
-                    if (imprimirInforme())
+                    catch (Exception)
                     {
-                        Word.crearArchivoInforme(plan, hayDosImagenes3D(), hayImagenesSetUp(),imprimirBEV());
+                        throw;
                     }
-                    if (MessageBox.Show("Se generaron los documentos.\n¿Desea mover las imágenes?", "Mover Imágenes", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        IO.moverImagenes(plan);
-                        MessageBox.Show("Se movieron las imágenes");
-                    }
+
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
-                
             }
             else
             {
                 MessageBox.Show("El número de imágenes encontradas difiere del esperado");
             }
         }
+
         private void cargarListaImagenes(Plan plan)
         {
             LB_Imágenes.Items.Clear();
             List<string> listaImagenes = IO.obtenerImagenes(plan.apellido);
-            foreach(string imagen in listaImagenes)
+            foreach (string imagen in listaImagenes)
             {
                 LB_Imágenes.Items.Add(Path.GetFileName(imagen));
             }
-            
+
         }
         private bool hayImagenesSetUp()
         {
             return (!CHB_SinImagenesSetUp.Checked && !RB_SoloInforme.Checked);
         }
-        
+
         private bool imprimirBEV()
         {
             return (RB_AmbosDocumentos.Checked || RB_SoloBEV.Checked);
@@ -230,24 +236,27 @@ namespace WinForm
             }
         }
 
-        private void colorCeldaVacia()
+        private bool celdaVacia()
         {
+            bool algoVacio = false;
             foreach (DataGridViewRow fila in DGV_DatosPaciente.Rows)
             {
                 if (fila.Cells[1].Value == null)
                 {
                     fila.Cells[1].Style.BackColor = Color.OrangeRed;
+                    algoVacio = true;
                 }
                 else
                 {
                     fila.Cells[1].Style.BackColor = DefaultBackColor;
                 }
             }
+            return algoVacio;
         }
 
         private void DGV_DatosPaciente_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
-            colorCeldaVacia();
+            celdaVacia();
         }
     }
 }
