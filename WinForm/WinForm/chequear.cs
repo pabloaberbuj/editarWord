@@ -19,6 +19,8 @@ namespace WinForm
         {
             return numeroDeCampo1 != 0;
         }
+        
+        
     }
 }
 		

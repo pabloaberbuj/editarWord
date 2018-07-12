@@ -41,7 +41,20 @@ namespace WinForm
         
         public static string encabezadoInformeLinea1(Plan plan) //Times 14, negrita
         {
-            return plan.modalidad + "	                            Centro Médico Mevaterapia	                            " + DateTime.Today.ToShortDateString();
+            string centro = "";
+            if (plan.equipo == "Avellaneda")
+            {
+                centro = "Centro de Radiaciones Avellaneda";
+            }
+            else if (plan.equipo == "Quilmes")
+            {
+                centro = "Centro de Radiaciones Quilmes";
+            }
+            else
+            {
+                centro = "Centro Médico Mevaterapia";
+            }
+            return plan.modalidad + "	                            "+ centro +"	                            " + DateTime.Today.ToShortDateString();
         }
         
         public static string encabezadoInformeLinea2(Plan plan) //Times 12
