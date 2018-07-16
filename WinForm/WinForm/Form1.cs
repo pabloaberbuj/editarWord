@@ -17,7 +17,8 @@ namespace WinForm
     public partial class Form1 : Form
     {
         Paciente paciente = new Paciente();
-        Plan plan = new Plan();
+        
+        
         int etapaNumero = 0;
 
         public Form1()
@@ -82,7 +83,7 @@ namespace WinForm
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string[] fid = Extraer.cargar(openFileDialog1.FileName);
-                if (etapaNumero>2)
+                if (etapaNumero<2)
                 {
                     paciente = Extraer.extraerPaciente(fid);
                 }
@@ -97,9 +98,9 @@ namespace WinForm
                 BT_HacerDocumentos.Enabled = true;
                 hayMasDeUnISO();
                 cargarDGVdePaciente(paciente);
-                cargarDGVdePan(plan);
-                escribirLabels(plan, paciente);
-                cargarListaImagenes(plan);
+                cargarDGVdePan(paciente.planes.Last());
+                escribirLabels(paciente.planes.Last(), paciente);
+                cargarListaImagenes(paciente.planes.Last());
                 GB_Imagenes.Enabled = true;
                 GB_CamposSetUp.Enabled = true;
                 GB_Documentos.Enabled = true;
@@ -289,7 +290,7 @@ namespace WinForm
                     try
                     {
                         guardarDGVenPaciente(paciente);
-                        guardarDGVenPlan(plan);
+                        guardarDGVenPlan(paciente.planes[etapa-1]);
                         crearBEV(etapa);
                         if (MessageBox.Show("Se generó el documento.\n¿Desea mover las imágenes?", "Mover Imágenes", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
@@ -391,9 +392,9 @@ namespace WinForm
 
         private void ActualizarNumeroImagenes(object sender, EventArgs e)
         {
-            if (plan.cantidadDeCampos > 0)
+            if (paciente.planes!=null )//&& paciente.planes.Last().cantidadDeCampos > 0)
             {
-                escribirLabels(plan, paciente);
+                escribirLabels(paciente.planes.Last(), paciente);
                 if (CHB_SinImagenesSetUp.Checked || RB_SoloInforme.Checked)
                 {
                     GB_CamposSetUp.Enabled = false;
@@ -434,10 +435,10 @@ namespace WinForm
 
         private void hayMasDeUnISO()
         {
-            if (plan.iso == "Hay más de un ISO")
+            if (paciente.planes.Last().iso == "Hay más de un ISO")
             {
                 MessageBox.Show("El plan tiene más de un iso");
-                plan.iso = null;
+                paciente.planes.Last().iso = null;
             }
         }
 
