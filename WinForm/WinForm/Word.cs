@@ -15,30 +15,30 @@ namespace WinForm
         private static Font FuenteTexto = new Font("Times New Roman");
 
 
-        private static List<string> imagenes(Plan plan)
+        private static List<string> imagenes(Paciente paciente)
         {
-            return IO.obtenerImagenes(plan.apellido);
+            return IO.obtenerImagenes(paciente.apellido);
         }
 
-        public static int cantidadDeImagenes(Plan plan)
+        public static int cantidadDeImagenes(Paciente paciente)
         {
-            return imagenes(plan).Count();
+            return imagenes(paciente).Count();
         }
 
-        private static List<string> imagenesBEVCampos(Plan plan)
+        private static List<string> imagenesBEVCampos(Paciente paciente, int etapa)
         {
-            return imagenes(plan).GetRange(0, plan.cantidadDeCampos);
+            return imagenes(paciente).GetRange(0, paciente.planes[etapa - 1].cantidadDeCampos);
         }
-        private static List<string> imagenesBEVSetUp(Plan plan, bool hayImagenesSetup)
+        private static List<string> imagenesBEVSetUp(Paciente paciente, int etapa, bool hayImagenesSetup)
         {
-            return imagenes(plan).GetRange(plan.cantidadDeCampos, 2);
+            return imagenes(paciente).GetRange(paciente.planes[etapa - 1].cantidadDeCampos, 2);
         }
-        private static List<string> imagenesInforme(Plan plan, bool hayDosImagenes3D, bool hayImagenesSetup, bool imprimirBEV)
+        private static List<string> imagenesInforme(Paciente paciente, bool hayDosImagenes3D, bool hayImagenesSetup, bool imprimirBEV)
         {
             int cantidadCamposTotales = 0;
-            if (imprimirBEV)
+            if (imprimirBEV) //si son varias etapas no imprime BEV
             {
-                cantidadCamposTotales += plan.cantidadDeCampos;
+                cantidadCamposTotales += paciente.planes[0].cantidadDeCampos;//si son varias etapas no imprime BEV
                 if (hayImagenesSetup)
                 {
                     cantidadCamposTotales += 2;
@@ -46,16 +46,17 @@ namespace WinForm
             }
             if (hayDosImagenes3D)
             {
-                return imagenes(plan).GetRange(cantidadCamposTotales, 6);
+                return imagenes(paciente).GetRange(cantidadCamposTotales, 6);
             }
             else
             {
-                return imagenes(plan).GetRange(cantidadCamposTotales, 5);
+                return imagenes(paciente).GetRange(cantidadCamposTotales, 5);
             }
+
         }
-    
-        
-        private static void agregarParrafo(DocX document, string texto, Font fuente, int tamaño=12)
+
+
+        private static void agregarParrafo(DocX document, string texto, Font fuente, int tamaño = 12)
         {
             document.InsertParagraph().InsertText(texto);
             document.Paragraphs.Last().Font(fuente).FontSize(tamaño);
@@ -66,13 +67,13 @@ namespace WinForm
             var image = document.AddImage(pathImagen);
             var picture = image.CreatePicture();
             double relacionAspecto = Convert.ToDouble(picture.Width) / Convert.ToDouble(picture.Height);
-            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
-            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
-            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
-            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
-            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
-            picture.Height = Convert.ToInt32(tamaño*RelPtaCm);
-            picture.Width = Convert.ToInt32(tamaño * relacionAspecto* RelPtaCm);
+            picture.Height = Convert.ToInt32(tamaño * RelPtaCm);
+            picture.Height = Convert.ToInt32(tamaño * RelPtaCm);
+            picture.Height = Convert.ToInt32(tamaño * RelPtaCm);
+            picture.Height = Convert.ToInt32(tamaño * RelPtaCm);
+            picture.Height = Convert.ToInt32(tamaño * RelPtaCm);
+            picture.Height = Convert.ToInt32(tamaño * RelPtaCm);
+            picture.Width = Convert.ToInt32(tamaño * relacionAspecto * RelPtaCm);
             Paragraph paragraph = document.InsertParagraph();
             paragraph.AppendPicture(picture);
             paragraph.Append(textoExtra);
@@ -120,87 +121,95 @@ namespace WinForm
                 MessageBox.Show("No se puede guardar. Es posible que alguno de los documentos esté abierto");
                 //throw;
             }
-            
+
         }
 
-        private static void encabezadoBEV(Plan plan, DocX document)
+        private static void encabezadoBEV(Paciente paciente, int etapa, DocX document)
         {
             document.AddHeaders();
-            agregarEncabezado(document, Textos.encabezadoBEV1(plan), FuenteTexto, 12, Alignment.left);
-            agregarEncabezado(document, Textos.encabezadoBEV2(plan), FuenteTexto, 12, Alignment.center);
+            agregarEncabezado(document, Textos.encabezadoBEV1(paciente), FuenteTexto, 12, Alignment.left);
+            agregarEncabezado(document, Textos.encabezadoBEV2(paciente,etapa), FuenteTexto, 12, Alignment.center);
         }
 
         private static void profundidadesEfectivasBEV(DocX document, string textoCrudo)
         {
-            if (textoCrudo!=null || textoCrudo !="")
+            if (textoCrudo != null || textoCrudo != "")
             {
                 agregarParrafo(document, Textos.profundidadesEfectivas(textoCrudo), FuenteTexto);
             }
         }
 
-        private static void imagenesBEV(Plan plan, DocX document, string gantrySetUp1, string tamSetUp1, string gantrySetUp2, string tamSetUp2, bool hayImagenesSetup)
+        private static void imagenesBEV(Paciente paciente, int etapa, DocX document, string gantrySetUp1, string tamSetUp1, string gantrySetUp2, string tamSetUp2, bool hayImagenesSetup)
         {
             if (hayImagenesSetup)
             {
-                insertarImagen(document, imagenesBEVSetUp(plan, hayImagenesSetup)[0], 11, Alignment.left, Textos.parametrosCampoSetUp(gantrySetUp1, tamSetUp1));
-                insertarImagen(document, imagenesBEVSetUp(plan, hayImagenesSetup)[1], 11, Alignment.left, Textos.parametrosCampoSetUp(gantrySetUp2, tamSetUp2));
+                insertarImagen(document, imagenesBEVSetUp(paciente, etapa, hayImagenesSetup)[0], 11, Alignment.left, Textos.parametrosCampoSetUp(gantrySetUp1, tamSetUp1));
+                insertarImagen(document, imagenesBEVSetUp(paciente, etapa, hayImagenesSetup)[1], 11, Alignment.left, Textos.parametrosCampoSetUp(gantrySetUp2, tamSetUp2));
             }
-            
-            for (int i=0;i<plan.cantidadDeCampos;i++)
+
+            for (int i = 0; i < paciente.planes[etapa - 1].cantidadDeCampos; i++)
             {
-                insertarImagen(document, imagenesBEVCampos(plan)[i], 11, Alignment.left, Textos.parametrosCampoTto(plan.listaCampos[i]));
+                insertarImagen(document, imagenesBEVCampos(paciente,etapa)[i], 11, Alignment.left, Textos.parametrosCampoTto(paciente.planes[etapa - 1].listaCampos[i]));
             }
         }
 
-        
-        public static void crearArchivoBEV(Plan plan,bool hayImagenesSetup, string SetUp1Gantry, string SetUp2Gantry, string SetUp1Tam, string SetUp2Tam,string textoCrudo)
+
+        public static void crearArchivoBEV(Paciente paciente, int etapa, bool hayImagenesSetup, string SetUp1Gantry, string SetUp2Gantry, string SetUp1Tam, string SetUp2Tam, string textoCrudo)
         {
             DocX document = DocX.Create("BEV.doc");
             document.DifferentFirstPage = false;
             document.DifferentFirstPage = false; //para que todos los encabezados sean iguales
-            document.MarginTop = Convert.ToInt32(1.41* RelPtaCm*factor);
-            document.MarginBottom = Convert.ToInt32(0.95* RelPtaCm * factor);
-            document.MarginLeft = Convert.ToInt32(0.95* RelPtaCm * factor);
-            document.MarginRight = Convert.ToInt32(0.95* RelPtaCm * factor);
-            encabezadoBEV(plan, document);
-            imagenesBEV(plan, document,SetUp1Gantry,SetUp1Tam,SetUp2Gantry,SetUp2Tam,hayImagenesSetup);
+            document.MarginTop = Convert.ToInt32(1.41 * RelPtaCm * factor);
+            document.MarginBottom = Convert.ToInt32(0.95 * RelPtaCm * factor);
+            document.MarginLeft = Convert.ToInt32(0.95 * RelPtaCm * factor);
+            document.MarginRight = Convert.ToInt32(0.95 * RelPtaCm * factor);
+            encabezadoBEV(paciente,etapa, document);
+            imagenesBEV(paciente, etapa, document, SetUp1Gantry, SetUp1Tam, SetUp2Gantry, SetUp2Tam, hayImagenesSetup);
             agregarParrafo(document, "", FuenteTexto);
             profundidadesEfectivasBEV(document, textoCrudo);
-            string aux = IO.pathDestino + plan.apellidoNombre + " " + plan.ID + "\\BEV.doc";
-            salvarArchivo(document, aux);
-        }
-
-        private static void encabezadoInforme(Plan plan, DocX document)
-        {
-            document.AddHeaders();
-            agregarEncabezadoNegrita(document, Textos.encabezadoInformeLinea1(plan), FuenteTexto, 14, Alignment.left);
-            agregarEncabezado(document, Textos.encabezadoInformeLinea2(plan), FuenteTexto, 12, Alignment.left);
-            agregarEncabezado(document, Textos.encabezadoInformeLinea3(plan), FuenteTexto, 12, Alignment.center);
-        }
-
-        private static void textoEImagenesInforme(Plan plan, DocX document, bool hayDosImagenes3D,bool hayImagenesSetUp, bool imprimirBEV)
-        {
-            insertarImagen(document, imagenesInforme(plan,hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[0], 11, Alignment.center);
-            agregarParrafo(document, Textos.axialInforme(plan), FuenteTexto);
-            insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[1], imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[2], 8, Alignment.center);
-            agregarParrafo(document, Textos.coronalSagitalInforme(), FuenteTexto);
-            if (hayDosImagenes3D)
+            string aux = IO.pathDestino + paciente.apellidoNombre + " " + paciente.ID;
+            if (paciente.numeroDeEtapas==1)
             {
-                insertarDosImagenes(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[3], imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 8, Alignment.center);
-                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
-                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[5], 11, Alignment.center);
-                agregarParrafo(document, Textos.dvhInforme(plan), FuenteTexto);
+                aux += "\\BEV.doc";
             }
             else
             {
-                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[3], 11, Alignment.center);
-                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
-                insertarImagen(document, imagenesInforme(plan, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 11, Alignment.center);
-                agregarParrafo(document, Textos.dvhInforme(plan), FuenteTexto);
+                aux += "\\Etapa " + etapa.ToString() + "\\BEV.doc";
             }
-            
+            salvarArchivo(document, aux);
         }
-        public static void crearArchivoInforme(Plan plan, bool hayDosImagenes3D,bool hayImagenesSetUp, bool imprimirBEV)
+
+        private static void encabezadoInforme(Paciente paciente, DocX document)
+        {
+            document.AddHeaders();
+            agregarEncabezadoNegrita(document, Textos.encabezadoInformeLinea1(paciente), FuenteTexto, 14, Alignment.left);
+            agregarEncabezado(document, Textos.encabezadoInformeLinea2(paciente), FuenteTexto, 12, Alignment.left);
+            agregarEncabezado(document, Textos.encabezadoInformeLinea3(paciente), FuenteTexto, 12, Alignment.center);
+        }
+
+        private static void textoEImagenesInforme(Paciente paciente, DocX document, bool hayDosImagenes3D, bool hayImagenesSetUp, bool imprimirBEV)
+        {
+            insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[0], 11, Alignment.center);
+            agregarParrafo(document, Textos.axialInforme(paciente), FuenteTexto);
+            insertarDosImagenes(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[1], imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[2], 8, Alignment.center);
+            agregarParrafo(document, Textos.coronalSagitalInforme(), FuenteTexto);
+            if (hayDosImagenes3D)
+            {
+                insertarDosImagenes(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[3], imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 8, Alignment.center);
+                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
+                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[5], 11, Alignment.center);
+                agregarParrafo(document, Textos.dvhInforme(), FuenteTexto);
+            }
+            else
+            {
+                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[3], 11, Alignment.center);
+                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
+                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 11, Alignment.center);
+                agregarParrafo(document, Textos.dvhInforme(), FuenteTexto);
+            }
+
+        }
+        public static void crearArchivoInforme(Paciente paciente, bool hayDosImagenes3D, bool hayImagenesSetUp, bool imprimirBEV)
         {
             DocX document = DocX.Create("Informe.doc");
             document.DifferentFirstPage = false;
@@ -209,11 +218,11 @@ namespace WinForm
             document.MarginBottom = Convert.ToInt32(1.9 * RelPtaCm * factor);
             document.MarginLeft = Convert.ToInt32(0.63 * RelPtaCm * factor);
             document.MarginRight = Convert.ToInt32(0.68 * RelPtaCm * factor);
-            encabezadoInforme(plan,document);
-            textoEImagenesInforme(plan, document,hayDosImagenes3D, hayImagenesSetUp, imprimirBEV);
-            string aux = IO.pathDestino + plan.apellidoNombre + " " + plan.ID + "\\Informe.doc";
+            encabezadoInforme(paciente, document);
+            textoEImagenesInforme(paciente, document, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV);
+            string aux = IO.pathDestino + paciente.apellidoNombre + " " + paciente.ID + "\\Informe.doc";
             salvarArchivo(document, aux);
         }
-       
+
     }
 }

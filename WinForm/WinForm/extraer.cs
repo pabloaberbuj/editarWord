@@ -145,14 +145,9 @@ namespace WinForm
         {
             Plan plan = new Plan()
             {
-                apellido = apellidoPaciente(fid),
-                nombre = nombrePaciente(fid),
-                apellidoNombre = apellidoNombrePaciente(fid),
-                ID = IDPaciente(fid),
                 dosisFraccion = dosisFraccion(fid),
                 numeroFracciones = numeroFracciones(fid),
                 dosisTotal = dosisTotal(fid),
-                modalidad = modalidad(fid),
                 equipo = equipo(fid),
                 cantidadDeCampos = numeroCampos(fid),
                 numeroParametros = numeroParametros(fid),
@@ -165,6 +160,20 @@ namespace WinForm
             };
             plan.iso = Plan.obtenerIso(plan);
             return plan;
+        }
+
+        public static Paciente extraerPaciente(string[] fid)
+        {
+            Paciente paciente = new Paciente()
+            {
+                apellido = apellidoPaciente(fid),
+                nombre = nombrePaciente(fid),
+                apellidoNombre = apellidoNombrePaciente(fid),
+                ID = IDPaciente(fid),
+                modalidad = modalidad(fid),
+            };
+            paciente.planes = new List<Plan>();
+            return paciente;
         }
 
 

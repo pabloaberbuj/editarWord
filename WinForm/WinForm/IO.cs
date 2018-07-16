@@ -19,11 +19,18 @@ namespace WinForm
         {
             return (paths[0].Split('\t'))[1];
         }
-        public static void crearCarpetas(string nombre, string ID)
+        public static void crearCarpetas(Paciente paciente)
         {
-            string aux = nombre + " " + ID;
+            string aux = paciente.apellidoNombre+ " " + paciente.ID;
             Directory.CreateDirectory(pathDestino + aux);
             Directory.CreateDirectory(pathDestino + aux + "\\Plan");
+            if (paciente.numeroDeEtapas > 1)
+            {
+                for (int i = 1; i < paciente.numeroDeEtapas; i++)
+                {
+                    Directory.CreateDirectory(pathDestino + aux + "\\Etapa " + i.ToString());
+                }
+            }
         }
 
         public static List<string> obtenerImagenes(string apellido)
@@ -33,11 +40,15 @@ namespace WinForm
             return Directory.GetFiles(pathImagenes(), patron).ToList();
         }
 
-        public static void moverImagenes(Plan plan)
+        public static void moverImagenes(Paciente paciente, int etapa =0)
         {
-            string aux = plan.apellidoNombre + " " + plan.ID;
+            string aux = paciente.apellidoNombre + " " + paciente.ID;
             
-            foreach (string imagen in obtenerImagenes(plan.apellido))
+            if (etapa>0)
+            {
+                aux += "\\Etapa " + etapa.ToString();
+            }
+            foreach (string imagen in obtenerImagenes(paciente.apellido))
             {
                 string auxOrigen = imagen;
                 string auxDestino = pathDestino + aux + Path.GetFileName(imagen);

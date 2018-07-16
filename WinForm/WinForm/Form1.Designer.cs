@@ -30,7 +30,7 @@
         {
             this.BT_Cargar = new System.Windows.Forms.Button();
             this.BT_HacerDocumentos = new System.Windows.Forms.Button();
-            this.DGV_DatosPaciente = new System.Windows.Forms.DataGridView();
+            this.DGV_DatosPlan = new System.Windows.Forms.DataGridView();
             this.GB_CamposSetUp = new System.Windows.Forms.GroupBox();
             this.TB_SetUp2Tam = new System.Windows.Forms.TextBox();
             this.TB_SetUp2Gantry = new System.Windows.Forms.TextBox();
@@ -49,23 +49,28 @@
             this.LB_Imágenes = new System.Windows.Forms.ListBox();
             this.CHB_DosImagenes3D = new System.Windows.Forms.CheckBox();
             this.CHB_SinImagenesSetUp = new System.Windows.Forms.CheckBox();
-            this.L_ImagenesEncontradas = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.L_ImagenesEsperadas = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.TB_ProfundidadesEfectivas = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).BeginInit();
+            this.DGV_DatosPaciente = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.L_ImagenesEsperadas = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.L_ImagenesEncontradas = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.CB_NumeroDeEtapas = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPlan)).BeginInit();
             this.GB_CamposSetUp.SuspendLayout();
             this.GB_Documentos.SuspendLayout();
             this.GB_Imagenes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).BeginInit();
             this.SuspendLayout();
             // 
             // BT_Cargar
             // 
-            this.BT_Cargar.Location = new System.Drawing.Point(12, 12);
+            this.BT_Cargar.Location = new System.Drawing.Point(9, 40);
             this.BT_Cargar.Name = "BT_Cargar";
-            this.BT_Cargar.Size = new System.Drawing.Size(97, 23);
+            this.BT_Cargar.Size = new System.Drawing.Size(148, 23);
             this.BT_Cargar.TabIndex = 0;
             this.BT_Cargar.Text = "Cargar PPF";
             this.BT_Cargar.UseVisualStyleBackColor = true;
@@ -82,22 +87,22 @@
             this.BT_HacerDocumentos.UseVisualStyleBackColor = true;
             this.BT_HacerDocumentos.Click += new System.EventHandler(this.BT_HacerDocumentos_Click);
             // 
-            // DGV_DatosPaciente
+            // DGV_DatosPlan
             // 
-            this.DGV_DatosPaciente.AllowUserToAddRows = false;
-            this.DGV_DatosPaciente.AllowUserToDeleteRows = false;
-            this.DGV_DatosPaciente.AllowUserToResizeColumns = false;
-            this.DGV_DatosPaciente.AllowUserToResizeRows = false;
-            this.DGV_DatosPaciente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_DatosPaciente.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.DGV_DatosPaciente.Location = new System.Drawing.Point(400, 12);
-            this.DGV_DatosPaciente.Name = "DGV_DatosPaciente";
-            this.DGV_DatosPaciente.RowHeadersVisible = false;
-            this.DGV_DatosPaciente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DGV_DatosPaciente.Size = new System.Drawing.Size(200, 323);
-            this.DGV_DatosPaciente.TabIndex = 22;
-            this.DGV_DatosPaciente.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
-            this.DGV_DatosPaciente.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
+            this.DGV_DatosPlan.AllowUserToAddRows = false;
+            this.DGV_DatosPlan.AllowUserToDeleteRows = false;
+            this.DGV_DatosPlan.AllowUserToResizeColumns = false;
+            this.DGV_DatosPlan.AllowUserToResizeRows = false;
+            this.DGV_DatosPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_DatosPlan.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.DGV_DatosPlan.Location = new System.Drawing.Point(400, 161);
+            this.DGV_DatosPlan.Name = "DGV_DatosPlan";
+            this.DGV_DatosPlan.RowHeadersVisible = false;
+            this.DGV_DatosPlan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.DGV_DatosPlan.Size = new System.Drawing.Size(200, 197);
+            this.DGV_DatosPlan.TabIndex = 22;
+            this.DGV_DatosPlan.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
+            this.DGV_DatosPlan.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
             // 
             // GB_CamposSetUp
             // 
@@ -109,7 +114,7 @@
             this.GB_CamposSetUp.Controls.Add(this.label5);
             this.GB_CamposSetUp.Controls.Add(this.label4);
             this.GB_CamposSetUp.Controls.Add(this.label2);
-            this.GB_CamposSetUp.Location = new System.Drawing.Point(12, 50);
+            this.GB_CamposSetUp.Location = new System.Drawing.Point(3, 78);
             this.GB_CamposSetUp.Name = "GB_CamposSetUp";
             this.GB_CamposSetUp.Size = new System.Drawing.Size(275, 100);
             this.GB_CamposSetUp.TabIndex = 37;
@@ -186,7 +191,7 @@
             this.GB_Documentos.Controls.Add(this.RB_SoloBEV);
             this.GB_Documentos.Controls.Add(this.RB_AmbosDocumentos);
             this.GB_Documentos.Controls.Add(this.BT_HacerDocumentos);
-            this.GB_Documentos.Location = new System.Drawing.Point(412, 341);
+            this.GB_Documentos.Location = new System.Drawing.Point(421, 376);
             this.GB_Documentos.Name = "GB_Documentos";
             this.GB_Documentos.Size = new System.Drawing.Size(188, 133);
             this.GB_Documentos.TabIndex = 38;
@@ -231,6 +236,7 @@
             // 
             // GB_Imagenes
             // 
+            this.GB_Imagenes.Controls.Add(this.checkBox1);
             this.GB_Imagenes.Controls.Add(this.label7);
             this.GB_Imagenes.Controls.Add(this.LB_Imágenes);
             this.GB_Imagenes.Controls.Add(this.CHB_DosImagenes3D);
@@ -239,9 +245,9 @@
             this.GB_Imagenes.Controls.Add(this.label3);
             this.GB_Imagenes.Controls.Add(this.L_ImagenesEsperadas);
             this.GB_Imagenes.Controls.Add(this.label1);
-            this.GB_Imagenes.Location = new System.Drawing.Point(12, 156);
+            this.GB_Imagenes.Location = new System.Drawing.Point(3, 193);
             this.GB_Imagenes.Name = "GB_Imagenes";
-            this.GB_Imagenes.Size = new System.Drawing.Size(382, 179);
+            this.GB_Imagenes.Size = new System.Drawing.Size(382, 165);
             this.GB_Imagenes.TabIndex = 40;
             this.GB_Imagenes.TabStop = false;
             this.GB_Imagenes.Text = "Imágenes";
@@ -249,7 +255,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(203, 16);
+            this.label7.Location = new System.Drawing.Point(203, 13);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(131, 13);
             this.label7.TabIndex = 41;
@@ -259,15 +265,15 @@
             // 
             this.LB_Imágenes.FormattingEnabled = true;
             this.LB_Imágenes.HorizontalScrollbar = true;
-            this.LB_Imágenes.Location = new System.Drawing.Point(206, 39);
+            this.LB_Imágenes.Location = new System.Drawing.Point(206, 32);
             this.LB_Imágenes.Name = "LB_Imágenes";
-            this.LB_Imágenes.Size = new System.Drawing.Size(170, 134);
+            this.LB_Imágenes.Size = new System.Drawing.Size(170, 121);
             this.LB_Imágenes.TabIndex = 40;
             // 
             // CHB_DosImagenes3D
             // 
             this.CHB_DosImagenes3D.AutoSize = true;
-            this.CHB_DosImagenes3D.Location = new System.Drawing.Point(13, 42);
+            this.CHB_DosImagenes3D.Location = new System.Drawing.Point(13, 57);
             this.CHB_DosImagenes3D.Name = "CHB_DosImagenes3D";
             this.CHB_DosImagenes3D.Size = new System.Drawing.Size(130, 17);
             this.CHB_DosImagenes3D.TabIndex = 34;
@@ -278,7 +284,7 @@
             // CHB_SinImagenesSetUp
             // 
             this.CHB_SinImagenesSetUp.AutoSize = true;
-            this.CHB_SinImagenesSetUp.Location = new System.Drawing.Point(13, 19);
+            this.CHB_SinImagenesSetUp.Location = new System.Drawing.Point(13, 34);
             this.CHB_SinImagenesSetUp.Name = "CHB_SinImagenesSetUp";
             this.CHB_SinImagenesSetUp.Size = new System.Drawing.Size(154, 17);
             this.CHB_SinImagenesSetUp.TabIndex = 33;
@@ -286,84 +292,135 @@
             this.CHB_SinImagenesSetUp.UseVisualStyleBackColor = true;
             this.CHB_SinImagenesSetUp.CheckedChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
             // 
-            // L_ImagenesEncontradas
+            // TB_ProfundidadesEfectivas
             // 
-            this.L_ImagenesEncontradas.AutoSize = true;
-            this.L_ImagenesEncontradas.Location = new System.Drawing.Point(134, 97);
-            this.L_ImagenesEncontradas.Name = "L_ImagenesEncontradas";
-            this.L_ImagenesEncontradas.Size = new System.Drawing.Size(35, 13);
-            this.L_ImagenesEncontradas.TabIndex = 32;
-            this.L_ImagenesEncontradas.Text = "label4";
-            this.L_ImagenesEncontradas.Visible = false;
+            this.TB_ProfundidadesEfectivas.Location = new System.Drawing.Point(3, 397);
+            this.TB_ProfundidadesEfectivas.Multiline = true;
+            this.TB_ProfundidadesEfectivas.Name = "TB_ProfundidadesEfectivas";
+            this.TB_ProfundidadesEfectivas.Size = new System.Drawing.Size(275, 103);
+            this.TB_ProfundidadesEfectivas.TabIndex = 41;
             // 
-            // label3
+            // label8
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 97);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(115, 13);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "Imagenes encontradas";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 376);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(121, 13);
+            this.label8.TabIndex = 42;
+            this.label8.Text = "Profundidades efectivas";
+            // 
+            // DGV_DatosPaciente
+            // 
+            this.DGV_DatosPaciente.AllowUserToAddRows = false;
+            this.DGV_DatosPaciente.AllowUserToDeleteRows = false;
+            this.DGV_DatosPaciente.AllowUserToResizeColumns = false;
+            this.DGV_DatosPaciente.AllowUserToResizeRows = false;
+            this.DGV_DatosPaciente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_DatosPaciente.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.DGV_DatosPaciente.Location = new System.Drawing.Point(400, 12);
+            this.DGV_DatosPaciente.Name = "DGV_DatosPaciente";
+            this.DGV_DatosPaciente.RowHeadersVisible = false;
+            this.DGV_DatosPaciente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.DGV_DatosPaciente.Size = new System.Drawing.Size(200, 127);
+            this.DGV_DatosPaciente.TabIndex = 43;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 109);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 13);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "Imagenes esperadas";
             // 
             // L_ImagenesEsperadas
             // 
             this.L_ImagenesEsperadas.AutoSize = true;
-            this.L_ImagenesEsperadas.Location = new System.Drawing.Point(134, 75);
+            this.L_ImagenesEsperadas.Location = new System.Drawing.Point(134, 109);
             this.L_ImagenesEsperadas.Name = "L_ImagenesEsperadas";
             this.L_ImagenesEsperadas.Size = new System.Drawing.Size(35, 13);
             this.L_ImagenesEsperadas.TabIndex = 30;
             this.L_ImagenesEsperadas.Text = "label2";
             this.L_ImagenesEsperadas.Visible = false;
             // 
-            // label1
+            // label3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 75);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 13);
-            this.label1.TabIndex = 29;
-            this.label1.Text = "Imagenes esperadas";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 131);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(115, 13);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "Imagenes encontradas";
             // 
-            // TB_ProfundidadesEfectivas
+            // L_ImagenesEncontradas
             // 
-            this.TB_ProfundidadesEfectivas.Location = new System.Drawing.Point(12, 361);
-            this.TB_ProfundidadesEfectivas.Multiline = true;
-            this.TB_ProfundidadesEfectivas.Name = "TB_ProfundidadesEfectivas";
-            this.TB_ProfundidadesEfectivas.Size = new System.Drawing.Size(275, 104);
-            this.TB_ProfundidadesEfectivas.TabIndex = 41;
+            this.L_ImagenesEncontradas.AutoSize = true;
+            this.L_ImagenesEncontradas.Location = new System.Drawing.Point(134, 131);
+            this.L_ImagenesEncontradas.Name = "L_ImagenesEncontradas";
+            this.L_ImagenesEncontradas.Size = new System.Drawing.Size(35, 13);
+            this.L_ImagenesEncontradas.TabIndex = 32;
+            this.L_ImagenesEncontradas.Text = "label4";
+            this.L_ImagenesEncontradas.Visible = false;
             // 
-            // label8
+            // checkBox1
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 345);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(121, 13);
-            this.label8.TabIndex = 42;
-            this.label8.Text = "Profundidades efectivas";
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(13, 80);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(130, 17);
+            this.checkBox1.TabIndex = 42;
+            this.checkBox1.Text = "Hay tres imágenes 3D";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // CB_NumeroDeEtapas
+            // 
+            this.CB_NumeroDeEtapas.FormattingEnabled = true;
+            this.CB_NumeroDeEtapas.Items.AddRange(new object[] {
+            "1 etapa",
+            "2 etapas",
+            "3 etapas"});
+            this.CB_NumeroDeEtapas.Location = new System.Drawing.Point(103, 6);
+            this.CB_NumeroDeEtapas.Name = "CB_NumeroDeEtapas";
+            this.CB_NumeroDeEtapas.Size = new System.Drawing.Size(121, 21);
+            this.CB_NumeroDeEtapas.TabIndex = 44;
+            this.CB_NumeroDeEtapas.SelectedIndexChanged += new System.EventHandler(this.CB_NumeroDeEtapas_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 9);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(94, 13);
+            this.label9.TabIndex = 45;
+            this.label9.Text = "Número de etapas";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 477);
+            this.ClientSize = new System.Drawing.Size(612, 510);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.CB_NumeroDeEtapas);
+            this.Controls.Add(this.DGV_DatosPaciente);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.TB_ProfundidadesEfectivas);
             this.Controls.Add(this.GB_Imagenes);
             this.Controls.Add(this.GB_Documentos);
             this.Controls.Add(this.GB_CamposSetUp);
-            this.Controls.Add(this.DGV_DatosPaciente);
+            this.Controls.Add(this.DGV_DatosPlan);
             this.Controls.Add(this.BT_Cargar);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Armado de carpetas";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPlan)).EndInit();
             this.GB_CamposSetUp.ResumeLayout(false);
             this.GB_CamposSetUp.PerformLayout();
             this.GB_Documentos.ResumeLayout(false);
             this.GB_Documentos.PerformLayout();
             this.GB_Imagenes.ResumeLayout(false);
             this.GB_Imagenes.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,7 +430,7 @@
 
         private System.Windows.Forms.Button BT_Cargar;
         private System.Windows.Forms.Button BT_HacerDocumentos;
-        private System.Windows.Forms.DataGridView DGV_DatosPaciente;
+        private System.Windows.Forms.DataGridView DGV_DatosPlan;
         private System.Windows.Forms.GroupBox GB_CamposSetUp;
         private System.Windows.Forms.TextBox TB_SetUp2Tam;
         private System.Windows.Forms.TextBox TB_SetUp2Gantry;
@@ -391,13 +448,17 @@
         private System.Windows.Forms.ListBox LB_Imágenes;
         private System.Windows.Forms.CheckBox CHB_DosImagenes3D;
         private System.Windows.Forms.CheckBox CHB_SinImagenesSetUp;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox TB_ProfundidadesEfectivas;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label L_ImagenesEncontradas;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label L_ImagenesEsperadas;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox TB_ProfundidadesEfectivas;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridView DGV_DatosPaciente;
+        private System.Windows.Forms.ComboBox CB_NumeroDeEtapas;
+        private System.Windows.Forms.Label label9;
     }
 }
 

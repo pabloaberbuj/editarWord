@@ -34,6 +34,10 @@ namespace WinForm
         {
             return (Directory.Exists(IO.pathImagenes()));
         }
+        public static bool paciente(Paciente pacienteOriginal, Paciente pacienteNuevo)
+        {
+            return (pacienteOriginal.apellidoNombre == pacienteNuevo.apellidoNombre && pacienteOriginal.ID == pacienteNuevo.ID);
+        }
     }
 }
 		
