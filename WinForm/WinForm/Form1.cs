@@ -105,6 +105,10 @@ namespace WinForm
                 {
                     paciente.planes.Last().etapa = etapaNumero.ToString();
                 }
+                if (paciente.planes.Last().equipo == "Cordoba")
+                {
+                    TB_SetUp1Gantry.Text = "0";
+                }
                 BT_HacerDocumentos.Enabled = true;
                 hayMasDeUnISO();
                 cargarDGVdePan(paciente.planes.Last());
@@ -272,7 +276,7 @@ namespace WinForm
             paciente.cantidadTotalDeCampos(paciente);
             paciente.dosisTotalPaciente(paciente);
             Word.crearArchivoInforme(paciente, hayDosImagenes3D(), hayImagenesSetUp(), imprimirBEV());
-            limpiarFormulario();
+            limpiarFormulario(this);
         }
 
 
@@ -532,17 +536,16 @@ namespace WinForm
 
         private void BT_LimpiarFormulario_Click(object sender, EventArgs e)
         {
-            limpiarFormulario();
+            limpiarFormulario(this);
         }
-        private void limpiarFormulario()
+        private void limpiarFormulario(Control parent)
         {
-            foreach (Control control in this.Controls)
+            foreach (Control control in parent.Controls)
             {
                 if (control.GetType()!=typeof(Label))
                 {
                     control.Enabled = false;
                 }
-                
                 if (control.GetType() == typeof(TextBox))
                 {
                     control.Text = "";
@@ -558,6 +561,14 @@ namespace WinForm
                 if (control.GetType()== typeof(DataGridView))
                 {
                     ((DataGridView)control).Rows.Clear();
+                }
+                if (control.GetType()==typeof(ListBox))
+                {
+                    ((ListBox)control).Items.Clear();
+                }
+                if (control.GetType()==typeof(GroupBox))
+                {
+                    limpiarFormulario(control);
                 }
             }
             CB_NumeroDeEtapas.Enabled = true;
