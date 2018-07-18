@@ -105,7 +105,7 @@ namespace WinForm
                 {
                     paciente.planes.Last().etapa = etapaNumero.ToString();
                 }
-                if (paciente.planes.Last().equipo == "Cordoba")
+                if (paciente.planes.Last().equipo == "Córdoba")
                 {
                     TB_SetUp1Gantry.Text = "0";
                 }
