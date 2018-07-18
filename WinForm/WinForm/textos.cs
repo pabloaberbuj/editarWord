@@ -78,7 +78,16 @@ namespace WinForm
         
         public static string axialInforme(Paciente paciente)
         {
-            string aux = "Corte axial en isocentro de la lesión y planificación del tratamiento en una etapa, con " + paciente.cantidadDeCamposTotal.ToString() + " campos de radiación ";
+            string etapa = "";
+            if (paciente.numeroDeEtapas==1)
+            {
+                etapa = "una etapa";
+            }
+            else
+            {
+                etapa = paciente.numeroDeEtapas.ToString() + " etapas";
+            }
+            string aux = "Corte axial en isocentro de la lesión y planificación del tratamiento en " + etapa + " , con " + paciente.cantidadDeCamposTotal.ToString() + " campos de radiación ";
             if (paciente.modalidad== "T3DC")
             {
                 aux += "conformados";

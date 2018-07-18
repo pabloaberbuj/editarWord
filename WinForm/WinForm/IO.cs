@@ -26,7 +26,7 @@ namespace WinForm
             Directory.CreateDirectory(pathDestino + aux + "\\Plan");
             if (paciente.numeroDeEtapas > 1)
             {
-                for (int i = 1; i < paciente.numeroDeEtapas; i++)
+                for (int i = 1; i < paciente.numeroDeEtapas+1; i++)
                 {
                     Directory.CreateDirectory(pathDestino + aux + "\\Etapa " + i.ToString());
                 }
@@ -40,11 +40,11 @@ namespace WinForm
             return Directory.GetFiles(pathImagenes(), patron).ToList();
         }
 
-        public static void moverImagenes(Paciente paciente, int etapa =0)
+        public static void moverImagenes(Paciente paciente, int etapa =0, bool esInformeVariasEtapas=false)
         {
             string aux = paciente.apellidoNombre + " " + paciente.ID;
-            
-            if (etapa>0)
+
+            if (etapa>0 && !esInformeVariasEtapas)
             {
                 aux += "\\Etapa " + etapa.ToString();
             }
