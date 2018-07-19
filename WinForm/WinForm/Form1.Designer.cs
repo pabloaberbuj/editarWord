@@ -46,10 +46,8 @@
             this.RB_AmbosDocumentos = new System.Windows.Forms.RadioButton();
             this.GB_Imagenes = new System.Windows.Forms.GroupBox();
             this.BT_ActualizarImagenes = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.LB_Imágenes = new System.Windows.Forms.ListBox();
-            this.CHB_DosImagenes3D = new System.Windows.Forms.CheckBox();
             this.CHB_SinImagenesSetUp = new System.Windows.Forms.CheckBox();
             this.L_ImagenesEncontradas = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,6 +59,8 @@
             this.CB_NumeroDeEtapas = new System.Windows.Forms.ComboBox();
             this.L_NumeroDeEtapas = new System.Windows.Forms.Label();
             this.BT_LimpiarFormulario = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.CB_Imagenes3D = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPlan)).BeginInit();
             this.GB_CamposSetUp.SuspendLayout();
             this.GB_Documentos.SuspendLayout();
@@ -238,11 +238,11 @@
             // 
             // GB_Imagenes
             // 
+            this.GB_Imagenes.Controls.Add(this.CB_Imagenes3D);
+            this.GB_Imagenes.Controls.Add(this.label9);
             this.GB_Imagenes.Controls.Add(this.BT_ActualizarImagenes);
-            this.GB_Imagenes.Controls.Add(this.checkBox1);
             this.GB_Imagenes.Controls.Add(this.label7);
             this.GB_Imagenes.Controls.Add(this.LB_Imágenes);
-            this.GB_Imagenes.Controls.Add(this.CHB_DosImagenes3D);
             this.GB_Imagenes.Controls.Add(this.CHB_SinImagenesSetUp);
             this.GB_Imagenes.Controls.Add(this.L_ImagenesEncontradas);
             this.GB_Imagenes.Controls.Add(this.label3);
@@ -265,16 +265,6 @@
             this.BT_ActualizarImagenes.UseVisualStyleBackColor = true;
             this.BT_ActualizarImagenes.Click += new System.EventHandler(this.BT_ActualizarImagenes_Click);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 65);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(130, 17);
-            this.checkBox1.TabIndex = 42;
-            this.checkBox1.Text = "Hay tres imágenes 3D";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -292,17 +282,6 @@
             this.LB_Imágenes.Name = "LB_Imágenes";
             this.LB_Imágenes.Size = new System.Drawing.Size(170, 108);
             this.LB_Imágenes.TabIndex = 40;
-            // 
-            // CHB_DosImagenes3D
-            // 
-            this.CHB_DosImagenes3D.AutoSize = true;
-            this.CHB_DosImagenes3D.Location = new System.Drawing.Point(9, 42);
-            this.CHB_DosImagenes3D.Name = "CHB_DosImagenes3D";
-            this.CHB_DosImagenes3D.Size = new System.Drawing.Size(130, 17);
-            this.CHB_DosImagenes3D.TabIndex = 34;
-            this.CHB_DosImagenes3D.Text = "Hay dos imágenes 3D";
-            this.CHB_DosImagenes3D.UseVisualStyleBackColor = true;
-            this.CHB_DosImagenes3D.CheckedChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
             // 
             // CHB_SinImagenesSetUp
             // 
@@ -420,6 +399,29 @@
             this.BT_LimpiarFormulario.UseVisualStyleBackColor = true;
             this.BT_LimpiarFormulario.Click += new System.EventHandler(this.BT_LimpiarFormulario_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 49);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(73, 13);
+            this.label9.TabIndex = 47;
+            this.label9.Text = "Imagenes 3D:";
+            // 
+            // CB_Imagenes3D
+            // 
+            this.CB_Imagenes3D.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CB_Imagenes3D.FormattingEnabled = true;
+            this.CB_Imagenes3D.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
+            this.CB_Imagenes3D.Location = new System.Drawing.Point(85, 46);
+            this.CB_Imagenes3D.Name = "CB_Imagenes3D";
+            this.CB_Imagenes3D.Size = new System.Drawing.Size(68, 21);
+            this.CB_Imagenes3D.TabIndex = 48;
+            this.CB_Imagenes3D.SelectedIndexChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -473,12 +475,10 @@
         private System.Windows.Forms.RadioButton RB_AmbosDocumentos;
         private System.Windows.Forms.GroupBox GB_Imagenes;
         private System.Windows.Forms.ListBox LB_Imágenes;
-        private System.Windows.Forms.CheckBox CHB_DosImagenes3D;
         private System.Windows.Forms.CheckBox CHB_SinImagenesSetUp;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox TB_ProfundidadesEfectivas;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label L_ImagenesEncontradas;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label L_ImagenesEsperadas;
@@ -488,6 +488,8 @@
         private System.Windows.Forms.Label L_NumeroDeEtapas;
         private System.Windows.Forms.Button BT_ActualizarImagenes;
         private System.Windows.Forms.Button BT_LimpiarFormulario;
+        private System.Windows.Forms.ComboBox CB_Imagenes3D;
+        private System.Windows.Forms.Label label9;
     }
 }
 

@@ -33,7 +33,7 @@ namespace WinForm
         {
             return imagenes(paciente).GetRange(paciente.planes[etapa - 1].cantidadDeCampos, 2);
         }
-        private static List<string> imagenesInforme(Paciente paciente, bool hayDosImagenes3D, bool hayImagenesSetup, bool imprimirBEV)
+        private static List<string> imagenesInforme(Paciente paciente, bool hayDosImagenes3D, bool hayTresImagenes3D, bool hayImagenesSetup, bool imprimirBEV)
         {
             int cantidadCamposTotales = 0;
             if (imprimirBEV) //si son varias etapas no imprime BEV
@@ -47,6 +47,10 @@ namespace WinForm
             if (hayDosImagenes3D)
             {
                 return imagenes(paciente).GetRange(cantidadCamposTotales, 6);
+            }
+            else if (hayTresImagenes3D)
+            {
+                return imagenes(paciente).GetRange(cantidadCamposTotales, 7);
             }
             else
             {
@@ -94,6 +98,26 @@ namespace WinForm
             picture2.Width = picture1.Width;
             Paragraph paragraph = document.InsertParagraph();
             paragraph.AppendPicture(picture1).AppendPicture(picture2);
+            paragraph.Alignment = alineacion;
+        }
+
+        private static void insertarTresImagenes(DocX document, string pathImagen1, string pathImagen2, string pathImagen3, double tamaño, Alignment alineacion)
+        {
+            var image1 = document.AddImage(pathImagen1);
+            var image2 = document.AddImage(pathImagen2);
+            var image3 = document.AddImage(pathImagen3);
+            var picture1 = image1.CreatePicture();
+            var picture2 = image2.CreatePicture();
+            var picture3 = image3.CreatePicture();
+            double relacionAspecto = Convert.ToDouble(picture1.Width) / Convert.ToDouble(picture1.Height);
+            picture1.Height = Convert.ToInt32(tamaño * RelPtaCm);
+            picture2.Height = picture1.Height;
+            picture3.Height = picture1.Height;
+            picture1.Width = Convert.ToInt32(tamaño * relacionAspecto * RelPtaCm);
+            picture2.Width = picture1.Width;
+            picture3.Width = picture1.Width;
+            Paragraph paragraph = document.InsertParagraph();
+            paragraph.AppendPicture(picture1).AppendPicture(picture2).AppendPicture(picture3);
             paragraph.Alignment = alineacion;
         }
 
@@ -187,29 +211,37 @@ namespace WinForm
             agregarEncabezado(document, Textos.encabezadoInformeLinea3(paciente), FuenteTexto, 12, Alignment.center);
         }
 
-        private static void textoEImagenesInforme(Paciente paciente, DocX document, bool hayDosImagenes3D, bool hayImagenesSetUp, bool imprimirBEV)
+        private static void textoEImagenesInforme(Paciente paciente, DocX document, bool hayDosImagenes3D, bool hayTresImagenes3D, bool hayImagenesSetUp, bool imprimirBEV)
         {
-            insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[0], 11, Alignment.center);
+            insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[0], 11, Alignment.center);
             agregarParrafo(document, Textos.axialInforme(paciente), FuenteTexto);
-            insertarDosImagenes(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[1], imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[2], 8, Alignment.center);
+            insertarDosImagenes(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[1], imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[2], 8, Alignment.center);
             agregarParrafo(document, Textos.coronalSagitalInforme(), FuenteTexto);
             if (hayDosImagenes3D)
             {
-                insertarDosImagenes(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[3], imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 8, Alignment.center);
+                insertarDosImagenes(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[3], imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 8, Alignment.center);
                 agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
-                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[5], 11, Alignment.center);
+                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[5], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(), FuenteTexto);
             }
+            else if (hayTresImagenes3D)
+            {
+                insertarTresImagenes(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[3], imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[4], imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[5], 6.5, Alignment.center);
+                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
+                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[5], 11, Alignment.center);
+                agregarParrafo(document, Textos.dvhInforme(), FuenteTexto);
+            }
+
             else
             {
-                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[3], 11, Alignment.center);
+                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[3], 11, Alignment.center);
                 agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
-                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 11, Alignment.center);
+                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(), FuenteTexto);
             }
 
         }
-        public static void crearArchivoInforme(Paciente paciente, bool hayDosImagenes3D, bool hayImagenesSetUp, bool imprimirBEV)
+        public static void crearArchivoInforme(Paciente paciente, bool hayDosImagenes3D, bool hayTresImagenes3D, bool hayImagenesSetUp, bool imprimirBEV)
         {
             DocX document = DocX.Create("Informe.doc");
             document.DifferentFirstPage = false;
@@ -219,7 +251,7 @@ namespace WinForm
             document.MarginLeft = Convert.ToInt32(0.63 * RelPtaCm * factor);
             document.MarginRight = Convert.ToInt32(0.68 * RelPtaCm * factor);
             encabezadoInforme(paciente, document);
-            textoEImagenesInforme(paciente, document, hayDosImagenes3D, hayImagenesSetUp, imprimirBEV);
+            textoEImagenesInforme(paciente, document, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV);
             string aux = IO.pathDestino + paciente.apellidoNombre + " " + paciente.ID + "\\Informe.doc";
             salvarArchivo(document, aux);
         }

@@ -91,6 +91,8 @@ namespace WinForm
                     paciente.planes.Last().etapa = etapaNumero.ToString();
                 }
                 BT_HacerDocumentos.Enabled = true;
+                habilitarControles();
+                inicializarSetUP();
                 hayMasDeUnISO();
                 cargarDGVdePan(paciente.planes.Last());
                 escribirLabels(paciente.planes.Last(), paciente);
@@ -113,8 +115,6 @@ namespace WinForm
                     RB_SoloBEV.Checked = true;
                     RB_SoloInforme.Enabled = false;
                 }
-                habilitarControles();
-                inicializarSetUP();
             }
         }
 
@@ -255,7 +255,7 @@ namespace WinForm
         {
             paciente.cantidadTotalDeCampos(paciente);
             paciente.dosisTotalPaciente(paciente);
-            Word.crearArchivoInforme(paciente, hayDosImagenes3D(), hayImagenesSetUp(), imprimirBEV());
+            Word.crearArchivoInforme(paciente, hayDosImagenes3D(), hayTresImagenes3D(), hayImagenesSetUp(), imprimirBEV());
             limpiarFormulario(this);
         }
 
@@ -285,8 +285,11 @@ namespace WinForm
                     {
                         throw;
                     }
-
                 }
+            }
+            else
+            {
+                MessageBox.Show("El número de imágenes esperadas y las encontradas no coinciden.\nPor favor revisar e intentarlo nuevamente");
             }
         }
 
@@ -337,6 +340,10 @@ namespace WinForm
 
                 }
             }
+            else
+            {
+                MessageBox.Show("El número de imágenes esperadas y las encontradas no coinciden.\nPor favor revisar e intentarlo nuevamente");
+            }
         }
 
         private void variasEtapasInforme()
@@ -358,6 +365,10 @@ namespace WinForm
                     }
 
                 }
+            }
+            else
+            {
+                MessageBox.Show("El número de imágenes esperadas y las encontradas no coinciden.\nPor favor revisar e intentarlo nuevamente");
             }
         }
 
@@ -388,7 +399,11 @@ namespace WinForm
 
         private bool hayDosImagenes3D()
         {
-            return CHB_DosImagenes3D.Checked;
+            return CB_Imagenes3D.SelectedIndex == 1;
+        }
+        private bool hayTresImagenes3D()
+        {
+            return CB_Imagenes3D.SelectedIndex == 2;
         }
         private int imagenesEncontradas(Paciente paciente)
         {
@@ -418,6 +433,10 @@ namespace WinForm
                 if (hayDosImagenes3D())
                 {
                     aux += 1;
+                }
+                else if (hayTresImagenes3D())
+                {
+                    aux += 2;
                 }
             }
             return aux;
@@ -554,7 +573,7 @@ namespace WinForm
             GB_Imagenes.Enabled = true;
             GB_Documentos.Enabled = true;
             CB_NumeroDeEtapas.Enabled = false;
-            CHB_DosImagenes3D.Checked = false;
+            CB_Imagenes3D.SelectedIndex = 0;
             CHB_SinImagenesSetUp.Checked = false;
             L_ImagenesEsperadas.Visible = false;
             L_ImagenesEncontradas.Visible = false;
