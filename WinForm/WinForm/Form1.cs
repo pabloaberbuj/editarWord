@@ -109,6 +109,10 @@ namespace WinForm
                 {
                     TB_SetUp1Gantry.Text = "0";
                 }
+                else
+                {
+                    TB_SetUp1Gantry.Text = "180";
+                }
                 BT_HacerDocumentos.Enabled = true;
                 hayMasDeUnISO();
                 cargarDGVdePan(paciente.planes.Last());

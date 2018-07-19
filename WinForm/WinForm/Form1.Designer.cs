@@ -385,6 +385,7 @@
             this.DGV_DatosPaciente.Size = new System.Drawing.Size(200, 127);
             this.DGV_DatosPaciente.TabIndex = 43;
             this.DGV_DatosPaciente.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
+            this.DGV_DatosPaciente.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
             // 
             // CB_NumeroDeEtapas
             // 

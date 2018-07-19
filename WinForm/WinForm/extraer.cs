@@ -123,14 +123,18 @@ namespace WinForm
 
 
 
-        public static Campo extraerCampo(string[] fid, int numeroDeCampo, int parametros)
+        public static Campo extraerCampo(string[] fid, int numeroDeCampo, int parametros, bool hayCampo0)
         {
             Campo campo = new Campo();
             int tab = (parametros + 1) * numeroDeCampo;
-            int aux = Convert.ToInt32(extraerStringSinSep(fid, 21 + tab));
+            /*int aux = Convert.ToInt32(extraerStringSinSep(fid, 21 + tab));
             if (aux == 0)
             {
                 MessageBox.Show("Quedó activado el Field 0. Se cargaran los otros campos");
+                tab += parametros + 1;
+            }*/
+            if (hayCampo0)
+            {
                 tab += parametros + 1;
             }
             campo.numero = numeroDeCampo;
@@ -154,9 +158,16 @@ namespace WinForm
             };
 
             plan.listaCampos = new List<Campo>();
+            int aux = Convert.ToInt32(extraerStringSinSep(fid, 21 + plan.numeroParametros + 1));
+            bool hayCampo0 = false;
+            if (aux == 0)
+            {
+                MessageBox.Show("Quedó activado el Field 0. Se cargaran los otros campos");
+                hayCampo0 = true;
+            }
             for (int i = 0; i < plan.cantidadDeCampos; i++)
             {
-                plan.listaCampos.Add(extraerCampo(fid, i + 1, plan.numeroParametros));
+                plan.listaCampos.Add(extraerCampo(fid, i + 1, plan.numeroParametros,hayCampo0));
             };
             plan.iso = Plan.obtenerIso(plan);
             return plan;
