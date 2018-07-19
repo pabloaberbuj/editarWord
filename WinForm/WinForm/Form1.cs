@@ -25,10 +25,6 @@ namespace WinForm
         {
             InitializeComponent();
             BT_HacerDocumentos.Enabled = false;
-            TB_SetUp1Gantry.Text = "180";
-            TB_SetUp2Gantry.Text = "270";
-            TB_SetUp1Tam.Text = "10x10";
-            TB_SetUp2Tam.Text = "10x10";
             RB_AmbosDocumentos.Checked = true;
             RB_SoloBEV.Checked = false;
             RB_SoloInforme.Checked = false;
@@ -67,17 +63,6 @@ namespace WinForm
 
         private void BT_CargarClick(object sender, EventArgs e)
         {
-            CB_NumeroDeEtapas.Enabled = false;
-            CHB_DosImagenes3D.Checked = false;
-            CHB_SinImagenesSetUp.Checked = false;
-            L_ImagenesEsperadas.Visible = false;
-            L_ImagenesEncontradas.Visible = false;
-            RB_AmbosDocumentos.Checked = true;
-            RB_SoloBEV.Checked = false;
-            RB_SoloInforme.Checked = false;
-            TB_ProfundidadesEfectivas.Clear();
-
-            
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Abrir archivo PPF";
             openFileDialog1.Filter = "Archivos ppf(.ppf)|*.ppf|All Files (*.*)|*.*";
@@ -105,14 +90,6 @@ namespace WinForm
                 {
                     paciente.planes.Last().etapa = etapaNumero.ToString();
                 }
-                if (paciente.planes.Last().equipo == "Córdoba")
-                {
-                    TB_SetUp1Gantry.Text = "0";
-                }
-                else
-                {
-                    TB_SetUp1Gantry.Text = "180";
-                }
                 BT_HacerDocumentos.Enabled = true;
                 hayMasDeUnISO();
                 cargarDGVdePan(paciente.planes.Last());
@@ -136,6 +113,8 @@ namespace WinForm
                     RB_SoloBEV.Checked = true;
                     RB_SoloInforme.Enabled = false;
                 }
+                habilitarControles();
+                inicializarSetUP();
             }
         }
 
@@ -214,9 +193,6 @@ namespace WinForm
                     else if (tipoProp.Equals(typeof(int)))
                     {
                         propiedad.SetValue(plan, Convert.ToInt32(fila.Cells[1].Value), null);
-                    }
-                    else
-                    {
                     }
                 }
             }
@@ -302,11 +278,8 @@ namespace WinForm
                         {
                             crearInforme();
                         }
-                        if (MessageBox.Show("Se generaron los documentos.\n¿Desea mover las imágenes?", "Mover Imágenes", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        {
-                            IO.moverImagenes(paciente);
-                            MessageBox.Show("Se movieron las imágenes");
-                        }
+                        IO.moverImagenes(paciente);
+                        MessageBox.Show("Se generaron los documentos y se movieron las imágenes");
                     }
                     catch (Exception)
                     {
@@ -330,11 +303,8 @@ namespace WinForm
                         guardarDGVenPaciente(paciente);
                         guardarDGVenPlan(paciente.planes[etapa-1]);
                         crearBEV(etapa);
-                        if (MessageBox.Show("Se generó el documento.\n¿Desea mover las imágenes?", "Mover Imágenes", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        {
-                            IO.moverImagenes(paciente, etapa);
-                            MessageBox.Show("Se movieron las imágenes");
-                        }
+                        IO.moverImagenes(paciente, etapa);
+                        MessageBox.Show("Se generó el documento y se movieron las imágenes");
                         if (etapa<paciente.numeroDeEtapas)
                         {
                             BT_Cargar.Enabled = true;
@@ -379,11 +349,8 @@ namespace WinForm
                     {
                         guardarDGVenPaciente(paciente);
                         crearInforme();
-                        if (MessageBox.Show("Se generó el documento.\n¿Desea mover las imágenes?", "Mover Imágenes", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        {
-                            IO.moverImagenes(paciente, 0, true);
-                            MessageBox.Show("Se movieron las imágenes");
-                        }
+                        IO.moverImagenes(paciente, 0, true);
+                        MessageBox.Show("Se generó el documento y se movieron las imágenes");
                     }
                     catch (Exception)
                     {
@@ -546,10 +513,10 @@ namespace WinForm
         {
             foreach (Control control in parent.Controls)
             {
-                if (control.GetType()!=typeof(Label))
+               /* if (control.GetType()!=typeof(Label))
                 {
-                    control.Enabled = false;
-                }
+               //     control.Enabled = false;
+                }*/
                 if (control.GetType() == typeof(TextBox))
                 {
                     control.Text = "";
@@ -572,6 +539,7 @@ namespace WinForm
                 }
                 if (control.GetType()==typeof(GroupBox))
                 {
+                    control.Enabled = false;
                     limpiarFormulario(control);
                 }
             }
@@ -580,6 +548,35 @@ namespace WinForm
             BT_Cargar.Enabled = true;
             BT_LimpiarFormulario.Enabled = true;
         }
-        //private void inicializarSetUp
+        private void habilitarControles()
+        {
+            GB_CamposSetUp.Enabled = true;
+            GB_Imagenes.Enabled = true;
+            GB_Documentos.Enabled = true;
+            CB_NumeroDeEtapas.Enabled = false;
+            CHB_DosImagenes3D.Checked = false;
+            CHB_SinImagenesSetUp.Checked = false;
+            L_ImagenesEsperadas.Visible = false;
+            L_ImagenesEncontradas.Visible = false;
+            RB_AmbosDocumentos.Checked = true;
+            RB_SoloBEV.Checked = false;
+            RB_SoloInforme.Checked = false;
+            TB_ProfundidadesEfectivas.Clear();
+        }
+
+        private void inicializarSetUP()
+        {
+            if (paciente.planes.Count>0 && paciente.planes.Last().equipo=="Córdoba")
+            {
+                TB_SetUp1Gantry.Text = "0";
+            }
+            else
+            {
+                TB_SetUp1Gantry.Text = "180";
+            }
+            TB_SetUp2Gantry.Text = "270";
+            TB_SetUp1Tam.Text = "10x10";
+            TB_SetUp2Tam.Text = "10x10";
+        }
     }
 }

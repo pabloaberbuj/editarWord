@@ -127,12 +127,6 @@ namespace WinForm
         {
             Campo campo = new Campo();
             int tab = (parametros + 1) * numeroDeCampo;
-            /*int aux = Convert.ToInt32(extraerStringSinSep(fid, 21 + tab));
-            if (aux == 0)
-            {
-                MessageBox.Show("Quedó activado el Field 0. Se cargaran los otros campos");
-                tab += parametros + 1;
-            }*/
             if (hayCampo0)
             {
                 tab += parametros + 1;
