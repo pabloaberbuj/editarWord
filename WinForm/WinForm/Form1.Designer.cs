@@ -45,6 +45,8 @@
             this.RB_SoloBEV = new System.Windows.Forms.RadioButton();
             this.RB_AmbosDocumentos = new System.Windows.Forms.RadioButton();
             this.GB_Imagenes = new System.Windows.Forms.GroupBox();
+            this.CB_Imagenes3D = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.BT_ActualizarImagenes = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.LB_Imágenes = new System.Windows.Forms.ListBox();
@@ -59,13 +61,17 @@
             this.CB_NumeroDeEtapas = new System.Windows.Forms.ComboBox();
             this.L_NumeroDeEtapas = new System.Windows.Forms.Label();
             this.BT_LimpiarFormulario = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.CB_Imagenes3D = new System.Windows.Forms.ComboBox();
+            this.GB_DocumentosCreados = new System.Windows.Forms.GroupBox();
+            this.L_DocCreado1 = new System.Windows.Forms.Label();
+            this.L_DocCreado2 = new System.Windows.Forms.Label();
+            this.L_DocCreado3 = new System.Windows.Forms.Label();
+            this.L_DocCreado4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPlan)).BeginInit();
             this.GB_CamposSetUp.SuspendLayout();
             this.GB_Documentos.SuspendLayout();
             this.GB_Imagenes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).BeginInit();
+            this.GB_DocumentosCreados.SuspendLayout();
             this.SuspendLayout();
             // 
             // BT_Cargar
@@ -96,12 +102,13 @@
             this.DGV_DatosPlan.AllowUserToResizeColumns = false;
             this.DGV_DatosPlan.AllowUserToResizeRows = false;
             this.DGV_DatosPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_DatosPlan.ColumnHeadersVisible = false;
             this.DGV_DatosPlan.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_DatosPlan.Location = new System.Drawing.Point(400, 161);
             this.DGV_DatosPlan.Name = "DGV_DatosPlan";
             this.DGV_DatosPlan.RowHeadersVisible = false;
             this.DGV_DatosPlan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DGV_DatosPlan.Size = new System.Drawing.Size(200, 197);
+            this.DGV_DatosPlan.Size = new System.Drawing.Size(227, 197);
             this.DGV_DatosPlan.TabIndex = 22;
             this.DGV_DatosPlan.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
             this.DGV_DatosPlan.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
@@ -118,7 +125,7 @@
             this.GB_CamposSetUp.Controls.Add(this.label2);
             this.GB_CamposSetUp.Location = new System.Drawing.Point(3, 78);
             this.GB_CamposSetUp.Name = "GB_CamposSetUp";
-            this.GB_CamposSetUp.Size = new System.Drawing.Size(275, 100);
+            this.GB_CamposSetUp.Size = new System.Drawing.Size(242, 100);
             this.GB_CamposSetUp.TabIndex = 37;
             this.GB_CamposSetUp.TabStop = false;
             this.GB_CamposSetUp.Text = "Campos SetUp";
@@ -193,7 +200,7 @@
             this.GB_Documentos.Controls.Add(this.RB_SoloBEV);
             this.GB_Documentos.Controls.Add(this.RB_AmbosDocumentos);
             this.GB_Documentos.Controls.Add(this.BT_HacerDocumentos);
-            this.GB_Documentos.Location = new System.Drawing.Point(421, 376);
+            this.GB_Documentos.Location = new System.Drawing.Point(439, 376);
             this.GB_Documentos.Name = "GB_Documentos";
             this.GB_Documentos.Size = new System.Drawing.Size(188, 133);
             this.GB_Documentos.TabIndex = 38;
@@ -254,6 +261,29 @@
             this.GB_Imagenes.TabIndex = 40;
             this.GB_Imagenes.TabStop = false;
             this.GB_Imagenes.Text = "Imágenes";
+            // 
+            // CB_Imagenes3D
+            // 
+            this.CB_Imagenes3D.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CB_Imagenes3D.FormattingEnabled = true;
+            this.CB_Imagenes3D.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
+            this.CB_Imagenes3D.Location = new System.Drawing.Point(85, 46);
+            this.CB_Imagenes3D.Name = "CB_Imagenes3D";
+            this.CB_Imagenes3D.Size = new System.Drawing.Size(68, 21);
+            this.CB_Imagenes3D.TabIndex = 48;
+            this.CB_Imagenes3D.SelectedIndexChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 49);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(73, 13);
+            this.label9.TabIndex = 47;
+            this.label9.Text = "Imagenes 3D:";
             // 
             // BT_ActualizarImagenes
             // 
@@ -356,12 +386,13 @@
             this.DGV_DatosPaciente.AllowUserToResizeColumns = false;
             this.DGV_DatosPaciente.AllowUserToResizeRows = false;
             this.DGV_DatosPaciente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_DatosPaciente.ColumnHeadersVisible = false;
             this.DGV_DatosPaciente.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_DatosPaciente.Location = new System.Drawing.Point(400, 12);
             this.DGV_DatosPaciente.Name = "DGV_DatosPaciente";
             this.DGV_DatosPaciente.RowHeadersVisible = false;
             this.DGV_DatosPaciente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DGV_DatosPaciente.Size = new System.Drawing.Size(200, 127);
+            this.DGV_DatosPaciente.Size = new System.Drawing.Size(227, 127);
             this.DGV_DatosPaciente.TabIndex = 43;
             this.DGV_DatosPaciente.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
             this.DGV_DatosPaciente.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DatosPaciente_CellLeave);
@@ -399,34 +430,73 @@
             this.BT_LimpiarFormulario.UseVisualStyleBackColor = true;
             this.BT_LimpiarFormulario.Click += new System.EventHandler(this.BT_LimpiarFormulario_Click);
             // 
-            // label9
+            // GB_DocumentosCreados
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 49);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 13);
-            this.label9.TabIndex = 47;
-            this.label9.Text = "Imagenes 3D:";
+            this.GB_DocumentosCreados.Controls.Add(this.L_DocCreado4);
+            this.GB_DocumentosCreados.Controls.Add(this.L_DocCreado3);
+            this.GB_DocumentosCreados.Controls.Add(this.L_DocCreado2);
+            this.GB_DocumentosCreados.Controls.Add(this.L_DocCreado1);
+            this.GB_DocumentosCreados.Location = new System.Drawing.Point(252, 12);
+            this.GB_DocumentosCreados.Name = "GB_DocumentosCreados";
+            this.GB_DocumentosCreados.Size = new System.Drawing.Size(142, 146);
+            this.GB_DocumentosCreados.TabIndex = 48;
+            this.GB_DocumentosCreados.TabStop = false;
+            this.GB_DocumentosCreados.Text = "Documentos creados";
             // 
-            // CB_Imagenes3D
+            // L_DocCreado1
             // 
-            this.CB_Imagenes3D.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CB_Imagenes3D.FormattingEnabled = true;
-            this.CB_Imagenes3D.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
-            this.CB_Imagenes3D.Location = new System.Drawing.Point(85, 46);
-            this.CB_Imagenes3D.Name = "CB_Imagenes3D";
-            this.CB_Imagenes3D.Size = new System.Drawing.Size(68, 21);
-            this.CB_Imagenes3D.TabIndex = 48;
-            this.CB_Imagenes3D.SelectedIndexChanged += new System.EventHandler(this.ActualizarNumeroImagenes);
+            this.L_DocCreado1.AutoSize = true;
+            this.L_DocCreado1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_DocCreado1.ForeColor = System.Drawing.Color.Green;
+            this.L_DocCreado1.Location = new System.Drawing.Point(27, 28);
+            this.L_DocCreado1.Name = "L_DocCreado1";
+            this.L_DocCreado1.Size = new System.Drawing.Size(77, 13);
+            this.L_DocCreado1.TabIndex = 39;
+            this.L_DocCreado1.Text = "DocCreado1";
+            this.L_DocCreado1.Visible = false;
+            // 
+            // L_DocCreado2
+            // 
+            this.L_DocCreado2.AutoSize = true;
+            this.L_DocCreado2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_DocCreado2.ForeColor = System.Drawing.Color.Green;
+            this.L_DocCreado2.Location = new System.Drawing.Point(27, 53);
+            this.L_DocCreado2.Name = "L_DocCreado2";
+            this.L_DocCreado2.Size = new System.Drawing.Size(77, 13);
+            this.L_DocCreado2.TabIndex = 40;
+            this.L_DocCreado2.Text = "DocCreado2";
+            this.L_DocCreado2.Visible = false;
+            // 
+            // L_DocCreado3
+            // 
+            this.L_DocCreado3.AutoSize = true;
+            this.L_DocCreado3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_DocCreado3.ForeColor = System.Drawing.Color.Green;
+            this.L_DocCreado3.Location = new System.Drawing.Point(27, 76);
+            this.L_DocCreado3.Name = "L_DocCreado3";
+            this.L_DocCreado3.Size = new System.Drawing.Size(77, 13);
+            this.L_DocCreado3.TabIndex = 41;
+            this.L_DocCreado3.Text = "DocCreado3";
+            this.L_DocCreado3.Visible = false;
+            // 
+            // L_DocCreado4
+            // 
+            this.L_DocCreado4.AutoSize = true;
+            this.L_DocCreado4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_DocCreado4.ForeColor = System.Drawing.Color.Green;
+            this.L_DocCreado4.Location = new System.Drawing.Point(27, 100);
+            this.L_DocCreado4.Name = "L_DocCreado4";
+            this.L_DocCreado4.Size = new System.Drawing.Size(77, 13);
+            this.L_DocCreado4.TabIndex = 42;
+            this.L_DocCreado4.Text = "DocCreado4";
+            this.L_DocCreado4.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 510);
+            this.ClientSize = new System.Drawing.Size(649, 510);
+            this.Controls.Add(this.GB_DocumentosCreados);
             this.Controls.Add(this.BT_LimpiarFormulario);
             this.Controls.Add(this.L_NumeroDeEtapas);
             this.Controls.Add(this.CB_NumeroDeEtapas);
@@ -450,6 +520,8 @@
             this.GB_Imagenes.ResumeLayout(false);
             this.GB_Imagenes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPaciente)).EndInit();
+            this.GB_DocumentosCreados.ResumeLayout(false);
+            this.GB_DocumentosCreados.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -490,6 +562,11 @@
         private System.Windows.Forms.Button BT_LimpiarFormulario;
         private System.Windows.Forms.ComboBox CB_Imagenes3D;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox GB_DocumentosCreados;
+        private System.Windows.Forms.Label L_DocCreado4;
+        private System.Windows.Forms.Label L_DocCreado3;
+        private System.Windows.Forms.Label L_DocCreado2;
+        private System.Windows.Forms.Label L_DocCreado1;
     }
 }
 

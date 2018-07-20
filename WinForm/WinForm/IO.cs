@@ -22,13 +22,22 @@ namespace WinForm
         public static void crearCarpetas(Paciente paciente)
         {
             string aux = paciente.apellidoNombre+ " " + paciente.ID;
-            Directory.CreateDirectory(pathDestino + aux);
-            Directory.CreateDirectory(pathDestino + aux + "\\Plan");
+            if (!Directory.Exists(pathDestino + aux))
+            {
+                Directory.CreateDirectory(pathDestino + aux);
+            }
+            if (!Directory.Exists(pathDestino + aux + "\\Plan"))
+            {
+                Directory.CreateDirectory(pathDestino + aux + "\\Plan");
+            }
             if (paciente.numeroDeEtapas > 1)
             {
                 for (int i = 1; i < paciente.numeroDeEtapas+1; i++)
                 {
-                    Directory.CreateDirectory(pathDestino + aux + "\\Etapa " + i.ToString());
+                    if (!Directory.Exists(pathDestino + aux + "\\Etapa " + i.ToString()))
+                    {
+                        Directory.CreateDirectory(pathDestino + aux + "\\Etapa " + i.ToString());
+                    }
                 }
             }
         }
@@ -51,8 +60,11 @@ namespace WinForm
             foreach (string imagen in obtenerImagenes(paciente.apellido))
             {
                 string auxOrigen = imagen;
-                string auxDestino = pathDestino + aux + Path.GetFileName(imagen);
-                File.Move(imagen, pathDestino + aux + "\\" + Path.GetFileName(imagen));
+                string auxDestino = pathDestino + aux + "\\" + Path.GetFileName(imagen);
+                if (!File.Exists(auxDestino))
+                {
+                    File.Move(imagen, auxDestino);
+                }
             }
         }
     }

@@ -17,9 +17,11 @@ namespace WinForm
     public partial class Form1 : Form
     {
         Paciente paciente = new Paciente();
-        
-        
+        List<Label> docCreados = new List<Label>();
+
+
         int etapaNumero = 0;
+        int indiceLabelDocCreados = 0;
 
         public Form1()
         {
@@ -58,6 +60,10 @@ namespace WinForm
                 MessageBox.Show("No se encuentra el archivo Equipos.txt. El programa se cerrará");
                 this.Close();
             }
+            docCreados.Add(L_DocCreado1);
+            docCreados.Add(L_DocCreado2);
+            docCreados.Add(L_DocCreado3);
+            docCreados.Add(L_DocCreado4);
 
         }
 
@@ -69,20 +75,22 @@ namespace WinForm
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string[] fid = Extraer.cargar(openFileDialog1.FileName);
-                if (etapaNumero<2)
+                if (etapaNumero < 2)
                 {
+                    limpiarLabelsDocCreado();
                     paciente = Extraer.extraerPaciente(fid);
+                    this.Text = "Armado de carpetas " + paciente.apellidoNombre;
                     cargarDGVdePaciente(paciente);
                 }
                 else
                 {
                     if (!Chequear.paciente(paciente, Extraer.extraerPaciente(fid)))
                     {
-                        MessageBox.Show("Los planes corresponden a diferentes pacientes","Error");
+                        MessageBox.Show("Los planes corresponden a diferentes pacientes", "Error");
                     }
                 }
                 paciente.planes.Add(Extraer.extraerPlan(fid));
-                if (numeroDeEtapas()==1)
+                if (numeroDeEtapas() == 1)
                 {
                     paciente.planes.Last().etapa = "1";
                 }
@@ -101,14 +109,14 @@ namespace WinForm
                 GB_CamposSetUp.Enabled = true;
                 GB_Documentos.Enabled = true;
                 TB_ProfundidadesEfectivas.Enabled = true;
-                if (numeroDeEtapas()==1)
+                if (numeroDeEtapas() == 1)
                 {
                     RB_AmbosDocumentos.Enabled = true;
                     RB_SoloBEV.Enabled = true;
                     RB_AmbosDocumentos.Checked = true;
                     RB_SoloInforme.Enabled = true;
                 }
-                if (numeroDeEtapas()>1)
+                if (numeroDeEtapas() > 1)
                 {
                     RB_AmbosDocumentos.Enabled = false;
                     RB_SoloBEV.Enabled = true;
@@ -219,30 +227,40 @@ namespace WinForm
 
         private void BT_HacerDocumentos_Click(object sender, EventArgs e)
         {
-            if (etapaNumero<2)
+            if (Chequear.numeroDeImagenes(imagenesEsperadas(paciente.planes[0]), imagenesEncontradas(paciente)))
             {
-                IO.crearCarpetas(paciente);
-            }
-            if (etapaNumero == 0)
-            {
-                unaEtapaBEVeInforme();
-            }
-            else if (etapaNumero <= paciente.numeroDeEtapas)
-            {
-                variasEtapasBEV(etapaNumero);
-                etapaNumero++;
-                if (etapaNumero > paciente.numeroDeEtapas)
+                if (!celdasVacias() || (celdasVacias() && MessageBox.Show("Hay datos sin completar ¿desea continuar?", "", MessageBoxButtons.YesNo) == DialogResult.Yes))
                 {
-                    BT_Cargar.Enabled = false;
-                    RB_AmbosDocumentos.Enabled = false;
-                    RB_SoloBEV.Enabled = false;
-                    RB_SoloInforme.Enabled = true;
-                    RB_SoloInforme.Checked = true;
+                    if (etapaNumero < 2)
+                    {
+                        IO.crearCarpetas(paciente);
+                    }
+                    if (etapaNumero == 0)
+                    {
+                        unaEtapaBEVeInforme();
+                    }
+                    else if (etapaNumero <= paciente.numeroDeEtapas)
+                    {
+                        variasEtapasBEV(etapaNumero);
+                        etapaNumero++;
+                        if (etapaNumero > paciente.numeroDeEtapas)
+                        {
+                            BT_Cargar.Enabled = false;
+                            RB_AmbosDocumentos.Enabled = false;
+                            RB_SoloBEV.Enabled = false;
+                            RB_SoloInforme.Enabled = true;
+                            RB_SoloInforme.Checked = true;
+                        }
+                    }
+                    else
+                    {
+                        variasEtapasInforme();
+                    }
                 }
             }
             else
             {
-                variasEtapasInforme();
+                MessageBox.Show("El número de imágenes esperadas y las encontradas no coinciden.\nPor favor revisar e intentarlo nuevamente");
             }
         }
 
@@ -262,113 +280,89 @@ namespace WinForm
 
         private void unaEtapaBEVeInforme()
         {
-            if (Chequear.numeroDeImagenes(imagenesEsperadas(paciente.planes[0]), imagenesEncontradas(paciente)))
+            try
             {
-                if (!celdasVacias() || (celdasVacias() && MessageBox.Show("Hay datos sin completar ¿desea continuar?", "", MessageBoxButtons.YesNo) == DialogResult.Yes))
+                guardarDGVenPlan(paciente.planes[0]);
+                guardarDGVenPaciente(paciente);
+                if (imprimirBEV())
                 {
-                    try
-                    {
-                        guardarDGVenPlan(paciente.planes[0]);
-                        guardarDGVenPaciente(paciente);
-                        if (imprimirBEV())
-                        {
-                            crearBEV(1);
-                        }
-                        if (imprimirInforme())
-                        {
-                            crearInforme();
-                        }
-                        IO.moverImagenes(paciente);
-                        MessageBox.Show("Se generaron los documentos y se movieron las imágenes");
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
+                    crearBEV(1);
+                    escribirLabelDocCreado("BEV", indiceLabelDocCreados);
                 }
+                if (imprimirInforme())
+                {
+                    crearInforme();
+                    escribirLabelDocCreado("Informe", indiceLabelDocCreados);
+                }
+                IO.moverImagenes(paciente);
+                MessageBox.Show("Se generaron los documentos y se movieron las imágenes");
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("El número de imágenes esperadas y las encontradas no coinciden.\nPor favor revisar e intentarlo nuevamente");
+                throw;
             }
+
+
         }
 
 
 
         private void variasEtapasBEV(int etapa)
         {
-            if (Chequear.numeroDeImagenes(imagenesEsperadas(paciente.planes[etapa - 1]), imagenesEncontradas(paciente)))
+            try
             {
-                if (!celdasVacias() || (celdasVacias() && MessageBox.Show("Hay datos sin completar ¿desea continuar?", "", MessageBoxButtons.YesNo) == DialogResult.Yes))
+                guardarDGVenPaciente(paciente);
+                guardarDGVenPlan(paciente.planes[etapa - 1]);
+                crearBEV(etapa);
+                IO.moverImagenes(paciente, etapa);
+                MessageBox.Show("Se generó el documento y se movieron las imágenes");
+                escribirLabelDocCreado("BEV etapa " + etapa.ToString(), indiceLabelDocCreados);
+                if (etapa < paciente.numeroDeEtapas)
                 {
-                    try
-                    {
-                        guardarDGVenPaciente(paciente);
-                        guardarDGVenPlan(paciente.planes[etapa-1]);
-                        crearBEV(etapa);
-                        IO.moverImagenes(paciente, etapa);
-                        MessageBox.Show("Se generó el documento y se movieron las imágenes");
-                        if (etapa<paciente.numeroDeEtapas)
-                        {
-                            BT_Cargar.Enabled = true;
-                            BT_Cargar.Text = "Cargar PPF Etapa " + (etapa + 1).ToString();
-                            BT_HacerDocumentos.Enabled = false;
-                            L_ImagenesEsperadas.Visible = false;
-                            L_ImagenesEncontradas.Visible = false;
-                            LB_Imágenes.Items.Clear();
-                            GB_Imagenes.Enabled = false;
-                            GB_CamposSetUp.Enabled = false;
-                            GB_Documentos.Enabled = false;
-                            TB_ProfundidadesEfectivas.Enabled = false;
-                        }
-                        else
-                        {
-                            BT_Cargar.Enabled = false;
-                            RB_SoloInforme.Checked = true;
-                            RB_SoloBEV.Enabled = false;
-                            RB_SoloInforme.Enabled = true;
-                            RB_AmbosDocumentos.Enabled = true;
-                            DGV_DatosPlan.Enabled = false;
-                            MessageBox.Show("Una vez exportadas las imágenes para el informe presione aceptar y luego Crear Documentos");
-                        }
-                        
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-
+                    BT_Cargar.Enabled = true;
+                    BT_Cargar.Text = "Cargar PPF Etapa " + (etapa + 1).ToString();
+                    BT_HacerDocumentos.Enabled = false;
+                    L_ImagenesEsperadas.Visible = false;
+                    L_ImagenesEncontradas.Visible = false;
+                    LB_Imágenes.Items.Clear();
+                    GB_Imagenes.Enabled = false;
+                    GB_CamposSetUp.Enabled = false;
+                    GB_Documentos.Enabled = false;
+                    TB_ProfundidadesEfectivas.Enabled = false;
                 }
+                else
+                {
+                    BT_Cargar.Enabled = false;
+                    RB_SoloInforme.Checked = true;
+                    RB_SoloBEV.Enabled = false;
+                    RB_SoloInforme.Enabled = true;
+                    RB_AmbosDocumentos.Enabled = true;
+                    DGV_DatosPlan.Enabled = false;
+                    MessageBox.Show("Una vez exportadas las imágenes para el informe presione aceptar y luego Crear Documentos");
+                }
+
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("El número de imágenes esperadas y las encontradas no coinciden.\nPor favor revisar e intentarlo nuevamente");
+                throw;
             }
+
+
         }
 
         private void variasEtapasInforme()
         {
-            if (Chequear.numeroDeImagenes(imagenesEsperadas(paciente.planes.Last()), imagenesEncontradas(paciente)))
+            try
             {
-                if (!celdasVacias() || (celdasVacias() && MessageBox.Show("Hay datos sin completar ¿desea continuar?", "", MessageBoxButtons.YesNo) == DialogResult.Yes))
-                {
-                    try
-                    {
-                        guardarDGVenPaciente(paciente);
-                        crearInforme();
-                        IO.moverImagenes(paciente, 0, true);
-                        MessageBox.Show("Se generó el documento y se movieron las imágenes");
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-
-                }
+                guardarDGVenPaciente(paciente);
+                crearInforme();
+                IO.moverImagenes(paciente, 0, true);
+                MessageBox.Show("Se generó el documento y se movieron las imágenes");
+                escribirLabelDocCreado("Informe", indiceLabelDocCreados);
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("El número de imágenes esperadas y las encontradas no coinciden.\nPor favor revisar e intentarlo nuevamente");
+                throw;
             }
         }
 
@@ -452,7 +446,7 @@ namespace WinForm
 
         private void ActualizarNumeroImagenes(object sender, EventArgs e)
         {
-            if (paciente.planes!=null )//&& paciente.planes.Last().cantidadDeCampos > 0)
+            if (paciente.planes != null)//&& paciente.planes.Last().cantidadDeCampos > 0)
             {
                 escribirLabels(paciente.planes.Last(), paciente);
                 if (CHB_SinImagenesSetUp.Checked || RB_SoloInforme.Checked)
@@ -505,7 +499,7 @@ namespace WinForm
 
         private void CB_NumeroDeEtapas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (numeroDeEtapas()>1)
+            if (numeroDeEtapas() > 1)
             {
                 etapaNumero = 1;
                 BT_Cargar.Text = "Cargar PPF etapa 1";
@@ -515,7 +509,7 @@ namespace WinForm
                 etapaNumero = 0;
                 BT_Cargar.Text = "Cargar PPF";
             }
-            
+
         }
 
         private void BT_ActualizarImagenes_Click(object sender, EventArgs e)
@@ -527,15 +521,16 @@ namespace WinForm
         private void BT_LimpiarFormulario_Click(object sender, EventArgs e)
         {
             limpiarFormulario(this);
+            this.Text = "Armado de carpetas";
         }
         private void limpiarFormulario(Control parent)
         {
             foreach (Control control in parent.Controls)
             {
-               /* if (control.GetType()!=typeof(Label))
-                {
-               //     control.Enabled = false;
-                }*/
+                /* if (control.GetType()!=typeof(Label))
+                 {
+                //     control.Enabled = false;
+                 }*/
                 if (control.GetType() == typeof(TextBox))
                 {
                     control.Text = "";
@@ -548,15 +543,15 @@ namespace WinForm
                 {
                     ((CheckBox)control).Checked = false;
                 }
-                if (control.GetType()== typeof(DataGridView))
+                if (control.GetType() == typeof(DataGridView))
                 {
                     ((DataGridView)control).Rows.Clear();
                 }
-                if (control.GetType()==typeof(ListBox))
+                if (control.GetType() == typeof(ListBox))
                 {
                     ((ListBox)control).Items.Clear();
                 }
-                if (control.GetType()==typeof(GroupBox))
+                if (control.GetType() == typeof(GroupBox))
                 {
                     control.Enabled = false;
                     limpiarFormulario(control);
@@ -566,6 +561,7 @@ namespace WinForm
             CB_NumeroDeEtapas.SelectedIndex = 0;
             BT_Cargar.Enabled = true;
             BT_LimpiarFormulario.Enabled = true;
+            GB_DocumentosCreados.Enabled = true;
         }
         private void habilitarControles()
         {
@@ -585,7 +581,7 @@ namespace WinForm
 
         private void inicializarSetUP()
         {
-            if (paciente.planes.Count>0 && paciente.planes.Last().equipo=="Córdoba")
+            if (paciente.planes.Count > 0 && paciente.planes.Last().equipo == "Córdoba")
             {
                 TB_SetUp1Gantry.Text = "0";
             }
@@ -596,6 +592,23 @@ namespace WinForm
             TB_SetUp2Gantry.Text = "270";
             TB_SetUp1Tam.Text = "10x10";
             TB_SetUp2Tam.Text = "10x10";
+        }
+
+        private void escribirLabelDocCreado(string texto, int indice)
+        {
+            docCreados[indice].Text = texto;
+            docCreados[indice].Visible = true;
+            indiceLabelDocCreados++;
+        }
+
+        private void limpiarLabelsDocCreado()
+        {
+            foreach (Label label in docCreados)
+            {
+                label.Text = "";
+                label.Visible = false;
+            }
+            indiceLabelDocCreados = 0;
         }
     }
 }
