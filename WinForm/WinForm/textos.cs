@@ -106,10 +106,10 @@ namespace WinForm
             return "Se muestra las vistas coronal y sagital reconstruidas a partir de los cortes tomográficos axiales. Las líneas azules son la proyección de la conformación de la lesión en cada corte axial.";
         }
         
-        public static string tresDInforme(bool hayDosImagenes3D)
+        public static string tresDInforme(bool hayDosImagenes3D, bool hayTresImagenes3D)
         {
             string aux = "";
-            if (hayDosImagenes3D)
+            if (hayDosImagenes3D || hayTresImagenes3D)
             {
                 aux+= "Imágenes tridimensionales del tratamiento sobre un corte axial, en las que están representadas las superficies del 95% ";
             }

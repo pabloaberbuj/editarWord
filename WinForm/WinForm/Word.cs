@@ -220,22 +220,22 @@ namespace WinForm
             if (hayDosImagenes3D)
             {
                 insertarDosImagenes(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[3], imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 8, Alignment.center);
-                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
+                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D, hayTresImagenes3D), FuenteTexto);
                 insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[5], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(), FuenteTexto);
             }
             else if (hayTresImagenes3D)
             {
                 insertarTresImagenes(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[3], imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[4], imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[5], 6.5, Alignment.center);
-                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
-                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[5], 11, Alignment.center);
+                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D, hayTresImagenes3D), FuenteTexto);
+                insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[6], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(), FuenteTexto);
             }
 
             else
             {
                 insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[3], 11, Alignment.center);
-                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D), FuenteTexto);
+                agregarParrafo(document, Textos.tresDInforme(hayDosImagenes3D, hayTresImagenes3D), FuenteTexto);
                 insertarImagen(document, imagenesInforme(paciente, hayDosImagenes3D, hayTresImagenes3D, hayImagenesSetUp, imprimirBEV)[4], 11, Alignment.center);
                 agregarParrafo(document, Textos.dvhInforme(), FuenteTexto);
             }

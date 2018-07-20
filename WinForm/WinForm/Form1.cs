@@ -468,7 +468,7 @@ namespace WinForm
 
         private bool celdasVacias()
         {
-            return celdaVacia(DGV_DatosPaciente) && celdaVacia(DGV_DatosPlan);
+            return celdaVacia(DGV_DatosPaciente) || celdaVacia(DGV_DatosPlan);
         }
         private bool celdaVacia(DataGridView dgv)
         {
