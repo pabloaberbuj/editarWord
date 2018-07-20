@@ -87,7 +87,7 @@ namespace WinForm
             {
                 etapa = paciente.numeroDeEtapas.ToString() + " etapas";
             }
-            string aux = "Corte axial en isocentro de la lesión y planificación del tratamiento en " + etapa + " , con " + paciente.cantidadDeCamposTotal.ToString() + " campos de radiación ";
+            string aux = "Corte axial en isocentro de la lesión y planificación del tratamiento en " + etapa + ", con " + paciente.cantidadDeCamposTotal.ToString() + " campos de radiación ";
             if (paciente.modalidad== "T3DC")
             {
                 aux += "conformados";

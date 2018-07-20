@@ -17,7 +17,7 @@ namespace WinForm
 
         private static List<string> imagenes(Paciente paciente)
         {
-            return IO.obtenerImagenes(paciente.apellido);
+            return IO.obtenerImagenes(paciente);
         }
 
         public static int cantidadDeImagenes(Paciente paciente)

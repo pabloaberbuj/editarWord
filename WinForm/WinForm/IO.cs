@@ -42,9 +42,12 @@ namespace WinForm
             }
         }
 
-        public static List<string> obtenerImagenes(string apellido)
+        public static List<string> obtenerImagenes(Paciente paciente)
         {
-            apellido = apellido.Replace(' ', '_');
+
+            string apellido = paciente.apellido.Replace(' ', '_');
+            //string nombre = paciente.nombre.Replace(' ', '_');
+            //string apellidonombre = apellido + "_" + nombre.ToUpper();
             string patron = apellido + "*.bmp";
             return Directory.GetFiles(pathImagenes(), patron).ToList();
         }
@@ -57,7 +60,7 @@ namespace WinForm
             {
                 aux += "\\Etapa " + etapa.ToString();
             }
-            foreach (string imagen in obtenerImagenes(paciente.apellido))
+            foreach (string imagen in obtenerImagenes(paciente))
             {
                 string auxOrigen = imagen;
                 string auxDestino = pathDestino + aux + "\\" + Path.GetFileName(imagen);

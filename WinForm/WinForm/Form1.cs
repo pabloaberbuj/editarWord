@@ -369,7 +369,7 @@ namespace WinForm
         private void cargarListaImagenes()
         {
             LB_Imágenes.Items.Clear();
-            List<string> listaImagenes = IO.obtenerImagenes(paciente.apellido);
+            List<string> listaImagenes = IO.obtenerImagenes(paciente);
             foreach (string imagen in listaImagenes)
             {
                 LB_Imágenes.Items.Add(Path.GetFileName(imagen));
