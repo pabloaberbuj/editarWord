@@ -18,6 +18,7 @@ namespace WinForm
     {
         Paciente paciente = new Paciente();
         List<Label> docCreados = new List<Label>();
+        Dictionary<string, string> Diccionario = Equipos.diccionario();
 
 
         int etapaNumero = 0;
@@ -227,7 +228,7 @@ namespace WinForm
 
         private void BT_HacerDocumentos_Click(object sender, EventArgs e)
         {
-            if (Chequear.numeroDeImagenes(imagenesEsperadas(paciente.planes[0]), imagenesEncontradas(paciente)))
+            if (Chequear.numeroDeImagenes(imagenesEsperadas(paciente.planes.Last()), imagenesEncontradas(paciente)))
             {
                 if (!celdasVacias() || (celdasVacias() && MessageBox.Show("Hay datos sin completar ¿desea continuar?", "", MessageBoxButtons.YesNo) == DialogResult.Yes))
                 {

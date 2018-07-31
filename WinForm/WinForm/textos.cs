@@ -130,7 +130,7 @@ namespace WinForm
         {
             string[] aux = textoCrudo.Split('\n');
             List<string> textoLimpio = new List<string>();
-            string[] lineasQuedan = new string[] { "Effective", "Fields", "REF", "ISO1" };
+            string[] lineasQuedan = new string[] { "Effective", "Fields", "REF", "ISO" };
             foreach (string linea in aux)
             {
                 string lineaNueva=linea.Trim();
