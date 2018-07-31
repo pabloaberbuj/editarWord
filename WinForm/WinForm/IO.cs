@@ -46,6 +46,7 @@ namespace WinForm
         {
 
             string apellido = paciente.apellido.Replace(' ', '_');
+            apellido = apellido.Replace('Ñ', '_');
             //string nombre = paciente.nombre.Replace(' ', '_');
             //string apellidonombre = apellido + "_" + nombre.ToUpper();
             string patron = apellido + "*.bmp";
