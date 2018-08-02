@@ -340,6 +340,9 @@ namespace WinForm
                     RB_AmbosDocumentos.Enabled = true;
                     DGV_DatosPlan.Enabled = false;
                     MessageBox.Show("Una vez exportadas las imágenes para el informe presione aceptar y luego Crear Documentos");
+                    cargarListaImagenes();
+                    escribirLabels(paciente.planes.Last(), paciente);
+
                 }
 
             }

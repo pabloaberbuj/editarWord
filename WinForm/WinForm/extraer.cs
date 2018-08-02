@@ -15,7 +15,7 @@ namespace WinForm
         {
             try
             {
-                return File.ReadAllLines(archivo);
+                return File.ReadAllLines(archivo,Encoding.GetEncoding(28591));
             }
             catch (Exception e)
             {
