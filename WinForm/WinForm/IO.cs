@@ -11,6 +11,8 @@ namespace WinForm
         public static string[]  paths = File.ReadAllLines("Configuracion.txt");
         //public static string pathDestino = @"..\..\"; //PARA DEBUG
         public static string pathDestino = ""; 
+
+
         //public static string pathImagenes = "C:\\Users\\Casa\\source\\repos\\editarWord\\WinForm\\WinForm\\Abramidis";
 
         public static string pathProtocolos = @"..\..\";
