@@ -15,6 +15,7 @@ namespace WinForm
     {
         public string carpetaPaciente;
         public Paciente paciente = new Paciente();
+        public Tratamiento tratamientoActual;
         public Main()
         {
             InitializeComponent();
@@ -74,6 +75,19 @@ namespace WinForm
             tratamiento.nombre = nombreTratamiento;
             tratamiento.planes = new List<Plan>();
             tratamiento.planes.Add(Extraer.extraerPlan(Extraer.cargar(fullPath(nombreArchivo))));
+            paciente.tratamientos.Add(tratamiento);
+            tratamientoActual = tratamiento;
+        }
+
+        private void BT_NuevoTratamiento_Click(object sender, EventArgs e)
+        {
+            TextBoxForm nombreNuevoTto = new TextBoxForm();
+            nombreNuevoTto.Text = "Nombre del tratamiento";
+            nombreNuevoTto.ShowDialog();
+            if (nombreNuevoTto.DialogResult==DialogResult.OK)
+            {
+                nuevoTratamiento(LB_ppfs.SelectedItem.ToString(), nombreNuevoTto.salida);
+            }
         }
     }
 }

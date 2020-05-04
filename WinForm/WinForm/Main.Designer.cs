@@ -114,6 +114,7 @@
             this.BT_NuevoTratamiento.TabIndex = 7;
             this.BT_NuevoTratamiento.Text = "Nuevo Tratamiento";
             this.BT_NuevoTratamiento.UseVisualStyleBackColor = true;
+            this.BT_NuevoTratamiento.Click += new System.EventHandler(this.BT_NuevoTratamiento_Click);
             // 
             // BT_NuevaEtapa
             // 
