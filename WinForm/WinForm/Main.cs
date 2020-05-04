@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Windows.Media;
 
 namespace WinForm
 {
@@ -77,24 +78,24 @@ namespace WinForm
             agregarNuevoPlan(tratamiento);
             paciente.tratamientos.Add(tratamiento);
             tratamientoActual = tratamiento;
+            visualizarArbol();
         }
 
         private void BT_NuevoTratamiento_Click(object sender, EventArgs e)
         {
-            TextBoxForm nombreNuevoTto = new TextBoxForm();
+            TextBoxForm nombreNuevoTto = new TextBoxForm(false,"Nombre de tratamiento");
             nombreNuevoTto.Text = "Nombre del tratamiento";
             nombreNuevoTto.ShowDialog();
             if (nombreNuevoTto.DialogResult==DialogResult.OK)
             {
-                nuevoTratamiento(nombrePlanSeleccionado(), nombreNuevoTto.salida);
+                nuevoTratamiento(nombrePlanSeleccionado(), nombreNuevoTto.salida1);
             }
-            visualizarArbol();
         }
 
         private void BT_NuevaEtapa_Click(object sender, EventArgs e)
         {
             agregarNuevoPlan(tratamientoActual);
-            visualizarArbol();
+            
         }
 
         private string nombrePlanSeleccionado()
@@ -104,7 +105,32 @@ namespace WinForm
 
         private void agregarNuevoPlan(Tratamiento tratamiento)
         {
-            tratamiento.planes.Add(Extraer.extraerPlan(Extraer.cargar(nombrePlanSeleccionado())));
+            Plan plan = Extraer.extraerPlan(Extraer.cargar(nombrePlanSeleccionado()));
+            TextBoxForm dosisTotalDia = new TextBoxForm(true,"Dosis Fracción", "Dosis plan");
+            dosisTotalDia.Text = "Dosis del plan seleccionado";
+            dosisTotalDia.ShowDialog();
+            if (dosisTotalDia.DialogResult == DialogResult.OK)
+            {
+                if (Convert.ToDouble(plan.dosisFraccion) != Convert.ToDouble(dosisTotalDia.salida1))
+                {
+                    MessageBox.Show("El valor de dosis día ingresado no coincide con el del PPF\nRevisar e ingresarlo nuevamente");
+                    dosisTotalDia.Show();
+                    
+                }
+                else if (Convert.ToDouble(dosisTotalDia.salida2)%Convert.ToDouble(dosisTotalDia.salida1)!=0)
+                {
+                    MessageBox.Show("El valor de dosis total no es un múltiplo de la dosis fracción\nRevisar e ingresarlo nuevamente");
+                    dosisTotalDia.Show();
+                }
+                else
+                {
+                    plan.dosisFraccion = dosisTotalDia.salida1;
+                    plan.dosisTotal = dosisTotalDia.salida2;
+                    tratamiento.planes.Add(plan);
+                    visualizarArbol();
+                }
+            }
+            
         }
 
         private void visualizarArbol()
@@ -114,14 +140,20 @@ namespace WinForm
             {
                 TreeNode tratamiento_node = new TreeNode();
                 tratamiento_node.Text = tratamiento.nombre;
-                TV_tratamientos.Nodes.Add(tratamiento_node);
                 if (tratamiento.planes.Count>1)
                 {
                     for (int i=0; i<tratamiento.planes.Count;i++)
                     {
-                        tratamiento_node.Nodes.Add("Etapa " + (i + 1).ToString());
+                        tratamiento_node.Nodes.Add("Etapa " + (i + 1).ToString() + " (" + tratamiento.planes[i].dosisTotal + "/" + tratamiento.planes[i].dosisFraccion + ")");
                     }
+                    
                 }
+                
+                else
+                {
+                    tratamiento_node.Text += " (" + tratamiento.planes[0].dosisTotal + "/" + tratamiento.planes[0].dosisFraccion + ")";
+                }
+                TV_tratamientos.Nodes.Add(tratamiento_node);
                 tratamiento_node.Expand();
             }
         }

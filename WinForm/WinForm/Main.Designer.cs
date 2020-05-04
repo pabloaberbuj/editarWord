@@ -100,7 +100,7 @@
             // 
             // BT_NuevoTratamiento
             // 
-            this.BT_NuevoTratamiento.Location = new System.Drawing.Point(470, 29);
+            this.BT_NuevoTratamiento.Location = new System.Drawing.Point(433, 29);
             this.BT_NuevoTratamiento.Name = "BT_NuevoTratamiento";
             this.BT_NuevoTratamiento.Size = new System.Drawing.Size(107, 23);
             this.BT_NuevoTratamiento.TabIndex = 7;
@@ -110,7 +110,7 @@
             // 
             // BT_NuevaEtapa
             // 
-            this.BT_NuevaEtapa.Location = new System.Drawing.Point(470, 56);
+            this.BT_NuevaEtapa.Location = new System.Drawing.Point(433, 56);
             this.BT_NuevaEtapa.Name = "BT_NuevaEtapa";
             this.BT_NuevaEtapa.Size = new System.Drawing.Size(107, 23);
             this.BT_NuevaEtapa.TabIndex = 8;
@@ -120,7 +120,7 @@
             // 
             // BT_Eliminar
             // 
-            this.BT_Eliminar.Location = new System.Drawing.Point(470, 118);
+            this.BT_Eliminar.Location = new System.Drawing.Point(433, 118);
             this.BT_Eliminar.Name = "BT_Eliminar";
             this.BT_Eliminar.Size = new System.Drawing.Size(107, 23);
             this.BT_Eliminar.TabIndex = 9;
@@ -147,9 +147,9 @@
             // 
             // TV_tratamientos
             // 
-            this.TV_tratamientos.Location = new System.Drawing.Point(614, 29);
+            this.TV_tratamientos.Location = new System.Drawing.Point(567, 29);
             this.TV_tratamientos.Name = "TV_tratamientos";
-            this.TV_tratamientos.Size = new System.Drawing.Size(135, 112);
+            this.TV_tratamientos.Size = new System.Drawing.Size(207, 134);
             this.TV_tratamientos.TabIndex = 12;
             // 
             // Main
