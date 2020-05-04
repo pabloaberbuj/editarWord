@@ -30,7 +30,6 @@
         {
             this.BT_CargarPaciente = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.LB_Tratamientos = new System.Windows.Forms.ListBox();
             this.LB_ppfs = new System.Windows.Forms.ListBox();
             this.L_Nombre = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,6 +39,7 @@
             this.BT_Eliminar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.L_ID = new System.Windows.Forms.Label();
+            this.TV_tratamientos = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
             // BT_CargarPaciente
@@ -60,14 +60,6 @@
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre:";
-            // 
-            // LB_Tratamientos
-            // 
-            this.LB_Tratamientos.FormattingEnabled = true;
-            this.LB_Tratamientos.Location = new System.Drawing.Point(621, 29);
-            this.LB_Tratamientos.Name = "LB_Tratamientos";
-            this.LB_Tratamientos.Size = new System.Drawing.Size(120, 121);
-            this.LB_Tratamientos.TabIndex = 2;
             // 
             // LB_ppfs
             // 
@@ -124,6 +116,7 @@
             this.BT_NuevaEtapa.TabIndex = 8;
             this.BT_NuevaEtapa.Text = "Nueva Etapa";
             this.BT_NuevaEtapa.UseVisualStyleBackColor = true;
+            this.BT_NuevaEtapa.Click += new System.EventHandler(this.BT_NuevaEtapa_Click);
             // 
             // BT_Eliminar
             // 
@@ -152,11 +145,19 @@
             this.L_ID.TabIndex = 11;
             this.L_ID.Text = "label6";
             // 
+            // TV_tratamientos
+            // 
+            this.TV_tratamientos.Location = new System.Drawing.Point(614, 29);
+            this.TV_tratamientos.Name = "TV_tratamientos";
+            this.TV_tratamientos.Size = new System.Drawing.Size(135, 112);
+            this.TV_tratamientos.TabIndex = 12;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.TV_tratamientos);
             this.Controls.Add(this.L_ID);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.BT_Eliminar);
@@ -166,7 +167,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.L_Nombre);
             this.Controls.Add(this.LB_ppfs);
-            this.Controls.Add(this.LB_Tratamientos);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BT_CargarPaciente);
             this.Name = "Main";
@@ -180,7 +180,6 @@
 
         private System.Windows.Forms.Button BT_CargarPaciente;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox LB_Tratamientos;
         private System.Windows.Forms.ListBox LB_ppfs;
         private System.Windows.Forms.Label L_Nombre;
         private System.Windows.Forms.Label label3;
@@ -190,5 +189,6 @@
         private System.Windows.Forms.Button BT_Eliminar;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label L_ID;
+        private System.Windows.Forms.TreeView TV_tratamientos;
     }
 }

@@ -74,7 +74,7 @@ namespace WinForm
             Tratamiento tratamiento = new Tratamiento();
             tratamiento.nombre = nombreTratamiento;
             tratamiento.planes = new List<Plan>();
-            tratamiento.planes.Add(Extraer.extraerPlan(Extraer.cargar(fullPath(nombreArchivo))));
+            agregarNuevoPlan(tratamiento);
             paciente.tratamientos.Add(tratamiento);
             tratamientoActual = tratamiento;
         }
@@ -86,7 +86,43 @@ namespace WinForm
             nombreNuevoTto.ShowDialog();
             if (nombreNuevoTto.DialogResult==DialogResult.OK)
             {
-                nuevoTratamiento(LB_ppfs.SelectedItem.ToString(), nombreNuevoTto.salida);
+                nuevoTratamiento(nombrePlanSeleccionado(), nombreNuevoTto.salida);
+            }
+            visualizarArbol();
+        }
+
+        private void BT_NuevaEtapa_Click(object sender, EventArgs e)
+        {
+            agregarNuevoPlan(tratamientoActual);
+            visualizarArbol();
+        }
+
+        private string nombrePlanSeleccionado()
+        {
+            return fullPath(LB_ppfs.SelectedItem.ToString());
+        }
+
+        private void agregarNuevoPlan(Tratamiento tratamiento)
+        {
+            tratamiento.planes.Add(Extraer.extraerPlan(Extraer.cargar(nombrePlanSeleccionado())));
+        }
+
+        private void visualizarArbol()
+        {
+            TV_tratamientos.Nodes.Clear();
+            foreach (Tratamiento tratamiento in paciente.tratamientos)
+            {
+                TreeNode tratamiento_node = new TreeNode();
+                tratamiento_node.Text = tratamiento.nombre;
+                TV_tratamientos.Nodes.Add(tratamiento_node);
+                if (tratamiento.planes.Count>1)
+                {
+                    for (int i=0; i<tratamiento.planes.Count;i++)
+                    {
+                        tratamiento_node.Nodes.Add("Etapa " + (i + 1).ToString());
+                    }
+                }
+                tratamiento_node.Expand();
             }
         }
     }
