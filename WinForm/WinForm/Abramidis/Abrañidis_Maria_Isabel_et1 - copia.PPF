@@ -10,7 +10,7 @@ NUMFRACTIONS = 15
 NORMALDOSE =   99.5
 MODALITY = CRT-3D
 [GenData]
-PATNAME = Abrañidis^Maria Isabel        
+PATNAME = Abramidis^Maria Isabel        
 PATID = 1-80032-0
 DIAGNOSIS = mama izq
 DATE = 21052018
@@ -108,7 +108,7 @@ Photon
 22.9
 [FIELD_4]
 4
-ISO1
+ISO2
 225
 110
 180

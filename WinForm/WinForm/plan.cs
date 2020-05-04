@@ -24,6 +24,8 @@ namespace WinForm
         public string etapa { get; set; }
         public string iso { get; set; }
 
+        
+
         public static string obtenerIso(Plan plan)
         {
             string iso = plan.listaCampos[0].iso;
