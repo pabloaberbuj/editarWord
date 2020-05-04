@@ -12,7 +12,9 @@ namespace WinForm
         //public string nombre {get; set;}
         //public string apellidoNombre { get; set; }
         //public string ID { get; set; }
-		public string dosisFraccion {get;set;}
+		public string pathPPF { get; set; }
+        public string etiquetaPPF { get; set; }
+        public string dosisFraccion {get;set;}
 		public string numeroFracciones {get;set;}
 		public string dosisTotal {get;set;}
 		
@@ -24,7 +26,9 @@ namespace WinForm
         public string etapa { get; set; }
         public string iso { get; set; }
 
-        
+        public List<string> isos { get; set; } //para usar después cuando agregue varios isos
+
+
 
         public static string obtenerIso(Plan plan)
         {

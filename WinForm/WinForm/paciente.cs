@@ -36,5 +36,23 @@ namespace WinForm
                 paciente.cantidadDeCamposTotal += plan.cantidadDeCampos;
             }
         }
+
+        public Paciente crear(string ppf)
+        {
+            {
+                string[] fid = Extraer.cargar(ppf);
+                Paciente paciente = new Paciente()
+                {
+                    apellido = Extraer.apellidoPaciente(fid),
+                    nombre = Extraer.nombrePaciente(fid),
+                    apellidoNombre = Extraer.apellidoNombrePaciente(fid),
+                    ID = Extraer.IDPaciente(fid),
+                };
+                paciente.tratamientos = new List<Tratamiento>();
+                return paciente;
+            }
+
+
+        }
     }
 }

@@ -28,121 +28,146 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.BT_CargarPaciente = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LB_Tratamientos = new System.Windows.Forms.ListBox();
+            this.LB_ppfs = new System.Windows.Forms.ListBox();
+            this.L_Nombre = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.L_Apellido = new System.Windows.Forms.Label();
+            this.BT_NuevoTratamiento = new System.Windows.Forms.Button();
+            this.BT_NuevaEtapa = new System.Windows.Forms.Button();
+            this.BT_Eliminar = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.L_ID = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // BT_CargarPaciente
             // 
-            this.button1.Location = new System.Drawing.Point(47, 29);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BT_CargarPaciente.Location = new System.Drawing.Point(12, 12);
+            this.BT_CargarPaciente.Name = "BT_CargarPaciente";
+            this.BT_CargarPaciente.Size = new System.Drawing.Size(100, 25);
+            this.BT_CargarPaciente.TabIndex = 0;
+            this.BT_CargarPaciente.Text = "Cargar paciente";
+            this.BT_CargarPaciente.UseVisualStyleBackColor = true;
+            this.BT_CargarPaciente.Click += new System.EventHandler(this.BT_CargarPaciente_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 67);
+            this.label1.Location = new System.Drawing.Point(12, 56);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.label1.Text = "Nombre:";
             // 
-            // listBox1
+            // LB_Tratamientos
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(520, 109);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 95);
-            this.listBox1.TabIndex = 2;
+            this.LB_Tratamientos.FormattingEnabled = true;
+            this.LB_Tratamientos.Location = new System.Drawing.Point(621, 29);
+            this.LB_Tratamientos.Name = "LB_Tratamientos";
+            this.LB_Tratamientos.Size = new System.Drawing.Size(120, 121);
+            this.LB_Tratamientos.TabIndex = 2;
             // 
-            // listBox2
+            // LB_ppfs
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(186, 29);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(120, 121);
-            this.listBox2.TabIndex = 3;
+            this.LB_ppfs.FormattingEnabled = true;
+            this.LB_ppfs.HorizontalScrollbar = true;
+            this.LB_ppfs.Location = new System.Drawing.Point(186, 29);
+            this.LB_ppfs.Name = "LB_ppfs";
+            this.LB_ppfs.ScrollAlwaysVisible = true;
+            this.LB_ppfs.Size = new System.Drawing.Size(227, 134);
+            this.LB_ppfs.TabIndex = 3;
             // 
-            // label2
+            // L_Nombre
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(104, 67);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "label2";
+            this.L_Nombre.AutoSize = true;
+            this.L_Nombre.Location = new System.Drawing.Point(77, 56);
+            this.L_Nombre.Name = "L_Nombre";
+            this.L_Nombre.Size = new System.Drawing.Size(35, 13);
+            this.L_Nombre.TabIndex = 4;
+            this.L_Nombre.Text = "label2";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 100);
+            this.label3.Location = new System.Drawing.Point(12, 87);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "label3";
+            this.label3.Text = "Apellido:";
             // 
-            // label4
+            // L_Apellido
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(104, 100);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "label4";
+            this.L_Apellido.AutoSize = true;
+            this.L_Apellido.Location = new System.Drawing.Point(77, 87);
+            this.L_Apellido.Name = "L_Apellido";
+            this.L_Apellido.Size = new System.Drawing.Size(35, 13);
+            this.L_Apellido.TabIndex = 6;
+            this.L_Apellido.Text = "label4";
             // 
-            // button2
+            // BT_NuevoTratamiento
             // 
-            this.button2.Location = new System.Drawing.Point(331, 29);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BT_NuevoTratamiento.Location = new System.Drawing.Point(470, 29);
+            this.BT_NuevoTratamiento.Name = "BT_NuevoTratamiento";
+            this.BT_NuevoTratamiento.Size = new System.Drawing.Size(107, 23);
+            this.BT_NuevoTratamiento.TabIndex = 7;
+            this.BT_NuevoTratamiento.Text = "Nuevo Tratamiento";
+            this.BT_NuevoTratamiento.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // BT_NuevaEtapa
             // 
-            this.button3.Location = new System.Drawing.Point(331, 67);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.BT_NuevaEtapa.Location = new System.Drawing.Point(470, 56);
+            this.BT_NuevaEtapa.Name = "BT_NuevaEtapa";
+            this.BT_NuevaEtapa.Size = new System.Drawing.Size(107, 23);
+            this.BT_NuevaEtapa.TabIndex = 8;
+            this.BT_NuevaEtapa.Text = "Nueva Etapa";
+            this.BT_NuevaEtapa.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // BT_Eliminar
             // 
-            this.button4.Location = new System.Drawing.Point(331, 118);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.BT_Eliminar.Location = new System.Drawing.Point(470, 118);
+            this.BT_Eliminar.Name = "BT_Eliminar";
+            this.BT_Eliminar.Size = new System.Drawing.Size(107, 23);
+            this.BT_Eliminar.TabIndex = 9;
+            this.BT_Eliminar.Text = "Eliminar";
+            this.BT_Eliminar.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 118);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(21, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "ID:";
+            // 
+            // L_ID
+            // 
+            this.L_ID.AutoSize = true;
+            this.L_ID.Location = new System.Drawing.Point(77, 118);
+            this.L_ID.Name = "L_ID";
+            this.L_ID.Size = new System.Drawing.Size(35, 13);
+            this.L_ID.TabIndex = 11;
+            this.L_ID.Text = "label6";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.L_ID);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.BT_Eliminar);
+            this.Controls.Add(this.BT_NuevaEtapa);
+            this.Controls.Add(this.BT_NuevoTratamiento);
+            this.Controls.Add(this.L_Apellido);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.L_Nombre);
+            this.Controls.Add(this.LB_ppfs);
+            this.Controls.Add(this.LB_Tratamientos);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BT_CargarPaciente);
             this.Name = "Main";
             this.Text = "Main";
             this.ResumeLayout(false);
@@ -152,15 +177,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BT_CargarPaciente;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListBox LB_Tratamientos;
+        private System.Windows.Forms.ListBox LB_ppfs;
+        private System.Windows.Forms.Label L_Nombre;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label L_Apellido;
+        private System.Windows.Forms.Button BT_NuevoTratamiento;
+        private System.Windows.Forms.Button BT_NuevaEtapa;
+        private System.Windows.Forms.Button BT_Eliminar;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label L_ID;
     }
 }
