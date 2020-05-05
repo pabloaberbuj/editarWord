@@ -40,10 +40,17 @@
             this.label5 = new System.Windows.Forms.Label();
             this.L_ID = new System.Windows.Forms.Label();
             this.TV_tratamientos = new System.Windows.Forms.TreeView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.GB_cargaPaciente = new System.Windows.Forms.GroupBox();
+            this.GB_esquemaTratamiento = new System.Windows.Forms.GroupBox();
+            this.GB_ChequeoDeLosPlanes = new System.Windows.Forms.GroupBox();
+            this.BT_RealizarChequeos = new System.Windows.Forms.Button();
+            this.BT_VerProblemas = new System.Windows.Forms.Button();
+            this.BT_ContinuarChequeos = new System.Windows.Forms.Button();
+            this.BT_FinalizarEsquemaTratamiento = new System.Windows.Forms.Button();
+            this.L_FallasChequeo = new System.Windows.Forms.Label();
+            this.GB_cargaPaciente.SuspendLayout();
+            this.GB_esquemaTratamiento.SuspendLayout();
+            this.GB_ChequeoDeLosPlanes.SuspendLayout();
             this.SuspendLayout();
             // 
             // BT_CargarPaciente
@@ -124,7 +131,7 @@
             // 
             // BT_Eliminar
             // 
-            this.BT_Eliminar.Location = new System.Drawing.Point(243, 108);
+            this.BT_Eliminar.Location = new System.Drawing.Point(243, 89);
             this.BT_Eliminar.Name = "BT_Eliminar";
             this.BT_Eliminar.Size = new System.Drawing.Size(107, 23);
             this.BT_Eliminar.TabIndex = 9;
@@ -158,48 +165,114 @@
             this.TV_tratamientos.Size = new System.Drawing.Size(207, 134);
             this.TV_tratamientos.TabIndex = 12;
             // 
-            // groupBox1
+            // GB_cargaPaciente
             // 
-            this.groupBox1.Controls.Add(this.BT_CargarPaciente);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.L_ID);
-            this.groupBox1.Controls.Add(this.L_Nombre);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.L_Apellido);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(177, 157);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.GB_cargaPaciente.Controls.Add(this.BT_CargarPaciente);
+            this.GB_cargaPaciente.Controls.Add(this.label1);
+            this.GB_cargaPaciente.Controls.Add(this.L_ID);
+            this.GB_cargaPaciente.Controls.Add(this.L_Nombre);
+            this.GB_cargaPaciente.Controls.Add(this.label5);
+            this.GB_cargaPaciente.Controls.Add(this.label3);
+            this.GB_cargaPaciente.Controls.Add(this.L_Apellido);
+            this.GB_cargaPaciente.Location = new System.Drawing.Point(12, 12);
+            this.GB_cargaPaciente.Name = "GB_cargaPaciente";
+            this.GB_cargaPaciente.Size = new System.Drawing.Size(177, 157);
+            this.GB_cargaPaciente.TabIndex = 13;
+            this.GB_cargaPaciente.TabStop = false;
+            this.GB_cargaPaciente.Text = "1. Carga paciente";
             // 
-            // groupBox2
+            // GB_esquemaTratamiento
             // 
-            this.groupBox2.Controls.Add(this.LB_ppfs);
-            this.groupBox2.Controls.Add(this.BT_NuevoTratamiento);
-            this.groupBox2.Controls.Add(this.TV_tratamientos);
-            this.groupBox2.Controls.Add(this.BT_NuevaEtapa);
-            this.groupBox2.Controls.Add(this.BT_Eliminar);
-            this.groupBox2.Location = new System.Drawing.Point(195, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(564, 157);
-            this.groupBox2.TabIndex = 14;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.GB_esquemaTratamiento.Controls.Add(this.BT_FinalizarEsquemaTratamiento);
+            this.GB_esquemaTratamiento.Controls.Add(this.LB_ppfs);
+            this.GB_esquemaTratamiento.Controls.Add(this.BT_NuevoTratamiento);
+            this.GB_esquemaTratamiento.Controls.Add(this.TV_tratamientos);
+            this.GB_esquemaTratamiento.Controls.Add(this.BT_NuevaEtapa);
+            this.GB_esquemaTratamiento.Controls.Add(this.BT_Eliminar);
+            this.GB_esquemaTratamiento.Location = new System.Drawing.Point(195, 12);
+            this.GB_esquemaTratamiento.Name = "GB_esquemaTratamiento";
+            this.GB_esquemaTratamiento.Size = new System.Drawing.Size(564, 157);
+            this.GB_esquemaTratamiento.TabIndex = 14;
+            this.GB_esquemaTratamiento.TabStop = false;
+            this.GB_esquemaTratamiento.Text = "2. Esquema de tratamiento";
+            // 
+            // GB_ChequeoDeLosPlanes
+            // 
+            this.GB_ChequeoDeLosPlanes.Controls.Add(this.L_FallasChequeo);
+            this.GB_ChequeoDeLosPlanes.Controls.Add(this.BT_ContinuarChequeos);
+            this.GB_ChequeoDeLosPlanes.Controls.Add(this.BT_VerProblemas);
+            this.GB_ChequeoDeLosPlanes.Controls.Add(this.BT_RealizarChequeos);
+            this.GB_ChequeoDeLosPlanes.Location = new System.Drawing.Point(12, 186);
+            this.GB_ChequeoDeLosPlanes.Name = "GB_ChequeoDeLosPlanes";
+            this.GB_ChequeoDeLosPlanes.Size = new System.Drawing.Size(177, 166);
+            this.GB_ChequeoDeLosPlanes.TabIndex = 15;
+            this.GB_ChequeoDeLosPlanes.TabStop = false;
+            this.GB_ChequeoDeLosPlanes.Text = "3. Chequeo de los planes";
+            // 
+            // BT_RealizarChequeos
+            // 
+            this.BT_RealizarChequeos.Location = new System.Drawing.Point(33, 19);
+            this.BT_RealizarChequeos.Name = "BT_RealizarChequeos";
+            this.BT_RealizarChequeos.Size = new System.Drawing.Size(100, 25);
+            this.BT_RealizarChequeos.TabIndex = 1;
+            this.BT_RealizarChequeos.Text = "Chequear";
+            this.BT_RealizarChequeos.UseVisualStyleBackColor = true;
+            this.BT_RealizarChequeos.Click += new System.EventHandler(this.BT_RealizarChequeos_Click);
+            // 
+            // BT_VerProblemas
+            // 
+            this.BT_VerProblemas.Location = new System.Drawing.Point(33, 100);
+            this.BT_VerProblemas.Name = "BT_VerProblemas";
+            this.BT_VerProblemas.Size = new System.Drawing.Size(100, 25);
+            this.BT_VerProblemas.TabIndex = 2;
+            this.BT_VerProblemas.Text = "Ver problemas";
+            this.BT_VerProblemas.UseVisualStyleBackColor = true;
+            this.BT_VerProblemas.Click += new System.EventHandler(this.BT_VerProblemas_Click);
+            // 
+            // BT_ContinuarChequeos
+            // 
+            this.BT_ContinuarChequeos.Location = new System.Drawing.Point(33, 131);
+            this.BT_ContinuarChequeos.Name = "BT_ContinuarChequeos";
+            this.BT_ContinuarChequeos.Size = new System.Drawing.Size(100, 25);
+            this.BT_ContinuarChequeos.TabIndex = 3;
+            this.BT_ContinuarChequeos.Text = "Continuar";
+            this.BT_ContinuarChequeos.UseVisualStyleBackColor = true;
+            // 
+            // BT_FinalizarEsquemaTratamiento
+            // 
+            this.BT_FinalizarEsquemaTratamiento.Location = new System.Drawing.Point(243, 118);
+            this.BT_FinalizarEsquemaTratamiento.Name = "BT_FinalizarEsquemaTratamiento";
+            this.BT_FinalizarEsquemaTratamiento.Size = new System.Drawing.Size(107, 30);
+            this.BT_FinalizarEsquemaTratamiento.TabIndex = 13;
+            this.BT_FinalizarEsquemaTratamiento.Text = "Finalizar";
+            this.BT_FinalizarEsquemaTratamiento.UseVisualStyleBackColor = true;
+            // 
+            // L_FallasChequeo
+            // 
+            this.L_FallasChequeo.AutoSize = true;
+            this.L_FallasChequeo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_FallasChequeo.Location = new System.Drawing.Point(6, 59);
+            this.L_FallasChequeo.Name = "L_FallasChequeo";
+            this.L_FallasChequeo.Size = new System.Drawing.Size(45, 16);
+            this.L_FallasChequeo.TabIndex = 12;
+            this.L_FallasChequeo.Text = "label2";
+            this.L_FallasChequeo.Visible = false;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 450);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.GB_ChequeoDeLosPlanes);
+            this.Controls.Add(this.GB_esquemaTratamiento);
+            this.Controls.Add(this.GB_cargaPaciente);
             this.Name = "Main";
             this.Text = "Main";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.GB_cargaPaciente.ResumeLayout(false);
+            this.GB_cargaPaciente.PerformLayout();
+            this.GB_esquemaTratamiento.ResumeLayout(false);
+            this.GB_ChequeoDeLosPlanes.ResumeLayout(false);
+            this.GB_ChequeoDeLosPlanes.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -218,7 +291,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label L_ID;
         private System.Windows.Forms.TreeView TV_tratamientos;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox GB_cargaPaciente;
+        private System.Windows.Forms.GroupBox GB_esquemaTratamiento;
+        private System.Windows.Forms.GroupBox GB_ChequeoDeLosPlanes;
+        private System.Windows.Forms.Button BT_ContinuarChequeos;
+        private System.Windows.Forms.Button BT_VerProblemas;
+        private System.Windows.Forms.Button BT_RealizarChequeos;
+        private System.Windows.Forms.Button BT_FinalizarEsquemaTratamiento;
+        private System.Windows.Forms.Label L_FallasChequeo;
     }
 }

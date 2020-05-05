@@ -16,6 +16,7 @@ namespace WinForm
     {
         public string carpetaPaciente;
         public Paciente paciente = new Paciente();
+        public string textoChequeos = "";
         public Main()
         {
             InitializeComponent();
@@ -187,6 +188,39 @@ namespace WinForm
             }
             TV_tratamientos.Nodes.Remove(TV_tratamientos.SelectedNode);
             visualizarArbol();
+        }
+
+        private void BT_RealizarChequeos_Click(object sender, EventArgs e)
+        {
+            textoChequeos = "";
+            foreach(Tratamiento tratamiento in paciente.tratamientos)
+            {
+                foreach (Plan plan in tratamiento.planes)
+                {
+                    Random rand = new Random();
+                    if (rand.NextDouble()>0.5)
+                    {
+                        textoChequeos += "\nEl plan " + plan.etiquetaPPF + "puede que: descripción de la falla";
+                    }
+                }
+            }
+            if (textoChequeos!="")
+            {
+                L_FallasChequeo.Text = "Se han detectado posibles\nfallas en los planes";
+                L_FallasChequeo.ForeColor = System.Drawing.Color.Red;
+                MessageBox.Show(textoChequeos);
+            }
+            else
+            {
+                L_FallasChequeo.Text = "Todo bien";
+                L_FallasChequeo.ForeColor = System.Drawing.Color.Green;
+            }
+            L_FallasChequeo.Visible = true;
+        }
+
+        private void BT_VerProblemas_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(textoChequeos);
         }
     }
 }

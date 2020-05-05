@@ -1,0 +1,2 @@
+Pendientes:
+- habilitar deshabilitar botones en Main
