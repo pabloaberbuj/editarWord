@@ -30,6 +30,8 @@ namespace WinForm
         public List<string> isos { get; set; } //para usar después cuando agregue varios isos
         public TreeNode nodo { get; set; }
 
+        public Tratamiento tratamiento { get; set; }
+
         public static string obtenerIso(Plan plan)
         {
             string iso = plan.listaCampos[0].iso;

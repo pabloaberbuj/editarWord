@@ -16,7 +16,6 @@ namespace WinForm
     {
         public string carpetaPaciente;
         public Paciente paciente = new Paciente();
-        public Tratamiento tratamientoActual;
         public Main()
         {
             InitializeComponent();
@@ -80,7 +79,6 @@ namespace WinForm
             tratamiento.nodo = tratamiento_node;
             agregarNuevoPlan(tratamiento);
             paciente.tratamientos.Add(tratamiento);
-            tratamientoActual = tratamiento;
             visualizarArbol();
         }
 
@@ -99,7 +97,7 @@ namespace WinForm
 
         private void BT_NuevaEtapa_Click(object sender, EventArgs e)
         {
-            agregarNuevoPlan(tratamientoActual);
+            agregarNuevoPlan(tratamientoActual());
 
         }
 
@@ -121,6 +119,7 @@ namespace WinForm
                 tratamiento.planes.Add(plan);
                 plan.pathPPF = nombrePlanSeleccionado();
                 plan.etiquetaPPF = LB_ppfs.SelectedItem.ToString();
+                plan.tratamiento = tratamiento;
                 TreeNode plan_nodo = new TreeNode();
                 plan.nodo = plan_nodo;
                 plan.nodo.Text = "Etapa única (" + tratamiento.planes[0].dosisTotal + "/" + plan.dosisFraccion + ")";
@@ -129,9 +128,29 @@ namespace WinForm
                 visualizarArbol();
                 dosisTotalDia.Close();
             }
-
         }
 
+        private Tratamiento tratamientoActual()
+        {
+            if (TV_tratamientos.SelectedNode!=null)
+            {
+                TreeNode nodoTratamiento;
+                if (TV_tratamientos.SelectedNode.Level == 0)
+                {
+                    nodoTratamiento = TV_tratamientos.SelectedNode;
+                }
+                else
+                {
+                    nodoTratamiento = TV_tratamientos.SelectedNode.Parent;
+                }
+                return paciente.tratamientos.Where(t => t.nodo == nodoTratamiento).First();
+            }
+            else
+            {
+                return paciente.tratamientos.Last();
+            }
+            
+        }
         private void visualizarArbol()
         {
             TV_tratamientos.Nodes.Clear();
