@@ -85,6 +85,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IO.cs" />
+    <Compile Include="Iso.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

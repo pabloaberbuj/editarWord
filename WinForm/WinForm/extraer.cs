@@ -132,7 +132,7 @@ namespace WinForm
                 tab += parametros + 1;
             }
             campo.numero = numeroDeCampo;
-            campo.iso = extraerStringSinSep(fid, 22 + tab);
+            campo.isoID = extraerStringSinSep(fid, 22 + tab);
             campo.gantry = extraerStringSinSep(fid, 26 + tab);
             campo.col = extraerStringSinSep(fid, 28 + tab);
             campo.camilla = extraerStringSinSep(fid, 25 + tab);

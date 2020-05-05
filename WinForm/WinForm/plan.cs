@@ -13,32 +13,31 @@ namespace WinForm
         //public string nombre {get; set;}
         //public string apellidoNombre { get; set; }
         //public string ID { get; set; }
-		public string pathPPF { get; set; }
+        public string pathPPF { get; set; }
         public string etiquetaPPF { get; set; }
-        public string dosisFraccion {get;set;}
-		public string numeroFracciones {get;set;}
-		public string dosisTotal {get;set;}
-		
-		public string equipo {get;set;}
-		public int cantidadDeCampos {get; set;}
-		public int numeroParametros { get; set; }
-        public List<Campo> listaCampos {get;set;}
-	    //public string tratemiento_de {get;set;}
+        public string dosisFraccion { get; set; }
+        public string numeroFracciones { get; set; }
+        public string dosisTotal { get; set; }
+
+        public string equipo { get; set; }
+        public int cantidadDeCampos { get; set; }
+        public int numeroParametros { get; set; }
+        public List<Campo> listaCampos { get; set; }
+        //public string tratemiento_de {get;set;}
         public string etapa { get; set; }
         public string iso { get; set; }
 
-        public List<string> isos { get; set; } //para usar después cuando agregue varios isos
+        public List<Iso> isos { get; set; } //para usar después cuando agregue varios isos
         public TreeNode nodo { get; set; }
-
         public Tratamiento tratamiento { get; set; }
 
         public static string obtenerIso(Plan plan)
         {
-            string iso = plan.listaCampos[0].iso;
+            string iso = plan.listaCampos[0].isoID;
             {
                 foreach (Campo campo in plan.listaCampos)
                 {
-                    if (campo.iso != iso)
+                    if (campo.isoID != iso)
                     {
                         iso = "Hay más de un ISO";
                     }
@@ -46,8 +45,23 @@ namespace WinForm
                 return iso;
             }
         }
-        
-    }
 
-    
+        public void obtenerIsos()
+        {
+            Iso iso1 = new Iso();
+            iso1.ID = listaCampos[0].isoID;
+            isos.Add(iso1);
+            {
+                foreach (Campo campo in listaCampos)
+                {
+                    if (campo.isoID != iso1.ID)
+                    {
+                        Iso isoN = new Iso();
+                        isoN.ID = campo.isoID;
+                        isos.Add(isoN);
+                    }
+                }
+            }
+        }
+    }
 }
