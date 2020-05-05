@@ -122,17 +122,15 @@ namespace WinForm
                 plan.tratamiento = tratamiento;
                 TreeNode plan_nodo = new TreeNode();
                 plan.nodo = plan_nodo;
-                plan.nodo.Text = "Etapa única (" + tratamiento.planes[0].dosisTotal + "/" + plan.dosisFraccion + ")";
                 plan.nodo.ToolTipText = plan.etiquetaPPF;
                 tratamiento.nodo.Nodes.Add(plan_nodo);
                 visualizarArbol();
-                dosisTotalDia.Close();
             }
         }
 
         private Tratamiento tratamientoActual()
         {
-            if (TV_tratamientos.SelectedNode!=null)
+            if (TV_tratamientos.SelectedNode != null)
             {
                 TreeNode nodoTratamiento;
                 if (TV_tratamientos.SelectedNode.Level == 0)
@@ -149,7 +147,7 @@ namespace WinForm
             {
                 return paciente.tratamientos.Last();
             }
-            
+
         }
         private void visualizarArbol()
         {
@@ -164,11 +162,31 @@ namespace WinForm
                     for (int i = 0; i < tratamiento.planes.Count; i++)
                     {
                         tratamiento.planes[i].nodo.Text = "Etapa " + (i + 1).ToString() + " (" + tratamiento.planes[i].dosisTotal + "/" + tratamiento.planes[i].dosisFraccion + ")";
-
                     }
+                }
+                else if (tratamiento.planes.Count==1)
+                {
+                    tratamiento.planes[0].nodo.Text = "Etapa única (" + tratamiento.planes[0].dosisTotal + "/" + tratamiento.planes[0].dosisFraccion + ")";
                 }
 
             }
+        }
+
+        private void BT_Eliminar_Click(object sender, EventArgs e)
+        {
+            if (TV_tratamientos.SelectedNode.Level == 0 && (MessageBox.Show("¿Seguro desea eliminar el tratamiento?", "Eliminar tratamiento", MessageBoxButtons.YesNo) == DialogResult.Yes))
+            {
+                Tratamiento tratamiento = paciente.tratamientos.Where(t => t.nodo == TV_tratamientos.SelectedNode).First();
+                paciente.tratamientos.Remove(tratamiento);
+            }
+            else if (TV_tratamientos.SelectedNode.Level == 1 && (MessageBox.Show("¿Seguro desea eliminar el plan?", "Eliminar plan", MessageBoxButtons.YesNo) == DialogResult.Yes))
+            {
+                Tratamiento tratamiento = paciente.tratamientos.Where(t => t.nodo == TV_tratamientos.SelectedNode.Parent).First();
+                Plan plan = tratamiento.planes.Where(p => p.nodo == TV_tratamientos.SelectedNode).First();
+                tratamiento.planes.Remove(plan);
+            }
+            TV_tratamientos.Nodes.Remove(TV_tratamientos.SelectedNode);
+            visualizarArbol();
         }
     }
 }
