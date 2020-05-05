@@ -136,6 +136,7 @@ namespace WinForm
             campo.gantry = extraerStringSinSep(fid, 26 + tab);
             campo.col = extraerStringSinSep(fid, 28 + tab);
             campo.camilla = extraerStringSinSep(fid, 25 + tab);
+            campo.conformador = extraerStringSinSep(fid, 32 + tab);
 
             return campo;
         }

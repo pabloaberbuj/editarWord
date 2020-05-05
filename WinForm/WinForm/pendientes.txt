@@ -1,2 +1,4 @@
 Pendientes:
 - habilitar deshabilitar botones en Main
+- que los tratamientos no puedan tener el mismo nombre
+- DGVComboBox singleClick open

@@ -13,5 +13,7 @@ namespace WinForm
 		public string gantry { get; set; }
         public string col { get; set; }
 		public string camilla {get; set;}
+
+        public string conformador { get; set; }
     }
 }

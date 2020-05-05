@@ -36,6 +36,7 @@ namespace WinForm
                 carpetaPaciente = dialog.FileName;
                 llenarLB_PPFs(carpetaPaciente);
                 crearPaciente(fullPath(LB_ppfs.Items[0].ToString()));
+                GB_esquemaTratamiento.Enabled = true;
             }
 
         }
@@ -231,6 +232,7 @@ namespace WinForm
 
         private void BT_FinalizarEsquemaTratamiento_Click(object sender, EventArgs e)
         {
+            GB_ChequeoAutomatico.Enabled = true;
             BT_RealizarChequeos_Click(sender, e);
         }
 
@@ -262,9 +264,29 @@ namespace WinForm
             }
         }
 
+        private List<string> listaConformadores()
+        {
+            List<string> conformadores = new List<string>();
+            foreach (Tratamiento tratamiento in paciente.tratamientos)
+            {
+                foreach (Plan plan in tratamiento.planes)
+                {
+                    foreach(Campo campo in plan.listaCampos)
+                    {
+                        if (campo.conformador!="NONE")
+                        {
+                            conformadores.Add(campo.conformador);
+                        }
+                    }
+                }
+            }
+            return conformadores;
+        }
         private void BT_ContinuarChequeos_Click(object sender, EventArgs e)
         {
-            cargarDGVIsos();
+            GB_ChequeoConformaciones.Enabled = true;
+            L_conformaciones.Text = "Hay " + listaConformadores().Count.ToString() + " campos conformados. \nEl equipo opera con (acá va MLC o Pb según)";
+            L_conformaciones.Visible = true;
         }
 
         private void BT_FinalizarIsos_Click(object sender, EventArgs e)
@@ -281,6 +303,12 @@ namespace WinForm
                     paciente.tratamientos.Where(t => t.nombre == tratamientoNombre).First().planes.Where(p => p.etiquetaPPF == planPPF).First().isos.Where(i => i.ID == isoID).First().patMove = patMove;
                 }
             }
+        }
+
+        private void BT_FinalizaChequeoConformaciones_Click(object sender, EventArgs e)
+        {
+            GB_IsosyPatMove.Enabled = true;
+            cargarDGVIsos();
         }
     }
 }
