@@ -1,0 +1,134 @@
+[Version]
+PPF_VER = 3
+CAT3D_VER = 7.12.17
+[Header]
+PARAM = 21
+FIELDS = 4
+TDOSE =  267.0
+TPERCENT =  100.0
+NUMFRACTIONS = 15
+NORMALDOSE =   99.5
+MODALITY = CRT-3D
+[GenData]
+PATNAME = Abramidis^Maria Isabel        
+PATID = 1-80032-0
+DIAGNOSIS = mama izq
+DATE = 21052018
+DRNAME = 
+PHYSNAME = 
+HOSPNAME = Mevaterapia
+MACHINE = CETRO_Fotones_06MV
+[Titles]
+Field #
+Isocenter
+INPLANE   
+CROSSPLANE
+Table Ang
+Gantry Ang
+Gantry Rot
+Collim Ang
+Weight
+Wedge Filt
+Wedge  Pos
+ShieldFile
+TrayFactor
+HEAD-JAW  
+FEET-JAW  
+RIGHT-JAW 
+LEFT-JAW  
+SSD
+Device
+Beam Type
+MON. UNITS
+[FIELD_1]
+1
+ISO1
+110
+225
+180
+230
+0
+255
+0.485
+EDW15
+OUT
+Abramidis_ef4f1
+1.000
+0
+0
+0
+0
+949.1
+0
+Photon
+145.6
+[FIELD_2]
+2
+ISO1
+110
+225
+170
+43
+0
+113
+0.365
+EDW15
+OUT
+Abramidis_ef4f2
+1.000
+0
+0
+0
+0
+901.1
+0
+Photon
+129.8
+[FIELD_3]
+3
+ISO1
+225
+110
+170
+43
+0
+203
+0.070
+NONE
+----
+Abramidis_ef573
+1.000
+0
+0
+0
+0
+901.1
+0
+Photon
+22.9
+[FIELD_4]
+4
+ISO2
+225
+110
+180
+230
+0
+165
+0.070
+NONE
+----
+Abramidis_ef4f4
+1.000
+0
+0
+0
+0
+949.1
+0
+Photon
+19.3
+[Footer]
+Dose Computation Mode: Convolution - Pencil Beam 8x8mm
+Normalized at isocenter
+Density correction ON

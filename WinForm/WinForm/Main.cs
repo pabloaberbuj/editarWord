@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Windows.Media;
+using Xceed.Words.NET;
 
 namespace WinForm
 {
@@ -28,7 +29,7 @@ namespace WinForm
         private void BT_CargarPaciente_Click(object sender, EventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            dialog.InitialDirectory = @"C:\Users\Casa\source\repos\editarWordExtendido\WinForm\WinForm";
+            dialog.InitialDirectory = @"C:\Users\Casa\source\repos\editarWordExtendido\Material";
             dialog.IsFolderPicker = true;
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
@@ -42,6 +43,11 @@ namespace WinForm
         private List<string> todosLosPPFs(string path)
         {
             return Directory.GetFiles(path, "*.ppf").ToList();
+        }
+
+        private List<string> todosLosPatMove(string path)
+        {
+            return Directory.GetFiles(path, "*.PatMove").ToList();
         }
 
         private void llenarLB_PPFs(string path)
@@ -221,6 +227,60 @@ namespace WinForm
         private void BT_VerProblemas_Click(object sender, EventArgs e)
         {
             MessageBox.Show(textoChequeos);
+        }
+
+        private void BT_FinalizarEsquemaTratamiento_Click(object sender, EventArgs e)
+        {
+            BT_RealizarChequeos_Click(sender, e);
+        }
+
+        private void cargarDGVIsos()
+        {
+            DGV_Isos.Rows.Clear();
+            List<string> listapatMoves = new List<string>();
+            foreach (string patMove in todosLosPatMove(carpetaPaciente))
+            {
+                listapatMoves.Add(Path.GetFileNameWithoutExtension(patMove).ToLower());
+            }
+            listapatMoves.Add("iso=ref. No hay patMove");
+
+            foreach (Tratamiento tratamiento in paciente.tratamientos)
+            {
+                for (int i=0;i<tratamiento.planes.Count;i++)
+                {
+                    foreach (Iso iso in tratamiento.planes[i].isos)
+                    {
+                        DGV_Isos.Rows.Add();
+                        DataGridViewRow row = DGV_Isos.Rows[DGV_Isos.Rows.Count-1];
+                        row.Cells[0].Value = tratamiento.nombre;
+                        row.Cells[1].Value = i + 1;
+                        row.Cells[2].Value = tratamiento.planes[i].etiquetaPPF;
+                        row.Cells[3].Value = iso.ID;
+                        ((DataGridViewComboBoxCell)row.Cells[4]).DataSource = listapatMoves;
+                    }
+                }
+            }
+        }
+
+        private void BT_ContinuarChequeos_Click(object sender, EventArgs e)
+        {
+            cargarDGVIsos();
+        }
+
+        private void BT_FinalizarIsos_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in DGV_Isos.Rows)
+            {
+                string patMove = (string)((DataGridViewComboBoxCell)row.Cells[4]).Value;
+                if ((string)row.Cells[4].Value != "iso=ref. No hay patMove")
+                {
+                    string tratamientoNombre = (string)row.Cells[0].Value;
+                    string planPPF = (string)row.Cells[2].Value;
+                    string isoID = (string)row.Cells[3].Value;
+
+                    paciente.tratamientos.Where(t => t.nombre == tratamientoNombre).First().planes.Where(p => p.etiquetaPPF == planPPF).First().isos.Where(i => i.ID == isoID).First().patMove = patMove;
+                }
+            }
         }
     }
 }

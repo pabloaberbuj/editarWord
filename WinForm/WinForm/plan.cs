@@ -50,7 +50,13 @@ namespace WinForm
         {
             Iso iso1 = new Iso();
             iso1.ID = listaCampos[0].isoID;
+            isos = new List<Iso>();
+            iso1.planes = new List<Plan>();
             isos.Add(iso1);
+            if (!iso1.planes.Contains(this))
+            {
+                iso1.planes.Add(this);
+            }
             {
                 foreach (Campo campo in listaCampos)
                 {
@@ -58,10 +64,16 @@ namespace WinForm
                     {
                         Iso isoN = new Iso();
                         isoN.ID = campo.isoID;
+                        isoN.planes = new List<Plan>();
                         isos.Add(isoN);
+                        if (!isoN.planes.Contains(this))
+                        {
+                            isoN.planes.Add(this);
+                        }
                     }
                 }
             }
+
         }
     }
 }

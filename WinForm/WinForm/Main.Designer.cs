@@ -45,12 +45,22 @@
             this.GB_ChequeoDeLosPlanes = new System.Windows.Forms.GroupBox();
             this.BT_RealizarChequeos = new System.Windows.Forms.Button();
             this.BT_VerProblemas = new System.Windows.Forms.Button();
-            this.BT_ContinuarChequeos = new System.Windows.Forms.Button();
+            this.BT_FinalizarChequeos = new System.Windows.Forms.Button();
             this.BT_FinalizarEsquemaTratamiento = new System.Windows.Forms.Button();
             this.L_FallasChequeo = new System.Windows.Forms.Label();
+            this.GB_IsosyPatMove = new System.Windows.Forms.GroupBox();
+            this.DGV_Isos = new System.Windows.Forms.DataGridView();
+            this.Tratamiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Etapa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ppf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patMOve = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.BT_FinalizarIsos = new System.Windows.Forms.Button();
             this.GB_cargaPaciente.SuspendLayout();
             this.GB_esquemaTratamiento.SuspendLayout();
             this.GB_ChequeoDeLosPlanes.SuspendLayout();
+            this.GB_IsosyPatMove.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Isos)).BeginInit();
             this.SuspendLayout();
             // 
             // BT_CargarPaciente
@@ -199,12 +209,12 @@
             // GB_ChequeoDeLosPlanes
             // 
             this.GB_ChequeoDeLosPlanes.Controls.Add(this.L_FallasChequeo);
-            this.GB_ChequeoDeLosPlanes.Controls.Add(this.BT_ContinuarChequeos);
+            this.GB_ChequeoDeLosPlanes.Controls.Add(this.BT_FinalizarChequeos);
             this.GB_ChequeoDeLosPlanes.Controls.Add(this.BT_VerProblemas);
             this.GB_ChequeoDeLosPlanes.Controls.Add(this.BT_RealizarChequeos);
             this.GB_ChequeoDeLosPlanes.Location = new System.Drawing.Point(12, 186);
             this.GB_ChequeoDeLosPlanes.Name = "GB_ChequeoDeLosPlanes";
-            this.GB_ChequeoDeLosPlanes.Size = new System.Drawing.Size(177, 166);
+            this.GB_ChequeoDeLosPlanes.Size = new System.Drawing.Size(177, 198);
             this.GB_ChequeoDeLosPlanes.TabIndex = 15;
             this.GB_ChequeoDeLosPlanes.TabStop = false;
             this.GB_ChequeoDeLosPlanes.Text = "3. Chequeo de los planes";
@@ -221,7 +231,7 @@
             // 
             // BT_VerProblemas
             // 
-            this.BT_VerProblemas.Location = new System.Drawing.Point(33, 100);
+            this.BT_VerProblemas.Location = new System.Drawing.Point(33, 136);
             this.BT_VerProblemas.Name = "BT_VerProblemas";
             this.BT_VerProblemas.Size = new System.Drawing.Size(100, 25);
             this.BT_VerProblemas.TabIndex = 2;
@@ -229,14 +239,15 @@
             this.BT_VerProblemas.UseVisualStyleBackColor = true;
             this.BT_VerProblemas.Click += new System.EventHandler(this.BT_VerProblemas_Click);
             // 
-            // BT_ContinuarChequeos
+            // BT_FinalizarChequeos
             // 
-            this.BT_ContinuarChequeos.Location = new System.Drawing.Point(33, 131);
-            this.BT_ContinuarChequeos.Name = "BT_ContinuarChequeos";
-            this.BT_ContinuarChequeos.Size = new System.Drawing.Size(100, 25);
-            this.BT_ContinuarChequeos.TabIndex = 3;
-            this.BT_ContinuarChequeos.Text = "Continuar";
-            this.BT_ContinuarChequeos.UseVisualStyleBackColor = true;
+            this.BT_FinalizarChequeos.Location = new System.Drawing.Point(33, 167);
+            this.BT_FinalizarChequeos.Name = "BT_FinalizarChequeos";
+            this.BT_FinalizarChequeos.Size = new System.Drawing.Size(100, 25);
+            this.BT_FinalizarChequeos.TabIndex = 3;
+            this.BT_FinalizarChequeos.Text = "Continuar";
+            this.BT_FinalizarChequeos.UseVisualStyleBackColor = true;
+            this.BT_FinalizarChequeos.Click += new System.EventHandler(this.BT_ContinuarChequeos_Click);
             // 
             // BT_FinalizarEsquemaTratamiento
             // 
@@ -244,8 +255,9 @@
             this.BT_FinalizarEsquemaTratamiento.Name = "BT_FinalizarEsquemaTratamiento";
             this.BT_FinalizarEsquemaTratamiento.Size = new System.Drawing.Size(107, 30);
             this.BT_FinalizarEsquemaTratamiento.TabIndex = 13;
-            this.BT_FinalizarEsquemaTratamiento.Text = "Finalizar";
+            this.BT_FinalizarEsquemaTratamiento.Text = "Continuar";
             this.BT_FinalizarEsquemaTratamiento.UseVisualStyleBackColor = true;
+            this.BT_FinalizarEsquemaTratamiento.Click += new System.EventHandler(this.BT_FinalizarEsquemaTratamiento_Click);
             // 
             // L_FallasChequeo
             // 
@@ -258,11 +270,82 @@
             this.L_FallasChequeo.Text = "label2";
             this.L_FallasChequeo.Visible = false;
             // 
+            // GB_IsosyPatMove
+            // 
+            this.GB_IsosyPatMove.Controls.Add(this.BT_FinalizarIsos);
+            this.GB_IsosyPatMove.Controls.Add(this.DGV_Isos);
+            this.GB_IsosyPatMove.Location = new System.Drawing.Point(205, 186);
+            this.GB_IsosyPatMove.Name = "GB_IsosyPatMove";
+            this.GB_IsosyPatMove.Size = new System.Drawing.Size(632, 198);
+            this.GB_IsosyPatMove.TabIndex = 16;
+            this.GB_IsosyPatMove.TabStop = false;
+            this.GB_IsosyPatMove.Text = "4. Isos y patMove";
+            // 
+            // DGV_Isos
+            // 
+            this.DGV_Isos.AllowUserToAddRows = false;
+            this.DGV_Isos.AllowUserToDeleteRows = false;
+            this.DGV_Isos.AllowUserToResizeColumns = false;
+            this.DGV_Isos.AllowUserToResizeRows = false;
+            this.DGV_Isos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Isos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Tratamiento,
+            this.Etapa,
+            this.ppf,
+            this.iso,
+            this.patMOve});
+            this.DGV_Isos.Location = new System.Drawing.Point(19, 19);
+            this.DGV_Isos.MultiSelect = false;
+            this.DGV_Isos.Name = "DGV_Isos";
+            this.DGV_Isos.RowHeadersVisible = false;
+            this.DGV_Isos.Size = new System.Drawing.Size(607, 137);
+            this.DGV_Isos.TabIndex = 0;
+            // 
+            // Tratamiento
+            // 
+            this.Tratamiento.HeaderText = "Tratamiento";
+            this.Tratamiento.Name = "Tratamiento";
+            // 
+            // Etapa
+            // 
+            this.Etapa.HeaderText = "Et";
+            this.Etapa.Name = "Etapa";
+            this.Etapa.Width = 40;
+            // 
+            // ppf
+            // 
+            this.ppf.HeaderText = "ppf";
+            this.ppf.Name = "ppf";
+            this.ppf.Width = 170;
+            // 
+            // iso
+            // 
+            this.iso.HeaderText = "iso";
+            this.iso.Name = "iso";
+            this.iso.Width = 40;
+            // 
+            // patMOve
+            // 
+            this.patMOve.HeaderText = "patMove";
+            this.patMOve.Name = "patMOve";
+            this.patMOve.Width = 200;
+            // 
+            // BT_FinalizarIsos
+            // 
+            this.BT_FinalizarIsos.Location = new System.Drawing.Point(526, 162);
+            this.BT_FinalizarIsos.Name = "BT_FinalizarIsos";
+            this.BT_FinalizarIsos.Size = new System.Drawing.Size(100, 25);
+            this.BT_FinalizarIsos.TabIndex = 13;
+            this.BT_FinalizarIsos.Text = "Continuar";
+            this.BT_FinalizarIsos.UseVisualStyleBackColor = true;
+            this.BT_FinalizarIsos.Click += new System.EventHandler(this.BT_FinalizarIsos_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 450);
+            this.Controls.Add(this.GB_IsosyPatMove);
             this.Controls.Add(this.GB_ChequeoDeLosPlanes);
             this.Controls.Add(this.GB_esquemaTratamiento);
             this.Controls.Add(this.GB_cargaPaciente);
@@ -273,6 +356,8 @@
             this.GB_esquemaTratamiento.ResumeLayout(false);
             this.GB_ChequeoDeLosPlanes.ResumeLayout(false);
             this.GB_ChequeoDeLosPlanes.PerformLayout();
+            this.GB_IsosyPatMove.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Isos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -294,10 +379,18 @@
         private System.Windows.Forms.GroupBox GB_cargaPaciente;
         private System.Windows.Forms.GroupBox GB_esquemaTratamiento;
         private System.Windows.Forms.GroupBox GB_ChequeoDeLosPlanes;
-        private System.Windows.Forms.Button BT_ContinuarChequeos;
+        private System.Windows.Forms.Button BT_FinalizarChequeos;
         private System.Windows.Forms.Button BT_VerProblemas;
         private System.Windows.Forms.Button BT_RealizarChequeos;
         private System.Windows.Forms.Button BT_FinalizarEsquemaTratamiento;
         private System.Windows.Forms.Label L_FallasChequeo;
+        private System.Windows.Forms.GroupBox GB_IsosyPatMove;
+        private System.Windows.Forms.DataGridView DGV_Isos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tratamiento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Etapa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ppf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iso;
+        private System.Windows.Forms.DataGridViewComboBoxColumn patMOve;
+        private System.Windows.Forms.Button BT_FinalizarIsos;
     }
 }

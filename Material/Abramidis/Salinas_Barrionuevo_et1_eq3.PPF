@@ -1,23 +1,23 @@
 [Version]
 PPF_VER = 3
-CAT3D_VER = 7.12.17
+CAT3D_VER = 7.12.00
 [Header]
 PARAM = 21
 FIELDS = 4
-TDOSE =  267.0
+TDOSE =  200.0
 TPERCENT =  100.0
-NUMFRACTIONS = 15
-NORMALDOSE =   99.5
+NUMFRACTIONS = 25
+NORMALDOSE =  199.0
 MODALITY = CRT-3D
 [GenData]
-PATNAME = Abramidis^Maria Isabel        
-PATID = 1-80032-0
-DIAGNOSIS = mama izq
-DATE = 21052018
+PATNAME = Salinas Barrionuevo^Benedicta 
+PATID = 1-80590-0
+DIAGNOSIS = utero + areas
+DATE = 06072018
 DRNAME = 
-PHYSNAME = 
+PHYSNAME = DG
 HOSPNAME = Mevaterapia
-MACHINE = CETRO_Fotones_06MV
+MACHINE = MEVA_EQ3_Fotones_10MV
 [Titles]
 Field #
 Isocenter
@@ -43,91 +43,91 @@ MON. UNITS
 [FIELD_1]
 1
 ISO1
-110
 225
+190
 180
-230
+180
 0
-255
-0.485
-EDW15
-OUT
-Abramidis_ef4f1
+180
+0.510
+NONE
+----
+Salinas_Bafc641
 1.000
 0
 0
 0
 0
-949.1
+797.3
 0
 Photon
-145.6
+72.4
 [FIELD_2]
 2
 ISO1
-110
 225
-170
-43
+190
+180
+270
 0
-113
-0.365
-EDW15
-OUT
-Abramidis_ef4f2
+180
+0.510
+NONE
+----
+Salinas_Bafc652
 1.000
 0
 0
 0
 0
-901.1
+809.0
 0
 Photon
-129.8
+73.2
 [FIELD_3]
 3
 ISO1
 225
-110
-170
-43
+190
+180
+90
 0
-203
-0.070
+180
+0.420
 NONE
 ----
-Abramidis_ef573
+Salinas_Bafc643
 1.000
 0
 0
 0
 0
-901.1
+758.2
 0
 Photon
-22.9
+69.8
 [FIELD_4]
 4
 ISO1
 225
-110
+190
 180
-230
 0
-165
-0.070
+0
+180
+0.560
 NONE
 ----
-Abramidis_ef4f4
+Salinas_Bafc664
 1.000
 0
 0
 0
 0
-949.1
+881.8
 0
 Photon
-19.3
+63.9
 [Footer]
 Dose Computation Mode: Convolution - Pencil Beam 8x8mm
 Normalized at isocenter
