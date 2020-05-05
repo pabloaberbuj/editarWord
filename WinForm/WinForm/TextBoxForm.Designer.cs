@@ -41,7 +41,7 @@
             this.BT_Aceptar.Location = new System.Drawing.Point(34, 121);
             this.BT_Aceptar.Name = "BT_Aceptar";
             this.BT_Aceptar.Size = new System.Drawing.Size(75, 23);
-            this.BT_Aceptar.TabIndex = 0;
+            this.BT_Aceptar.TabIndex = 2;
             this.BT_Aceptar.Text = "Aceptar";
             this.BT_Aceptar.UseVisualStyleBackColor = true;
             this.BT_Aceptar.Click += new System.EventHandler(this.BT_Aceptar_Click);
@@ -51,7 +51,7 @@
             this.TB_llenar1.Location = new System.Drawing.Point(34, 25);
             this.TB_llenar1.Name = "TB_llenar1";
             this.TB_llenar1.Size = new System.Drawing.Size(207, 20);
-            this.TB_llenar1.TabIndex = 1;
+            this.TB_llenar1.TabIndex = 0;
             this.TB_llenar1.TextChanged += new System.EventHandler(this.TB_llenar_TextChanged);
             // 
             // BT_Cancelar
@@ -60,7 +60,7 @@
             this.BT_Cancelar.Location = new System.Drawing.Point(166, 121);
             this.BT_Cancelar.Name = "BT_Cancelar";
             this.BT_Cancelar.Size = new System.Drawing.Size(75, 23);
-            this.BT_Cancelar.TabIndex = 2;
+            this.BT_Cancelar.TabIndex = 3;
             this.BT_Cancelar.Text = "Cancelar";
             this.BT_Cancelar.UseVisualStyleBackColor = true;
             this.BT_Cancelar.Click += new System.EventHandler(this.BT_Cancelar_Click);
@@ -70,7 +70,7 @@
             this.TB_llenar2.Location = new System.Drawing.Point(34, 85);
             this.TB_llenar2.Name = "TB_llenar2";
             this.TB_llenar2.Size = new System.Drawing.Size(207, 20);
-            this.TB_llenar2.TabIndex = 3;
+            this.TB_llenar2.TabIndex = 1;
             this.TB_llenar2.Visible = false;
             // 
             // Label1

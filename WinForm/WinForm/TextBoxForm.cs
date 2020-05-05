@@ -14,18 +14,29 @@ namespace WinForm
         public string salida1 { get; set; }
         public string salida2 { get; set; }
         bool usaDosTextBox = false;
-        public TextBoxForm(bool _usaDosTextBox, string texto1, string texto2="")
+        bool hayChequeoDosis = false;
+        double dosisDiaPPF = double.NaN;
+        public TextBoxForm(bool _usaDosTextBox, bool _hayChequeoDosis, string texto1, string texto2="", double _dosisDiaPPF=double.NaN)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
             TB_llenar1.Focus();
             Label1.Text = texto1;
             usaDosTextBox = _usaDosTextBox;
+            hayChequeoDosis = _hayChequeoDosis;
+            dosisDiaPPF = _dosisDiaPPF;
             if (usaDosTextBox)
             {
                 label2.Visible = true;
                 TB_llenar2.Visible = true;
                 label2.Text = texto2;
+            }
+            else
+            {
+                Size = new Size(Size.Width, Size.Height - 57);
+                BT_Aceptar.Location = new Point(BT_Aceptar.Location.X,BT_Aceptar.Location.Y - 57);
+                BT_Cancelar.Location = new Point(BT_Cancelar.Location.X, BT_Cancelar.Location.Y - 57);
+
             }
 
         }
@@ -37,8 +48,27 @@ namespace WinForm
             {
                 salida2 = TB_llenar2.Text;
             }
-            DialogResult = DialogResult.OK;
-            Close();
+            if (hayChequeoDosis)
+            {
+                if (Convert.ToDouble(salida1)!= dosisDiaPPF)
+                {
+                    MessageBox.Show("El valor de dosis día ingresado no coincide con el del PPF\nRevisar e ingresarlo nuevamente");
+                }
+                else if (Convert.ToDouble(salida2) % Convert.ToDouble(salida1) != 0)
+                {
+                    MessageBox.Show("El valor de dosis total no es un múltiplo de la dosis fracción\nRevisar e ingresarlo nuevamente");
+                }
+                else
+                {
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+            }
+            else
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
 
         private void BT_Cancelar_Click(object sender, EventArgs e)

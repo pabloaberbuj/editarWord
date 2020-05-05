@@ -40,11 +40,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.L_ID = new System.Windows.Forms.Label();
             this.TV_tratamientos = new System.Windows.Forms.TreeView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // BT_CargarPaciente
             // 
-            this.BT_CargarPaciente.Location = new System.Drawing.Point(12, 12);
+            this.BT_CargarPaciente.Location = new System.Drawing.Point(15, 19);
             this.BT_CargarPaciente.Name = "BT_CargarPaciente";
             this.BT_CargarPaciente.Size = new System.Drawing.Size(100, 25);
             this.BT_CargarPaciente.TabIndex = 0;
@@ -55,7 +59,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 56);
+            this.label1.Location = new System.Drawing.Point(15, 63);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 1;
@@ -65,7 +69,7 @@
             // 
             this.LB_ppfs.FormattingEnabled = true;
             this.LB_ppfs.HorizontalScrollbar = true;
-            this.LB_ppfs.Location = new System.Drawing.Point(186, 29);
+            this.LB_ppfs.Location = new System.Drawing.Point(10, 17);
             this.LB_ppfs.Name = "LB_ppfs";
             this.LB_ppfs.ScrollAlwaysVisible = true;
             this.LB_ppfs.Size = new System.Drawing.Size(227, 134);
@@ -74,7 +78,7 @@
             // L_Nombre
             // 
             this.L_Nombre.AutoSize = true;
-            this.L_Nombre.Location = new System.Drawing.Point(77, 56);
+            this.L_Nombre.Location = new System.Drawing.Point(80, 63);
             this.L_Nombre.Name = "L_Nombre";
             this.L_Nombre.Size = new System.Drawing.Size(35, 13);
             this.L_Nombre.TabIndex = 4;
@@ -83,7 +87,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 87);
+            this.label3.Location = new System.Drawing.Point(15, 94);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 5;
@@ -92,7 +96,7 @@
             // L_Apellido
             // 
             this.L_Apellido.AutoSize = true;
-            this.L_Apellido.Location = new System.Drawing.Point(77, 87);
+            this.L_Apellido.Location = new System.Drawing.Point(80, 94);
             this.L_Apellido.Name = "L_Apellido";
             this.L_Apellido.Size = new System.Drawing.Size(35, 13);
             this.L_Apellido.TabIndex = 6;
@@ -100,7 +104,7 @@
             // 
             // BT_NuevoTratamiento
             // 
-            this.BT_NuevoTratamiento.Location = new System.Drawing.Point(433, 29);
+            this.BT_NuevoTratamiento.Location = new System.Drawing.Point(243, 19);
             this.BT_NuevoTratamiento.Name = "BT_NuevoTratamiento";
             this.BT_NuevoTratamiento.Size = new System.Drawing.Size(107, 23);
             this.BT_NuevoTratamiento.TabIndex = 7;
@@ -110,7 +114,7 @@
             // 
             // BT_NuevaEtapa
             // 
-            this.BT_NuevaEtapa.Location = new System.Drawing.Point(433, 56);
+            this.BT_NuevaEtapa.Location = new System.Drawing.Point(243, 46);
             this.BT_NuevaEtapa.Name = "BT_NuevaEtapa";
             this.BT_NuevaEtapa.Size = new System.Drawing.Size(107, 23);
             this.BT_NuevaEtapa.TabIndex = 8;
@@ -120,7 +124,7 @@
             // 
             // BT_Eliminar
             // 
-            this.BT_Eliminar.Location = new System.Drawing.Point(433, 118);
+            this.BT_Eliminar.Location = new System.Drawing.Point(243, 108);
             this.BT_Eliminar.Name = "BT_Eliminar";
             this.BT_Eliminar.Size = new System.Drawing.Size(107, 23);
             this.BT_Eliminar.TabIndex = 9;
@@ -130,7 +134,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 118);
+            this.label5.Location = new System.Drawing.Point(15, 125);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 10;
@@ -139,7 +143,7 @@
             // L_ID
             // 
             this.L_ID.AutoSize = true;
-            this.L_ID.Location = new System.Drawing.Point(77, 118);
+            this.L_ID.Location = new System.Drawing.Point(80, 125);
             this.L_ID.Name = "L_ID";
             this.L_ID.Size = new System.Drawing.Size(35, 13);
             this.L_ID.TabIndex = 11;
@@ -147,32 +151,54 @@
             // 
             // TV_tratamientos
             // 
-            this.TV_tratamientos.Location = new System.Drawing.Point(567, 29);
+            this.TV_tratamientos.Location = new System.Drawing.Point(351, 17);
             this.TV_tratamientos.Name = "TV_tratamientos";
             this.TV_tratamientos.Size = new System.Drawing.Size(207, 134);
             this.TV_tratamientos.TabIndex = 12;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.BT_CargarPaciente);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.L_ID);
+            this.groupBox1.Controls.Add(this.L_Nombre);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.L_Apellido);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(177, 157);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.LB_ppfs);
+            this.groupBox2.Controls.Add(this.BT_NuevoTratamiento);
+            this.groupBox2.Controls.Add(this.TV_tratamientos);
+            this.groupBox2.Controls.Add(this.BT_NuevaEtapa);
+            this.groupBox2.Controls.Add(this.BT_Eliminar);
+            this.groupBox2.Location = new System.Drawing.Point(195, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(564, 157);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.TV_tratamientos);
-            this.Controls.Add(this.L_ID);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.BT_Eliminar);
-            this.Controls.Add(this.BT_NuevaEtapa);
-            this.Controls.Add(this.BT_NuevoTratamiento);
-            this.Controls.Add(this.L_Apellido);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.L_Nombre);
-            this.Controls.Add(this.LB_ppfs);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.BT_CargarPaciente);
+            this.ClientSize = new System.Drawing.Size(905, 450);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Name = "Main";
             this.Text = "Main";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -190,5 +216,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label L_ID;
         private System.Windows.Forms.TreeView TV_tratamientos;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

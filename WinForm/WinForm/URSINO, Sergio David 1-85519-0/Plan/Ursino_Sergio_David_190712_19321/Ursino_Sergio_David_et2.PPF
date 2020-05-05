@@ -1,0 +1,112 @@
+[Version]
+PPF_VER = 3
+CAT3D_VER = 7.12.00
+[Header]
+PARAM = 21
+FIELDS = 3
+TDOSE =  200.0
+TPERCENT =  100.0
+NUMFRACTIONS = 3
+NORMALDOSE =   74.0
+MODALITY = CRT-3D
+[GenData]
+PATNAME = Ursino^Sergio David           
+PATID = 1-85519-0
+DIAGNOSIS = recto+areas gg
+DATE = 17072019
+DRNAME = 
+PHYSNAME = 
+HOSPNAME = Mevaterapia
+MACHINE = MEVA_EQ2_Fotones_06MV
+[Titles]
+Field #
+Isocenter
+INPLANE   
+CROSSPLANE
+Table Ang
+Gantry Ang
+Gantry Rot
+Collim Ang
+Weight
+Wedge Filt
+Wedge  Pos
+ShieldFile
+TrayFactor
+HEAD-JAW  
+FEET-JAW  
+RIGHT-JAW 
+LEFT-JAW  
+SSD
+Device
+Beam Type
+MON. UNITS
+[FIELD_2]
+2
+ISO1
+125
+125
+180
+0
+0
+180
+0.480
+W15
+IN
+Ursino_Ser7b1b2
+0.947
+-5
+130
+55
+70
+893.0
+0
+Photon
+145.3
+[FIELD_3]
+3
+ISO1
+115
+100
+180
+230
+0
+180
+0.560
+NONE
+----
+Ursino_Ser7b1c3
+0.947
+-5
+120
+90
+10
+852.5
+0
+Photon
+110.8
+[FIELD_4]
+4
+ISO1
+115
+110
+180
+130
+0
+180
+0.560
+NONE
+----
+Ursino_Ser7b1c4
+0.947
+-5
+120
+15
+95
+854.7
+0
+Photon
+111.0
+[Footer]
+Dose Computation Mode: Convolution - Pencil Beam 8x8mm
+Normalized at depth of maximum dose for each field
+Density correction ON
