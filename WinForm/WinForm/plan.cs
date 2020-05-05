@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,7 @@ namespace WinForm
         public string iso { get; set; }
 
         public List<string> isos { get; set; } //para usar después cuando agregue varios isos
-
-
+        public TreeNode nodo { get; set; }
 
         public static string obtenerIso(Plan plan)
         {

@@ -153,6 +153,7 @@
             // 
             this.TV_tratamientos.Location = new System.Drawing.Point(351, 17);
             this.TV_tratamientos.Name = "TV_tratamientos";
+            this.TV_tratamientos.ShowNodeToolTips = true;
             this.TV_tratamientos.Size = new System.Drawing.Size(207, 134);
             this.TV_tratamientos.TabIndex = 12;
             // 

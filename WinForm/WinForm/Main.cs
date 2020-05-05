@@ -75,6 +75,9 @@ namespace WinForm
             Tratamiento tratamiento = new Tratamiento();
             tratamiento.nombre = nombreTratamiento;
             tratamiento.planes = new List<Plan>();
+            TreeNode tratamiento_node = new TreeNode();
+            tratamiento_node.Text = tratamiento.nombre;
+            tratamiento.nodo = tratamiento_node;
             agregarNuevoPlan(tratamiento);
             paciente.tratamientos.Add(tratamiento);
             tratamientoActual = tratamiento;
@@ -83,20 +86,21 @@ namespace WinForm
 
         private void BT_NuevoTratamiento_Click(object sender, EventArgs e)
         {
-            TextBoxForm nombreNuevoTto = new TextBoxForm(false,false,"Nombre de tratamiento");
+            TextBoxForm nombreNuevoTto = new TextBoxForm(false, false, "Nombre de tratamiento");
             nombreNuevoTto.Text = "Nombre del tratamiento";
             nombreNuevoTto.ShowDialog();
-            if (nombreNuevoTto.DialogResult==DialogResult.OK)
+            if (nombreNuevoTto.DialogResult == DialogResult.OK)
             {
                 nuevoTratamiento(nombrePlanSeleccionado(), nombreNuevoTto.salida1);
                 nombreNuevoTto.Close();
+
             }
         }
 
         private void BT_NuevaEtapa_Click(object sender, EventArgs e)
         {
             agregarNuevoPlan(tratamientoActual);
-            
+
         }
 
         private string nombrePlanSeleccionado()
@@ -107,30 +111,25 @@ namespace WinForm
         private void agregarNuevoPlan(Tratamiento tratamiento)
         {
             Plan plan = Extraer.extraerPlan(Extraer.cargar(nombrePlanSeleccionado()));
-            TextBoxForm dosisTotalDia = new TextBoxForm(true,true, "Dosis Fracción", "Dosis plan",Convert.ToDouble(plan.dosisFraccion));
+            TextBoxForm dosisTotalDia = new TextBoxForm(true, true, "Dosis Fracción", "Dosis plan", Convert.ToDouble(plan.dosisFraccion));
             dosisTotalDia.Text = "Dosis del plan seleccionado";
             dosisTotalDia.ShowDialog();
             if (dosisTotalDia.DialogResult == DialogResult.OK)
             {
-                /*if (Convert.ToDouble(plan.dosisFraccion) != Convert.ToDouble(dosisTotalDia.salida1))
-                {
-                    MessageBox.Show("El valor de dosis día ingresado no coincide con el del PPF\nRevisar e ingresarlo nuevamente");
-                    
-                }
-                else if (Convert.ToDouble(dosisTotalDia.salida2)%Convert.ToDouble(dosisTotalDia.salida1)!=0)
-                {
-                    MessageBox.Show("El valor de dosis total no es un múltiplo de la dosis fracción\nRevisar e ingresarlo nuevamente");
-                }
-                else
-                {*/
-                    plan.dosisFraccion = dosisTotalDia.salida1;
-                    plan.dosisTotal = dosisTotalDia.salida2;
-                    tratamiento.planes.Add(plan);
-                    visualizarArbol();
-                    dosisTotalDia.Close();
-              //  }
+                plan.dosisFraccion = dosisTotalDia.salida1;
+                plan.dosisTotal = dosisTotalDia.salida2;
+                tratamiento.planes.Add(plan);
+                plan.pathPPF = nombrePlanSeleccionado();
+                plan.etiquetaPPF = LB_ppfs.SelectedItem.ToString();
+                TreeNode plan_nodo = new TreeNode();
+                plan.nodo = plan_nodo;
+                plan.nodo.Text = "Etapa única (" + tratamiento.planes[0].dosisTotal + "/" + plan.dosisFraccion + ")";
+                plan.nodo.ToolTipText = plan.etiquetaPPF;
+                tratamiento.nodo.Nodes.Add(plan_nodo);
+                visualizarArbol();
+                dosisTotalDia.Close();
             }
-            
+
         }
 
         private void visualizarArbol()
@@ -138,21 +137,18 @@ namespace WinForm
             TV_tratamientos.Nodes.Clear();
             foreach (Tratamiento tratamiento in paciente.tratamientos)
             {
-                TreeNode tratamiento_node = new TreeNode();
-                tratamiento_node.Text = tratamiento.nombre;
-                if (tratamiento.planes.Count>1)
+                TV_tratamientos.Nodes.Add(tratamiento.nodo);
+                tratamiento.nodo.Expand();
+
+                if (tratamiento.planes.Count > 1)
                 {
-                    for (int i=0; i<tratamiento.planes.Count;i++)
+                    for (int i = 0; i < tratamiento.planes.Count; i++)
                     {
-                        tratamiento_node.Nodes.Add("Etapa " + (i + 1).ToString() + " (" + tratamiento.planes[i].dosisTotal + "/" + tratamiento.planes[i].dosisFraccion + ")");
+                        tratamiento.planes[i].nodo.Text = "Etapa " + (i + 1).ToString() + " (" + tratamiento.planes[i].dosisTotal + "/" + tratamiento.planes[i].dosisFraccion + ")";
+
                     }
                 }
-                else if (tratamiento.planes.Count==1)
-                {
-                    tratamiento_node.Nodes.Add("Etapa única (" + tratamiento.planes[0].dosisTotal + "/" + tratamiento.planes[0].dosisFraccion + ")");
-                }
-                TV_tratamientos.Nodes.Add(tratamiento_node);
-                tratamiento_node.Expand();
+
             }
         }
     }

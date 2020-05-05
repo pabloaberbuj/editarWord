@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace WinForm
 {
@@ -13,6 +14,7 @@ namespace WinForm
         public modalidad modalidad { get; set; } //antes en paciente y string. Ahora Enum. 0 para 3D, 1 para IMRT SyS, 2 para IMRT mod
         public double dosisTotal { get; set; } //qutiar, pasa a tratamiento
         public List<Plan> planes { get; set; }
+        public TreeNode nodo { get; set; }
 
     }
 };
