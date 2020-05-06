@@ -390,6 +390,7 @@
             // GB_6ArmarCarpeta
             // 
             this.GB_6ArmarCarpeta.Controls.Add(this.BT_ArmarCarpeta);
+            this.GB_6ArmarCarpeta.Enabled = false;
             this.GB_6ArmarCarpeta.Location = new System.Drawing.Point(12, 397);
             this.GB_6ArmarCarpeta.Name = "GB_6ArmarCarpeta";
             this.GB_6ArmarCarpeta.Size = new System.Drawing.Size(200, 89);
@@ -400,6 +401,7 @@
             // GB_7Finalizar
             // 
             this.GB_7Finalizar.Controls.Add(this.BT_ComprimirYEnviar);
+            this.GB_7Finalizar.Enabled = false;
             this.GB_7Finalizar.Location = new System.Drawing.Point(243, 397);
             this.GB_7Finalizar.Name = "GB_7Finalizar";
             this.GB_7Finalizar.Size = new System.Drawing.Size(168, 85);
@@ -409,7 +411,7 @@
             // 
             // BT_ArmarCarpeta
             // 
-            this.BT_ArmarCarpeta.Location = new System.Drawing.Point(34, 38);
+            this.BT_ArmarCarpeta.Location = new System.Drawing.Point(34, 35);
             this.BT_ArmarCarpeta.Name = "BT_ArmarCarpeta";
             this.BT_ArmarCarpeta.Size = new System.Drawing.Size(129, 25);
             this.BT_ArmarCarpeta.TabIndex = 17;
@@ -439,6 +441,7 @@
             this.Controls.Add(this.GB_2esquemaTratamiento);
             this.Controls.Add(this.GB_1cargaPaciente);
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
             this.GB_1cargaPaciente.ResumeLayout(false);
             this.GB_1cargaPaciente.PerformLayout();

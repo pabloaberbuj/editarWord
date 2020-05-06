@@ -21,8 +21,12 @@ namespace WinForm
 
         public modalidad modalidad { get; set; } //antes en paciente y string. Ahora Enum. 0 para 3D, 1 para IMRT SyS, 2 para IMRT mod
         public string equipo { get; set; }
+        public string norma { get; set; }
         public int cantidadDeCampos { get; set; }
         public int numeroParametros { get; set; }
+
+        public string DoseMode { get; set; }
+        public string DensCorrection { get; set; }
         public List<Campo> listaCampos { get; set; }
         
         //public string etapa { get; set; }
@@ -34,11 +38,11 @@ namespace WinForm
 
         public static string obtenerIso(Plan plan)
         {
-            string iso = plan.listaCampos[0].isoID;
+            string iso = plan.listaCampos[0].iso;
             {
                 foreach (Campo campo in plan.listaCampos)
                 {
-                    if (campo.isoID != iso)
+                    if (campo.iso != iso)
                     {
                         iso = "Hay más de un ISO";
                     }
@@ -50,7 +54,7 @@ namespace WinForm
         public void obtenerIsos()
         {
             Iso iso1 = new Iso();
-            iso1.ID = listaCampos[0].isoID;
+            iso1.ID = listaCampos[0].iso;
             isos = new List<Iso>();
             iso1.planes = new List<Plan>();
             isos.Add(iso1);
@@ -61,10 +65,10 @@ namespace WinForm
             {
                 foreach (Campo campo in listaCampos)
                 {
-                    if (campo.isoID != iso1.ID)
+                    if (campo.iso != iso1.ID)
                     {
                         Iso isoN = new Iso();
-                        isoN.ID = campo.isoID;
+                        isoN.ID = campo.iso;
                         isoN.planes = new List<Plan>();
                         isos.Add(isoN);
                         if (!isoN.planes.Contains(this))

@@ -5,6 +5,9 @@ Pendientes:
 - Ver cómo relacionar el patmove con el protocolo.pdf y reftoiso.pdf
 - Ver cómo pone los nombres Cat3D (para nombre corto en ppf y patmove) DIFICIL. Al grabar se puede cambiar el nombre.
 
+- Eliminar Iso de plan (cuando vea de hacer para varios isos)
+- En FormArmarCarpetas rediseñar iniciar()
+
 Lopez Virginia
 Lezcano
 Mendoza Chavez

@@ -213,11 +213,10 @@ namespace WinForm
             {
                 foreach (Plan plan in tratamiento.planes)
                 {
-                    Random rand = new Random();
-                    if (rand.NextDouble()>0.5)
-                    {
-                        textoChequeos += "\nEl plan " + plan.etiquetaPPF + "puede que: descripción de la falla";
-                    }
+                    Form1 chequeoPlan = new Form1(paciente,plan);
+                    chequeoPlan.StartPosition = FormStartPosition.CenterParent;
+                    chequeoPlan.ShowDialog();
+                    
                 }
             }
             if (textoChequeos!="")
@@ -287,9 +286,9 @@ namespace WinForm
                 {
                     foreach(Campo campo in plan.listaCampos)
                     {
-                        if (campo.conformador!="NONE")
+                        if (campo.SldFile != "NONE")
                         {
-                            conformadores.Add(campo.conformador);
+                            conformadores.Add(campo.SldFile);
                         }
                     }
                 }
@@ -317,6 +316,8 @@ namespace WinForm
                     paciente.tratamientos.Where(t => t.nombre == tratamientoNombre).First().planes.Where(p => p.etiquetaPPF == planPPF).First().isos.Where(i => i.ID == isoID).First().patMove = patMove;
                 }
             }
+            GB_6ArmarCarpeta.Enabled = true;
+            GB_7Finalizar.Enabled = true;
         }
 
         private void BT_FinalizaChequeoConformaciones_Click(object sender, EventArgs e)
@@ -334,7 +335,7 @@ namespace WinForm
         {
             foreach (Tratamiento tratamiento in paciente.tratamientos)
             {
-                Form1 armarCarpeta = new Form1(paciente, tratamiento);
+                FormArmarCarpetas armarCarpeta = new FormArmarCarpetas(paciente, tratamiento);
                 armarCarpeta.ShowDialog();
             }
         }

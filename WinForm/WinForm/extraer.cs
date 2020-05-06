@@ -54,6 +54,22 @@ namespace WinForm
             return extraerDouble(fid, 6);
         }
 
+        public static string CalculationMode(string[] fid)
+        {
+            string aux = extraerStringSinSep(fid, fid.Length-3).Trim();
+            string[] aux2 = aux.Split(':');
+            return aux2[1];
+
+        }
+
+        public static string DensityON(string[] fid)
+        {
+            string aux = extraerStringSinSep(fid, fid.Length - 1).Trim();
+            string[] aux2 = aux.Split(' ');
+            return aux2[2];
+
+        }
+
         public static int numeroFracciones(string[] fid)
         {
             return Convert.ToInt32(extraerDouble(fid, 8));
@@ -111,11 +127,23 @@ namespace WinForm
             }
             else
             {
+                return "-1";
+            }            
+
+        }
+        public static string norma(string[] fid)
+        {
+            string aux = extraerString(fid, 19);
+            if (NormaEq.diccionario().ContainsKey(aux))
+            {
+                return NormaEq.diccionario()[aux];
+            }
+            else
+            {
                 return aux;
             }
 
         }
-
 
 
         public static Campo extraerCampo(string[] fid, int numeroDeCampo, int parametros, bool hayCampo0)
@@ -127,11 +155,23 @@ namespace WinForm
                 tab += parametros + 1;
             }
             campo.numero = numeroDeCampo;
-            campo.isoID = extraerStringSinSep(fid, 22 + tab);
+            campo.iso = extraerStringSinSep(fid, 22 + tab);
             campo.gantry = extraerStringSinSep(fid, 26 + tab);
             campo.col = extraerStringSinSep(fid, 28 + tab);
             campo.camilla = extraerStringSinSep(fid, 25 + tab);
-            campo.conformador = extraerStringSinSep(fid, 32 + tab);
+            campo.Weight = Convert.ToDouble(extraerStringSinSep(fid, 29 + tab));
+            campo.WDG = extraerStringSinSep(fid, 30 + tab);
+            campo.WDG_ori = extraerStringSinSep(fid, 31 + tab);
+            campo.SldFile = extraerStringSinSep(fid, 32 + tab);
+            campo.TrayFactor = Convert.ToDouble(extraerStringSinSep(fid, 33 + tab));
+            campo.Y2 = Convert.ToInt32(extraerStringSinSep(fid, 34 + tab));
+            campo.Y1 = Convert.ToInt32(extraerStringSinSep(fid, 35 + tab));
+            campo.X1 = Convert.ToInt32(extraerStringSinSep(fid, 36 + tab));
+            campo.X2 = Convert.ToInt32(extraerStringSinSep(fid, 37 + tab));
+            campo.SSD = Convert.ToDouble(extraerStringSinSep(fid, 38 + tab));
+            campo.MU = Convert.ToDouble(extraerStringSinSep(fid, 41 + tab));
+            campo.Y = Convert.ToInt32(extraerStringSinSep(fid, 23 + tab));
+            campo.X = Convert.ToInt32(extraerStringSinSep(fid, 24 + tab));
 
             return campo;
         }
@@ -143,9 +183,12 @@ namespace WinForm
                 numeroFracciones = numeroFracciones(fid),
                 dosisTotal = dosisTotal(fid),
                 equipo = equipo(fid),
+				norma = norma(fid),			   
                 cantidadDeCampos = numeroCampos(fid),
                 numeroParametros = numeroParametros(fid),
                 modalidad = modalidad(fid),
+				DoseMode = CalculationMode(fid),
+                DensCorrection = DensityON(fid),								
             };
 
             plan.listaCampos = new List<Campo>();
