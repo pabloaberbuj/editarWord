@@ -329,5 +329,14 @@ namespace WinForm
         {
             cargarDGVIsos();
         }
+
+        private void BT_ArmarCarpeta_Click(object sender, EventArgs e)
+        {
+            foreach (Tratamiento tratamiento in paciente.tratamientos)
+            {
+                Form1 armarCarpeta = new Form1(paciente, tratamiento);
+                armarCarpeta.ShowDialog();
+            }
+        }
     }
 }

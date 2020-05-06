@@ -27,6 +27,8 @@ namespace WinForm
 
         public Form1(Paciente _paciente, Tratamiento _tratamiento)
         {
+            paciente = _paciente;
+            tratamiento = _tratamiento;
             InitializeComponent();
             BT_HacerDocumentos.Enabled = false;
             RB_AmbosDocumentos.Checked = true;
@@ -39,9 +41,7 @@ namespace WinForm
             GB_CamposSetUp.Enabled = false;
             GB_Documentos.Enabled = false;
             TB_ProfundidadesEfectivas.Enabled = false;
-            CB_NumeroDeEtapas.SelectedIndex = 0;
-            paciente = _paciente;
-            tratamiento = _tratamiento;
+            CB_NumeroDeEtapas.SelectedIndex = tratamiento.planes.Count-1;
         }
 
         private void Form1_Load(object sender, EventArgs e)

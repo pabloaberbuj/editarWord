@@ -62,10 +62,10 @@
             this.L_NumeroDeEtapas = new System.Windows.Forms.Label();
             this.BT_LimpiarFormulario = new System.Windows.Forms.Button();
             this.GB_DocumentosCreados = new System.Windows.Forms.GroupBox();
-            this.L_DocCreado1 = new System.Windows.Forms.Label();
-            this.L_DocCreado2 = new System.Windows.Forms.Label();
-            this.L_DocCreado3 = new System.Windows.Forms.Label();
             this.L_DocCreado4 = new System.Windows.Forms.Label();
+            this.L_DocCreado3 = new System.Windows.Forms.Label();
+            this.L_DocCreado2 = new System.Windows.Forms.Label();
+            this.L_DocCreado1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DatosPlan)).BeginInit();
             this.GB_CamposSetUp.SuspendLayout();
             this.GB_Documentos.SuspendLayout();
@@ -400,6 +400,7 @@
             // CB_NumeroDeEtapas
             // 
             this.CB_NumeroDeEtapas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CB_NumeroDeEtapas.Enabled = false;
             this.CB_NumeroDeEtapas.FormattingEnabled = true;
             this.CB_NumeroDeEtapas.Items.AddRange(new object[] {
             "1 etapa",
@@ -443,29 +444,17 @@
             this.GB_DocumentosCreados.TabStop = false;
             this.GB_DocumentosCreados.Text = "Documentos creados";
             // 
-            // L_DocCreado1
+            // L_DocCreado4
             // 
-            this.L_DocCreado1.AutoSize = true;
-            this.L_DocCreado1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.L_DocCreado1.ForeColor = System.Drawing.Color.Green;
-            this.L_DocCreado1.Location = new System.Drawing.Point(27, 28);
-            this.L_DocCreado1.Name = "L_DocCreado1";
-            this.L_DocCreado1.Size = new System.Drawing.Size(77, 13);
-            this.L_DocCreado1.TabIndex = 39;
-            this.L_DocCreado1.Text = "DocCreado1";
-            this.L_DocCreado1.Visible = false;
-            // 
-            // L_DocCreado2
-            // 
-            this.L_DocCreado2.AutoSize = true;
-            this.L_DocCreado2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.L_DocCreado2.ForeColor = System.Drawing.Color.Green;
-            this.L_DocCreado2.Location = new System.Drawing.Point(27, 53);
-            this.L_DocCreado2.Name = "L_DocCreado2";
-            this.L_DocCreado2.Size = new System.Drawing.Size(77, 13);
-            this.L_DocCreado2.TabIndex = 40;
-            this.L_DocCreado2.Text = "DocCreado2";
-            this.L_DocCreado2.Visible = false;
+            this.L_DocCreado4.AutoSize = true;
+            this.L_DocCreado4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_DocCreado4.ForeColor = System.Drawing.Color.Green;
+            this.L_DocCreado4.Location = new System.Drawing.Point(27, 100);
+            this.L_DocCreado4.Name = "L_DocCreado4";
+            this.L_DocCreado4.Size = new System.Drawing.Size(77, 13);
+            this.L_DocCreado4.TabIndex = 42;
+            this.L_DocCreado4.Text = "DocCreado4";
+            this.L_DocCreado4.Visible = false;
             // 
             // L_DocCreado3
             // 
@@ -479,17 +468,29 @@
             this.L_DocCreado3.Text = "DocCreado3";
             this.L_DocCreado3.Visible = false;
             // 
-            // L_DocCreado4
+            // L_DocCreado2
             // 
-            this.L_DocCreado4.AutoSize = true;
-            this.L_DocCreado4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.L_DocCreado4.ForeColor = System.Drawing.Color.Green;
-            this.L_DocCreado4.Location = new System.Drawing.Point(27, 100);
-            this.L_DocCreado4.Name = "L_DocCreado4";
-            this.L_DocCreado4.Size = new System.Drawing.Size(77, 13);
-            this.L_DocCreado4.TabIndex = 42;
-            this.L_DocCreado4.Text = "DocCreado4";
-            this.L_DocCreado4.Visible = false;
+            this.L_DocCreado2.AutoSize = true;
+            this.L_DocCreado2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_DocCreado2.ForeColor = System.Drawing.Color.Green;
+            this.L_DocCreado2.Location = new System.Drawing.Point(27, 53);
+            this.L_DocCreado2.Name = "L_DocCreado2";
+            this.L_DocCreado2.Size = new System.Drawing.Size(77, 13);
+            this.L_DocCreado2.TabIndex = 40;
+            this.L_DocCreado2.Text = "DocCreado2";
+            this.L_DocCreado2.Visible = false;
+            // 
+            // L_DocCreado1
+            // 
+            this.L_DocCreado1.AutoSize = true;
+            this.L_DocCreado1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_DocCreado1.ForeColor = System.Drawing.Color.Green;
+            this.L_DocCreado1.Location = new System.Drawing.Point(27, 28);
+            this.L_DocCreado1.Name = "L_DocCreado1";
+            this.L_DocCreado1.Size = new System.Drawing.Size(77, 13);
+            this.L_DocCreado1.TabIndex = 39;
+            this.L_DocCreado1.Text = "DocCreado1";
+            this.L_DocCreado1.Visible = false;
             // 
             // Form1
             // 

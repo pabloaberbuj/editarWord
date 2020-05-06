@@ -61,8 +61,8 @@
             this.BT_BuscarPatMove = new System.Windows.Forms.Button();
             this.GB_6ArmarCarpeta = new System.Windows.Forms.GroupBox();
             this.GB_7Finalizar = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BT_ArmarCarpeta = new System.Windows.Forms.Button();
+            this.BT_ComprimirYEnviar = new System.Windows.Forms.Button();
             this.GB_1cargaPaciente.SuspendLayout();
             this.GB_2esquemaTratamiento.SuspendLayout();
             this.GB_3ChequeoAutomatico.SuspendLayout();
@@ -389,7 +389,7 @@
             // 
             // GB_6ArmarCarpeta
             // 
-            this.GB_6ArmarCarpeta.Controls.Add(this.button1);
+            this.GB_6ArmarCarpeta.Controls.Add(this.BT_ArmarCarpeta);
             this.GB_6ArmarCarpeta.Location = new System.Drawing.Point(12, 397);
             this.GB_6ArmarCarpeta.Name = "GB_6ArmarCarpeta";
             this.GB_6ArmarCarpeta.Size = new System.Drawing.Size(200, 89);
@@ -399,7 +399,7 @@
             // 
             // GB_7Finalizar
             // 
-            this.GB_7Finalizar.Controls.Add(this.button2);
+            this.GB_7Finalizar.Controls.Add(this.BT_ComprimirYEnviar);
             this.GB_7Finalizar.Location = new System.Drawing.Point(243, 397);
             this.GB_7Finalizar.Name = "GB_7Finalizar";
             this.GB_7Finalizar.Size = new System.Drawing.Size(168, 85);
@@ -407,23 +407,24 @@
             this.GB_7Finalizar.TabStop = false;
             this.GB_7Finalizar.Text = "7. Finalizar";
             // 
-            // button1
+            // BT_ArmarCarpeta
             // 
-            this.button1.Location = new System.Drawing.Point(34, 38);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 25);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Armar BEVs e informe";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BT_ArmarCarpeta.Location = new System.Drawing.Point(34, 38);
+            this.BT_ArmarCarpeta.Name = "BT_ArmarCarpeta";
+            this.BT_ArmarCarpeta.Size = new System.Drawing.Size(129, 25);
+            this.BT_ArmarCarpeta.TabIndex = 17;
+            this.BT_ArmarCarpeta.Text = "Armar BEVs e informe";
+            this.BT_ArmarCarpeta.UseVisualStyleBackColor = true;
+            this.BT_ArmarCarpeta.Click += new System.EventHandler(this.BT_ArmarCarpeta_Click);
             // 
-            // button2
+            // BT_ComprimirYEnviar
             // 
-            this.button2.Location = new System.Drawing.Point(30, 25);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 44);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Comprimir y enviar archivos";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BT_ComprimirYEnviar.Location = new System.Drawing.Point(30, 25);
+            this.BT_ComprimirYEnviar.Name = "BT_ComprimirYEnviar";
+            this.BT_ComprimirYEnviar.Size = new System.Drawing.Size(100, 44);
+            this.BT_ComprimirYEnviar.TabIndex = 15;
+            this.BT_ComprimirYEnviar.Text = "Comprimir y enviar archivos";
+            this.BT_ComprimirYEnviar.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -488,8 +489,8 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn patMOve;
         private System.Windows.Forms.Button BT_BuscarPatMove;
         private System.Windows.Forms.GroupBox GB_6ArmarCarpeta;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BT_ArmarCarpeta;
         private System.Windows.Forms.GroupBox GB_7Finalizar;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BT_ComprimirYEnviar;
     }
 }
