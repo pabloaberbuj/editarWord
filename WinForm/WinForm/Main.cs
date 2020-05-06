@@ -65,7 +65,7 @@ namespace WinForm
                     LB_ppfs.Items.Add(Path.GetFileName(ppf));
                 }
                 crearPaciente(fullPath(LB_ppfs.Items[0].ToString()));
-                GB_esquemaTratamiento.Enabled = true;
+                GB_2esquemaTratamiento.Enabled = true;
             }
         }
 
@@ -241,7 +241,7 @@ namespace WinForm
 
         private void BT_FinalizarEsquemaTratamiento_Click(object sender, EventArgs e)
         {
-            GB_ChequeoAutomatico.Enabled = true;
+            GB_3ChequeoAutomatico.Enabled = true;
             BT_RealizarChequeos_Click(sender, e);
         }
 
@@ -298,7 +298,7 @@ namespace WinForm
         }
         private void BT_ContinuarChequeos_Click(object sender, EventArgs e)
         {
-            GB_ChequeoConformaciones.Enabled = true;
+            GB_4ChequeoConformaciones.Enabled = true;
             L_conformaciones.Text = "Hay " + listaConformadores().Count.ToString() + " campos conformados. \nEl equipo opera con (acá va MLC o Pb según)";
             L_conformaciones.Visible = true;
         }
@@ -321,7 +321,12 @@ namespace WinForm
 
         private void BT_FinalizaChequeoConformaciones_Click(object sender, EventArgs e)
         {
-            GB_IsosyPatMove.Enabled = true;
+            GB_5IsosyPatMove.Enabled = true;
+            cargarDGVIsos();
+        }
+
+        private void BT_BuscarPatMove_Click(object sender, EventArgs e)
+        {
             cargarDGVIsos();
         }
     }
