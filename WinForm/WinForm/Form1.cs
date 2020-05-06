@@ -17,6 +17,7 @@ namespace WinForm
     public partial class Form1 : Form
     {
         Paciente paciente = new Paciente();
+        Tratamiento tratamiento = new Tratamiento();
         List<Label> docCreados = new List<Label>();
         Dictionary<string, string> Diccionario = Equipos.diccionario();
 
@@ -24,7 +25,7 @@ namespace WinForm
         int etapaNumero = 0;
         int indiceLabelDocCreados = 0;
 
-        public Form1()
+        public Form1(Paciente _paciente, Tratamiento _tratamiento)
         {
             InitializeComponent();
             BT_HacerDocumentos.Enabled = false;
@@ -39,6 +40,8 @@ namespace WinForm
             GB_Documentos.Enabled = false;
             TB_ProfundidadesEfectivas.Enabled = false;
             CB_NumeroDeEtapas.SelectedIndex = 0;
+            paciente = _paciente;
+            tratamiento = _tratamiento;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -70,64 +73,37 @@ namespace WinForm
 
         private void BT_CargarClick(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Title = "Abrir archivo PPF";
-            openFileDialog1.Filter = "Archivos ppf(.ppf)|*.ppf|All Files (*.*)|*.*";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            limpiarLabelsDocCreado();
+            this.Text = "Armado de carpetas " + paciente.apellidoNombre + tratamiento.nombre;
+            cargarDGVdePaciente(paciente);
+            BT_HacerDocumentos.Enabled = true;
+            habilitarControles();
+            inicializarSetUP();
+            hayMasDeUnISO();
+            cargarDGVdePlan(tratamiento.planes.Last());
+            escribirLabels(tratamiento.planes.Last(), paciente);
+            cargarListaImagenes();
+            GB_Imagenes.Enabled = true;
+            GB_CamposSetUp.Enabled = true;
+            GB_Documentos.Enabled = true;
+            TB_ProfundidadesEfectivas.Enabled = true;
+            if (numeroDeEtapas() == 1)
             {
-                string[] fid = Extraer.cargar(openFileDialog1.FileName);
-                if (etapaNumero < 2)
-                {
-                    limpiarLabelsDocCreado();
-                    paciente = Extraer.extraerPaciente(fid);
-                    this.Text = "Armado de carpetas " + paciente.apellidoNombre;
-                    cargarDGVdePaciente(paciente);
-                }
-                else
-                {
-                    if (!Chequear.paciente(paciente, Extraer.extraerPaciente(fid)))
-                    {
-                        MessageBox.Show("Los planes corresponden a diferentes pacientes", "Error");
-                    }
-                }
-                paciente.planes.Add(Extraer.extraerPlan(fid));
-                if (numeroDeEtapas() == 1)
-                {
-                    paciente.planes.Last().etapa = "1";
-                }
-                else
-                {
-                    paciente.planes.Last().etapa = etapaNumero.ToString();
-                }
-                BT_HacerDocumentos.Enabled = true;
-                habilitarControles();
-                inicializarSetUP();
-                hayMasDeUnISO();
-                cargarDGVdePan(paciente.planes.Last());
-                escribirLabels(paciente.planes.Last(), paciente);
-                cargarListaImagenes();
-                GB_Imagenes.Enabled = true;
-                GB_CamposSetUp.Enabled = true;
-                GB_Documentos.Enabled = true;
-                TB_ProfundidadesEfectivas.Enabled = true;
-                if (numeroDeEtapas() == 1)
-                {
-                    RB_AmbosDocumentos.Enabled = true;
-                    RB_SoloBEV.Enabled = true;
-                    RB_AmbosDocumentos.Checked = true;
-                    RB_SoloInforme.Enabled = true;
-                }
-                if (numeroDeEtapas() > 1)
-                {
-                    RB_AmbosDocumentos.Enabled = false;
-                    RB_SoloBEV.Enabled = true;
-                    RB_SoloBEV.Checked = true;
-                    RB_SoloInforme.Enabled = false;
-                }
+                RB_AmbosDocumentos.Enabled = true;
+                RB_SoloBEV.Enabled = true;
+                RB_AmbosDocumentos.Checked = true;
+                RB_SoloInforme.Enabled = true;
+            }
+            if (numeroDeEtapas() > 1)
+            {
+                RB_AmbosDocumentos.Enabled = false;
+                RB_SoloBEV.Enabled = true;
+                RB_SoloBEV.Checked = true;
+                RB_SoloInforme.Enabled = false;
             }
         }
 
-        private void cargarDGVdePan(Plan plan)
+        private void cargarDGVdePlan(Plan plan)
         {
             DGV_DatosPlan.Rows.Clear();
             PropertyInfo[] propiedades = plan.GetType().GetProperties();
@@ -228,23 +204,23 @@ namespace WinForm
 
         private void BT_HacerDocumentos_Click(object sender, EventArgs e)
         {
-            if (Chequear.numeroDeImagenes(imagenesEsperadas(paciente.planes.Last()), imagenesEncontradas(paciente)))
+            if (Chequear.numeroDeImagenes(imagenesEsperadas(tratamiento.planes.Last()), imagenesEncontradas(paciente)))
             {
                 if (!celdasVacias() || (celdasVacias() && MessageBox.Show("Hay datos sin completar ¿desea continuar?", "", MessageBoxButtons.YesNo) == DialogResult.Yes))
                 {
                     if (etapaNumero < 2)
                     {
-                        IO.crearCarpetas(paciente);
+                        IO.crearCarpetas(paciente,tratamiento);
                     }
                     if (etapaNumero == 0)
                     {
                         unaEtapaBEVeInforme();
                     }
-                    else if (etapaNumero <= paciente.numeroDeEtapas)
+                    else if (etapaNumero <= tratamiento.planes.Count())
                     {
                         variasEtapasBEV(etapaNumero);
                         etapaNumero++;
-                        if (etapaNumero > paciente.numeroDeEtapas)
+                        if (etapaNumero > tratamiento.planes.Count())
                         {
                             BT_Cargar.Enabled = false;
                             RB_AmbosDocumentos.Enabled = false;
@@ -267,14 +243,14 @@ namespace WinForm
 
         private void crearBEV(int etapa)
         {
-            Word.crearArchivoBEV(paciente, etapa, hayImagenesSetUp(), TB_SetUp1Gantry.Text, TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text, TB_SetUp2Tam.Text, TB_ProfundidadesEfectivas.Text);
+            Word.crearArchivoBEV(paciente, tratamiento, etapa, hayImagenesSetUp(), TB_SetUp1Gantry.Text, TB_SetUp2Gantry.Text, TB_SetUp1Tam.Text, TB_SetUp2Tam.Text, TB_ProfundidadesEfectivas.Text);
         }
 
         private void crearInforme()
         {
-            paciente.cantidadTotalDeCampos(paciente);
-            paciente.dosisTotalPaciente(paciente);
-            Word.crearArchivoInforme(paciente, hayDosImagenes3D(), hayTresImagenes3D(), hayImagenesSetUp(), imprimirBEV());
+            tratamiento.cantidadTotalDeCampos();
+            tratamiento.dosisAcumulada();
+            Word.crearArchivoInforme(paciente, tratamiento, hayDosImagenes3D(), hayTresImagenes3D(), hayImagenesSetUp(), imprimirBEV());
             limpiarFormulario(this);
         }
 
@@ -283,7 +259,7 @@ namespace WinForm
         {
             try
             {
-                guardarDGVenPlan(paciente.planes[0]);
+                guardarDGVenPlan(tratamiento.planes[0]);
                 guardarDGVenPaciente(paciente);
                 if (imprimirBEV())
                 {
@@ -313,12 +289,12 @@ namespace WinForm
             try
             {
                 guardarDGVenPaciente(paciente);
-                guardarDGVenPlan(paciente.planes[etapa - 1]);
+                guardarDGVenPlan(tratamiento.planes[etapa - 1]);
                 crearBEV(etapa);
                 IO.moverImagenes(paciente, etapa);
                 MessageBox.Show("Se generó el documento y se movieron las imágenes");
                 escribirLabelDocCreado("BEV etapa " + etapa.ToString(), indiceLabelDocCreados);
-                if (etapa < paciente.numeroDeEtapas)
+                if (etapa < tratamiento.planes.Count())
                 {
                     BT_Cargar.Enabled = true;
                     BT_Cargar.Text = "Cargar PPF Etapa " + (etapa + 1).ToString();
@@ -341,7 +317,7 @@ namespace WinForm
                     DGV_DatosPlan.Enabled = false;
                     MessageBox.Show("Una vez exportadas las imágenes para el informe presione aceptar y luego Crear Documentos");
                     cargarListaImagenes();
-                    escribirLabels(paciente.planes.Last(), paciente);
+                    escribirLabels(tratamiento.planes.Last(), paciente);
 
                 }
 
@@ -410,8 +386,9 @@ namespace WinForm
 
         private int numeroDeEtapas()
         {
-            paciente.numeroDeEtapas = CB_NumeroDeEtapas.SelectedIndex + 1;
-            return CB_NumeroDeEtapas.SelectedIndex + 1;
+            //paciente.numeroDeEtapas = CB_NumeroDeEtapas.SelectedIndex + 1;
+            //return CB_NumeroDeEtapas.SelectedIndex + 1;
+            return tratamiento.planes.Count();
         }
 
         private int imagenesEsperadas(Plan plan)
@@ -450,9 +427,9 @@ namespace WinForm
 
         private void ActualizarNumeroImagenes(object sender, EventArgs e)
         {
-            if (paciente.planes != null)//&& paciente.planes.Last().cantidadDeCampos > 0)
+            if (tratamiento.planes != null)//&& paciente.planes.Last().cantidadDeCampos > 0)
             {
-                escribirLabels(paciente.planes.Last(), paciente);
+                escribirLabels(tratamiento.planes.Last(), paciente);
                 if (CHB_SinImagenesSetUp.Checked || RB_SoloInforme.Checked)
                 {
                     GB_CamposSetUp.Enabled = false;
@@ -494,10 +471,10 @@ namespace WinForm
 
         private void hayMasDeUnISO()
         {
-            if (paciente.planes.Last().iso == "Hay más de un ISO")
+            if (tratamiento.planes.Last().iso == "Hay más de un ISO")
             {
                 MessageBox.Show("El plan tiene más de un iso");
-                paciente.planes.Last().iso = null;
+                tratamiento.planes.Last().iso = null;
             }
         }
 
@@ -519,7 +496,7 @@ namespace WinForm
         private void BT_ActualizarImagenes_Click(object sender, EventArgs e)
         {
             cargarListaImagenes();
-            escribirLabels(paciente.planes.Last(), paciente);
+            escribirLabels(tratamiento.planes.Last(), paciente);
         }
 
         private void BT_LimpiarFormulario_Click(object sender, EventArgs e)
@@ -585,7 +562,7 @@ namespace WinForm
 
         private void inicializarSetUP()
         {
-            if (paciente.planes.Count > 0 && paciente.planes.Last().equipo == "Córdoba")
+            if (tratamiento.planes.Count > 0 && tratamiento.planes.Last().equipo == "Córdoba")
             {
                 TB_SetUp1Gantry.Text = "0";
             }

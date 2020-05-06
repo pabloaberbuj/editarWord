@@ -16,7 +16,8 @@ namespace WinForm
         bool usaDosTextBox = false;
         bool hayChequeoDosis = false;
         double dosisDiaPPF = double.NaN;
-        public TextBoxForm(bool _usaDosTextBox, bool _hayChequeoDosis, string texto1, string texto2="", double _dosisDiaPPF=double.NaN)
+        double dosisTotalPPF = double.NaN;
+        public TextBoxForm(bool _usaDosTextBox, bool _hayChequeoDosis, string texto1, string texto2="", double _dosisDiaPPF=double.NaN, double _dosisTotalPPF=double.NaN)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
@@ -25,6 +26,7 @@ namespace WinForm
             usaDosTextBox = _usaDosTextBox;
             hayChequeoDosis = _hayChequeoDosis;
             dosisDiaPPF = _dosisDiaPPF;
+            dosisTotalPPF = _dosisTotalPPF;
             if (usaDosTextBox)
             {
                 label2.Visible = true;
@@ -54,9 +56,9 @@ namespace WinForm
                 {
                     MessageBox.Show("El valor de dosis día ingresado no coincide con el del PPF\nRevisar e ingresarlo nuevamente");
                 }
-                else if (Convert.ToDouble(salida2) % Convert.ToDouble(salida1) != 0)
+                else if (Convert.ToDouble(salida2) != dosisTotalPPF)
                 {
-                    MessageBox.Show("El valor de dosis total no es un múltiplo de la dosis fracción\nRevisar e ingresarlo nuevamente");
+                    MessageBox.Show("El valor de dosis total ingresado no coincide con el del PPF\nRevisar e ingresarlo nuevamente");
                 }
                 else
                 {

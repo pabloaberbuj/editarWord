@@ -16,9 +16,9 @@ namespace WinForm
             return "Nombre: " + paciente.apellidoNombre + "                                        HC:" + paciente.ID + "                                      " + DateTime.Today.ToShortDateString();
         }
         
-        public static string encabezadoBEV2(Paciente paciente, int etapa) //centrado
+        public static string encabezadoBEV2(Tratamiento tratamiento, int etapa) //centrado
         {
-            return "Etapa " + etapa.ToString() + "   –   " + paciente.planes[etapa - 1].iso + "   –   Equipo " + paciente.planes[etapa - 1].equipo;
+            return "Etapa " + etapa.ToString() + "   –   " + tratamiento.planes[etapa - 1].iso + "   –   Equipo " + tratamiento.planes[etapa - 1].equipo;
         }
         
         public static string parametrosCampoTto(Campo campo)
@@ -39,14 +39,14 @@ namespace WinForm
             return "G=" + gantry + ", " + tamanoCampo;
         }
         
-        public static string encabezadoInformeLinea1(Paciente paciente) //Times 14, negrita
+        public static string encabezadoInformeLinea1(Tratamiento tratamiento) //Times 14, negrita
         {
             string centro = "";
-            if (paciente.planes[0].equipo == "Avellaneda")
+            if (tratamiento.planes[0].equipo == "Avellaneda")
             {
                 centro = "Centro de Radiaciones Avellaneda";
             }
-            else if (paciente.planes[0].equipo == "Quilmes")
+            else if (tratamiento.planes[0].equipo == "Quilmes")
             {
                 centro = "Centro de Radiaciones Quilmes";
             }
@@ -54,7 +54,7 @@ namespace WinForm
             {
                 centro = "Centro Médico Mevaterapia";
             }
-            return paciente.modalidad + "	                            "+ centro +"	                            " + DateTime.Today.ToShortDateString();
+            return tratamiento.planes[0].modalidad + "	                            "+ centro +"	                            " + DateTime.Today.ToShortDateString();
         }
         
         public static string encabezadoInformeLinea2(Paciente paciente) //Times 12
@@ -62,10 +62,10 @@ namespace WinForm
             return "Paciente: " + paciente.apellidoNombre + "	                            	                            HC: " + paciente.ID;
         }
         
-        public static string encabezadoInformeLinea3(Paciente paciente) //Times 12 // centrado
+        public static string encabezadoInformeLinea3(Tratamiento tratamiento) //Times 12 // centrado
         {
             string mod = "";
-            if (paciente.modalidad == "T3DC")
+            if (tratamiento.planes[0].modalidad == modalidad.tridimensional)
             {
                 mod = "tridimensional conformado de ";
             }
@@ -73,22 +73,22 @@ namespace WinForm
             {
                 mod = "con intensidad modulada de ";
             }
-            return "Tratamiento " + mod  + paciente.tratemiento_de;
+            return "Tratamiento " + mod  + tratamiento.nombre;
         }
         
-        public static string axialInforme(Paciente paciente)
+        public static string axialInforme(Tratamiento tratamiento)
         {
             string etapa = "";
-            if (paciente.numeroDeEtapas==1)
+            if (tratamiento.planes.Count()==1)
             {
                 etapa = "una etapa";
             }
             else
             {
-                etapa = paciente.numeroDeEtapas.ToString() + " etapas";
+                etapa = tratamiento.planes.Count.ToString() + " etapas";
             }
-            string aux = "Corte axial en isocentro de la lesión y planificación del tratamiento en " + etapa + ", con " + paciente.cantidadDeCamposTotal.ToString() + " campos de radiación ";
-            if (paciente.modalidad== "T3DC")
+            string aux = "Corte axial en isocentro de la lesión y planificación del tratamiento en " + etapa + ", con " + tratamiento.cantidadTotalDeCampos().ToString() + " campos de radiación ";
+            if (tratamiento.planes[0].modalidad == modalidad.tridimensional)
             {
                 aux += "conformados";
             }
@@ -97,7 +97,7 @@ namespace WinForm
                 aux += "modulados";
             }
             aux+= ". Las curvas representan niveles de dosis en % donde el 100% representa "
-                + (Convert.ToDouble(paciente.dosisTotal) / 100).ToString() + "Gy, indicados con diferentes colores.";
+                + (Convert.ToDouble(tratamiento.dosisAcumulada()) / 100).ToString() + "Gy, indicados con diferentes colores.";
             return aux;
         }
         

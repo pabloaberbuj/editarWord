@@ -21,7 +21,7 @@ namespace WinForm
         {
             return (paths[0].Split('\t'))[1];
         }
-        public static void crearCarpetas(Paciente paciente)
+        public static void crearCarpetas(Paciente paciente, Tratamiento tratamiento)
         {
             string aux = paciente.apellidoNombre+ " " + paciente.ID;
             if (!Directory.Exists(pathDestino + aux))
@@ -32,9 +32,9 @@ namespace WinForm
             {
                 Directory.CreateDirectory(pathDestino + aux + "\\Plan");
             }
-            if (paciente.numeroDeEtapas > 1)
+            if (tratamiento.planes.Count()> 1)
             {
-                for (int i = 1; i < paciente.numeroDeEtapas+1; i++)
+                for (int i = 1; i < tratamiento.planes.Count() + 1; i++)
                 {
                     if (!Directory.Exists(pathDestino + aux + "\\Etapa " + i.ToString()))
                     {

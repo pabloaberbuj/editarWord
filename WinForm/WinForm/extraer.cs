@@ -49,39 +49,34 @@ namespace WinForm
             return Convert.ToInt32(extraerDouble(fid, 5));
         }
 
-        public static string dosisFraccion(string[] fid)
+        public static double dosisFraccion(string[] fid)
         {
-            return extraerString(fid, 6);
+            return extraerDouble(fid, 6);
         }
 
-        public static string numeroFracciones(string[] fid)
+        public static int numeroFracciones(string[] fid)
         {
-            return extraerString(fid, 8);
+            return Convert.ToInt32(extraerDouble(fid, 8));
         }
 
-        public static string dosisTotal(string[] fid)
+        public static double dosisTotal(string[] fid)
         {
-            return (Convert.ToDouble(dosisFraccion(fid)) * Convert.ToDouble(numeroFracciones(fid))).ToString();
+            return dosisFraccion(fid) * numeroFracciones(fid);
         }
-        public static string modalidad(string[] fid)
+        public static modalidad modalidad(string[] fid)
         {
             if (extraerString(fid, 10) == "CRT-3D")
             {
-                return "T3DC";
+                return WinForm.modalidad.tridimensional;
             }
             else if (extraerString(fid, 10) == "IMRT(s&s)")
             {
-                return "IMRT";
+                return WinForm.modalidad.IMRT_MLC;
             }
-            else if (extraerString(fid, 10) == "IMRT(mod)")
+            else //if (extraerString(fid, 10) == "IMRT(mod)")
             {
-                return "IMRT";
+                return WinForm.modalidad.IMRT_moduladores;
             }
-            else //no debería caer acá
-            {
-                return "";
-            }
-
         }
 
         public static string apellidoPaciente(string[] fid)
@@ -150,6 +145,7 @@ namespace WinForm
                 equipo = equipo(fid),
                 cantidadDeCampos = numeroCampos(fid),
                 numeroParametros = numeroParametros(fid),
+                modalidad = modalidad(fid),
             };
 
             plan.listaCampos = new List<Campo>();
@@ -177,9 +173,8 @@ namespace WinForm
                 nombre = nombrePaciente(fid),
                 apellidoNombre = apellidoNombrePaciente(fid),
                 ID = IDPaciente(fid),
-                modalidad = modalidad(fid),
             };
-            paciente.planes = new List<Plan>();
+            paciente.tratamientos = new List<Tratamiento>();
             return paciente;
         }
 

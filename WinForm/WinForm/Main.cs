@@ -126,13 +126,13 @@ namespace WinForm
         private void agregarNuevoPlan(Tratamiento tratamiento)
         {
             Plan plan = Extraer.extraerPlan(Extraer.cargar(nombrePlanSeleccionado()));
-            TextBoxForm dosisTotalDia = new TextBoxForm(true, true, "Dosis Fracción", "Dosis plan", Convert.ToDouble(plan.dosisFraccion));
+            TextBoxForm dosisTotalDia = new TextBoxForm(true, true, "Dosis Fracción", "Dosis plan", plan.dosisFraccion, plan.dosisTotal);
             dosisTotalDia.Text = "Dosis del plan seleccionado";
             dosisTotalDia.ShowDialog();
             if (dosisTotalDia.DialogResult == DialogResult.OK)
             {
-                plan.dosisFraccion = dosisTotalDia.salida1;
-                plan.dosisTotal = dosisTotalDia.salida2;
+                plan.dosisFraccion = Convert.ToDouble(dosisTotalDia.salida1);
+                plan.dosisTotal = Convert.ToDouble(dosisTotalDia.salida2);
                 tratamiento.planes.Add(plan);
                 plan.pathPPF = nombrePlanSeleccionado();
                 plan.etiquetaPPF = LB_ppfs.SelectedItem.ToString();

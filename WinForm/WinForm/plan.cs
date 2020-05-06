@@ -15,16 +15,17 @@ namespace WinForm
         //public string ID { get; set; }
         public string pathPPF { get; set; }
         public string etiquetaPPF { get; set; }
-        public string dosisFraccion { get; set; }
-        public string numeroFracciones { get; set; }
-        public string dosisTotal { get; set; }
+        public double dosisFraccion { get; set; }
+        public double numeroFracciones { get; set; }
+        public double dosisTotal { get; set; }
 
+        public modalidad modalidad { get; set; } //antes en paciente y string. Ahora Enum. 0 para 3D, 1 para IMRT SyS, 2 para IMRT mod
         public string equipo { get; set; }
         public int cantidadDeCampos { get; set; }
         public int numeroParametros { get; set; }
         public List<Campo> listaCampos { get; set; }
-        //public string tratemiento_de {get;set;}
-        public string etapa { get; set; }
+        
+        //public string etapa { get; set; }
         public string iso { get; set; }
 
         public List<Iso> isos { get; set; } //para usar después cuando agregue varios isos
