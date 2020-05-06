@@ -1,4 +1,10 @@
 Pendientes:
 - habilitar deshabilitar botones en Main
 - que los tratamientos no puedan tener el mismo nombre
-- DGVComboBox singleClick open
+- Cuando carga paciente deshabilitar todo y limpiar LB, DGV, etc
+- Ver cómo relacionar el patmove con el protocolo.pdf y reftoiso.pdf
+- Ver cómo pone los nombres Cat3D (para nombre corto en ppf y patmove) DIFICIL. Al grabar se puede cambiar el nombre.
+
+Lopez Virginia
+Lezcano
+Mendoza Chavez

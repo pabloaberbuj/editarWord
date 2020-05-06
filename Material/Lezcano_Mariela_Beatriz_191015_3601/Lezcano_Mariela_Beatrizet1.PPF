@@ -1,0 +1,112 @@
+[Version]
+PPF_VER = 3
+CAT3D_VER = 7.12.00
+[Header]
+PARAM = 21
+FIELDS = 3
+TDOSE =  200.0
+TPERCENT =  100.0
+NUMFRACTIONS = 25
+NORMALDOSE =  157.0
+MODALITY = CRT-3D
+[GenData]
+PATNAME = Lezcano^Mariela Beatriz       
+PATID = 1-86744-0
+DIAGNOSIS = mama
+DATE = 18102019
+DRNAME = 
+PHYSNAME = 
+HOSPNAME = Mevaterapia
+MACHINE = MEDRANO_Fotones_06MV
+[Titles]
+Field #
+Isocenter
+INPLANE   
+CROSSPLANE
+Table Ang
+Gantry Ang
+Gantry Rot
+Collim Ang
+Weight
+Wedge Filt
+Wedge  Pos
+ShieldFile
+TrayFactor
+HEAD-JAW  
+FEET-JAW  
+RIGHT-JAW 
+LEFT-JAW  
+SSD
+Device
+Beam Type
+MON. UNITS
+[FIELD_1]
+1
+ISO1
+195
+95
+0
+128
+0
+345
+0.825
+NONE
+----
+Lezcano_Mae121
+0.940
+0
+0
+0
+0
+918.3
+0
+Photon
+80.0
+[FIELD_2]
+2
+ISO1
+195
+95
+0
+121
+0
+345
+0.190
+W30
+CW
+Lezcano_Mae142
+0.940
+0
+0
+0
+0
+930.8
+0
+Photon
+35.7
+[FIELD_4]
+4
+ISO1
+195
+95
+0
+303
+0
+13
+1.090
+NONE
+----
+Lezcano_Mae114
+0.940
+0
+0
+0
+0
+944.4
+0
+Photon
+111.7
+[Footer]
+Dose Computation Mode: Convolution - Pencil Beam 8x8mm
+Normalized at depth of maximum dose for each field
+Density correction ON

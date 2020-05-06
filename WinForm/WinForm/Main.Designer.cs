@@ -39,25 +39,25 @@
             this.TV_tratamientos = new System.Windows.Forms.TreeView();
             this.GB_cargaPaciente = new System.Windows.Forms.GroupBox();
             this.GB_esquemaTratamiento = new System.Windows.Forms.GroupBox();
-            this.GB_ChequeoAutomatico = new System.Windows.Forms.GroupBox();
-            this.BT_RealizarChequeos = new System.Windows.Forms.Button();
-            this.BT_VerProblemas = new System.Windows.Forms.Button();
-            this.BT_FinalizarChequeos = new System.Windows.Forms.Button();
             this.BT_FinalizarEsquemaTratamiento = new System.Windows.Forms.Button();
+            this.GB_ChequeoAutomatico = new System.Windows.Forms.GroupBox();
             this.L_FallasChequeo = new System.Windows.Forms.Label();
+            this.BT_FinalizarChequeos = new System.Windows.Forms.Button();
+            this.BT_VerProblemas = new System.Windows.Forms.Button();
+            this.BT_RealizarChequeos = new System.Windows.Forms.Button();
             this.GB_IsosyPatMove = new System.Windows.Forms.GroupBox();
-            this.DGV_Isos = new System.Windows.Forms.DataGridView();
             this.BT_FinalizarIsos = new System.Windows.Forms.Button();
-            this.GB_ChequeoConformaciones = new System.Windows.Forms.GroupBox();
-            this.BT_FinalizaChequeoConformaciones = new System.Windows.Forms.Button();
-            this.L_conformaciones = new System.Windows.Forms.Label();
-            this.BT_EnviarMLCaShaper = new System.Windows.Forms.Button();
-            this.BT_AbrirKilosPb = new System.Windows.Forms.Button();
+            this.DGV_Isos = new System.Windows.Forms.DataGridView();
             this.Tratamiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Etapa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ppf = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patMOve = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.GB_ChequeoConformaciones = new System.Windows.Forms.GroupBox();
+            this.BT_AbrirKilosPb = new System.Windows.Forms.Button();
+            this.BT_EnviarMLCaShaper = new System.Windows.Forms.Button();
+            this.L_conformaciones = new System.Windows.Forms.Label();
+            this.BT_FinalizaChequeoConformaciones = new System.Windows.Forms.Button();
             this.GB_cargaPaciente.SuspendLayout();
             this.GB_esquemaTratamiento.SuspendLayout();
             this.GB_ChequeoAutomatico.SuspendLayout();
@@ -180,6 +180,16 @@
             this.GB_esquemaTratamiento.TabStop = false;
             this.GB_esquemaTratamiento.Text = "2. Esquema de tratamiento";
             // 
+            // BT_FinalizarEsquemaTratamiento
+            // 
+            this.BT_FinalizarEsquemaTratamiento.Location = new System.Drawing.Point(243, 118);
+            this.BT_FinalizarEsquemaTratamiento.Name = "BT_FinalizarEsquemaTratamiento";
+            this.BT_FinalizarEsquemaTratamiento.Size = new System.Drawing.Size(107, 30);
+            this.BT_FinalizarEsquemaTratamiento.TabIndex = 13;
+            this.BT_FinalizarEsquemaTratamiento.Text = "Continuar";
+            this.BT_FinalizarEsquemaTratamiento.UseVisualStyleBackColor = true;
+            this.BT_FinalizarEsquemaTratamiento.Click += new System.EventHandler(this.BT_FinalizarEsquemaTratamiento_Click);
+            // 
             // GB_ChequeoAutomatico
             // 
             this.GB_ChequeoAutomatico.Controls.Add(this.L_FallasChequeo);
@@ -194,25 +204,16 @@
             this.GB_ChequeoAutomatico.TabStop = false;
             this.GB_ChequeoAutomatico.Text = "3. Chequeo automatico";
             // 
-            // BT_RealizarChequeos
+            // L_FallasChequeo
             // 
-            this.BT_RealizarChequeos.Location = new System.Drawing.Point(33, 19);
-            this.BT_RealizarChequeos.Name = "BT_RealizarChequeos";
-            this.BT_RealizarChequeos.Size = new System.Drawing.Size(100, 25);
-            this.BT_RealizarChequeos.TabIndex = 1;
-            this.BT_RealizarChequeos.Text = "Chequear";
-            this.BT_RealizarChequeos.UseVisualStyleBackColor = true;
-            this.BT_RealizarChequeos.Click += new System.EventHandler(this.BT_RealizarChequeos_Click);
-            // 
-            // BT_VerProblemas
-            // 
-            this.BT_VerProblemas.Location = new System.Drawing.Point(33, 95);
-            this.BT_VerProblemas.Name = "BT_VerProblemas";
-            this.BT_VerProblemas.Size = new System.Drawing.Size(100, 25);
-            this.BT_VerProblemas.TabIndex = 2;
-            this.BT_VerProblemas.Text = "Ver problemas";
-            this.BT_VerProblemas.UseVisualStyleBackColor = true;
-            this.BT_VerProblemas.Click += new System.EventHandler(this.BT_VerProblemas_Click);
+            this.L_FallasChequeo.AutoSize = true;
+            this.L_FallasChequeo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_FallasChequeo.Location = new System.Drawing.Point(6, 53);
+            this.L_FallasChequeo.Name = "L_FallasChequeo";
+            this.L_FallasChequeo.Size = new System.Drawing.Size(45, 16);
+            this.L_FallasChequeo.TabIndex = 12;
+            this.L_FallasChequeo.Text = "label2";
+            this.L_FallasChequeo.Visible = false;
             // 
             // BT_FinalizarChequeos
             // 
@@ -224,26 +225,25 @@
             this.BT_FinalizarChequeos.UseVisualStyleBackColor = true;
             this.BT_FinalizarChequeos.Click += new System.EventHandler(this.BT_ContinuarChequeos_Click);
             // 
-            // BT_FinalizarEsquemaTratamiento
+            // BT_VerProblemas
             // 
-            this.BT_FinalizarEsquemaTratamiento.Location = new System.Drawing.Point(243, 118);
-            this.BT_FinalizarEsquemaTratamiento.Name = "BT_FinalizarEsquemaTratamiento";
-            this.BT_FinalizarEsquemaTratamiento.Size = new System.Drawing.Size(107, 30);
-            this.BT_FinalizarEsquemaTratamiento.TabIndex = 13;
-            this.BT_FinalizarEsquemaTratamiento.Text = "Continuar";
-            this.BT_FinalizarEsquemaTratamiento.UseVisualStyleBackColor = true;
-            this.BT_FinalizarEsquemaTratamiento.Click += new System.EventHandler(this.BT_FinalizarEsquemaTratamiento_Click);
+            this.BT_VerProblemas.Location = new System.Drawing.Point(33, 95);
+            this.BT_VerProblemas.Name = "BT_VerProblemas";
+            this.BT_VerProblemas.Size = new System.Drawing.Size(100, 25);
+            this.BT_VerProblemas.TabIndex = 2;
+            this.BT_VerProblemas.Text = "Ver problemas";
+            this.BT_VerProblemas.UseVisualStyleBackColor = true;
+            this.BT_VerProblemas.Click += new System.EventHandler(this.BT_VerProblemas_Click);
             // 
-            // L_FallasChequeo
+            // BT_RealizarChequeos
             // 
-            this.L_FallasChequeo.AutoSize = true;
-            this.L_FallasChequeo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.L_FallasChequeo.Location = new System.Drawing.Point(6, 53);
-            this.L_FallasChequeo.Name = "L_FallasChequeo";
-            this.L_FallasChequeo.Size = new System.Drawing.Size(45, 16);
-            this.L_FallasChequeo.TabIndex = 12;
-            this.L_FallasChequeo.Text = "label2";
-            this.L_FallasChequeo.Visible = false;
+            this.BT_RealizarChequeos.Location = new System.Drawing.Point(33, 19);
+            this.BT_RealizarChequeos.Name = "BT_RealizarChequeos";
+            this.BT_RealizarChequeos.Size = new System.Drawing.Size(100, 25);
+            this.BT_RealizarChequeos.TabIndex = 1;
+            this.BT_RealizarChequeos.Text = "Chequear";
+            this.BT_RealizarChequeos.UseVisualStyleBackColor = true;
+            this.BT_RealizarChequeos.Click += new System.EventHandler(this.BT_RealizarChequeos_Click);
             // 
             // GB_IsosyPatMove
             // 
@@ -256,6 +256,16 @@
             this.GB_IsosyPatMove.TabIndex = 16;
             this.GB_IsosyPatMove.TabStop = false;
             this.GB_IsosyPatMove.Text = "5. Isos y patMove";
+            // 
+            // BT_FinalizarIsos
+            // 
+            this.BT_FinalizarIsos.Location = new System.Drawing.Point(526, 162);
+            this.BT_FinalizarIsos.Name = "BT_FinalizarIsos";
+            this.BT_FinalizarIsos.Size = new System.Drawing.Size(100, 25);
+            this.BT_FinalizarIsos.TabIndex = 13;
+            this.BT_FinalizarIsos.Text = "Continuar";
+            this.BT_FinalizarIsos.UseVisualStyleBackColor = true;
+            this.BT_FinalizarIsos.Click += new System.EventHandler(this.BT_FinalizarIsos_Click);
             // 
             // DGV_Isos
             // 
@@ -270,74 +280,13 @@
             this.ppf,
             this.iso,
             this.patMOve});
+            this.DGV_Isos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_Isos.Location = new System.Drawing.Point(19, 19);
             this.DGV_Isos.MultiSelect = false;
             this.DGV_Isos.Name = "DGV_Isos";
             this.DGV_Isos.RowHeadersVisible = false;
             this.DGV_Isos.Size = new System.Drawing.Size(607, 137);
             this.DGV_Isos.TabIndex = 0;
-            // 
-            // BT_FinalizarIsos
-            // 
-            this.BT_FinalizarIsos.Location = new System.Drawing.Point(526, 162);
-            this.BT_FinalizarIsos.Name = "BT_FinalizarIsos";
-            this.BT_FinalizarIsos.Size = new System.Drawing.Size(100, 25);
-            this.BT_FinalizarIsos.TabIndex = 13;
-            this.BT_FinalizarIsos.Text = "Continuar";
-            this.BT_FinalizarIsos.UseVisualStyleBackColor = true;
-            this.BT_FinalizarIsos.Click += new System.EventHandler(this.BT_FinalizarIsos_Click);
-            // 
-            // GB_ChequeoConformaciones
-            // 
-            this.GB_ChequeoConformaciones.Controls.Add(this.BT_AbrirKilosPb);
-            this.GB_ChequeoConformaciones.Controls.Add(this.BT_EnviarMLCaShaper);
-            this.GB_ChequeoConformaciones.Controls.Add(this.L_conformaciones);
-            this.GB_ChequeoConformaciones.Controls.Add(this.BT_FinalizaChequeoConformaciones);
-            this.GB_ChequeoConformaciones.Enabled = false;
-            this.GB_ChequeoConformaciones.Location = new System.Drawing.Point(12, 192);
-            this.GB_ChequeoConformaciones.Name = "GB_ChequeoConformaciones";
-            this.GB_ChequeoConformaciones.Size = new System.Drawing.Size(200, 198);
-            this.GB_ChequeoConformaciones.TabIndex = 13;
-            this.GB_ChequeoConformaciones.TabStop = false;
-            this.GB_ChequeoConformaciones.Text = "4. Chequeo conformaciones";
-            // 
-            // BT_FinalizaChequeoConformaciones
-            // 
-            this.BT_FinalizaChequeoConformaciones.Location = new System.Drawing.Point(94, 162);
-            this.BT_FinalizaChequeoConformaciones.Name = "BT_FinalizaChequeoConformaciones";
-            this.BT_FinalizaChequeoConformaciones.Size = new System.Drawing.Size(100, 25);
-            this.BT_FinalizaChequeoConformaciones.TabIndex = 14;
-            this.BT_FinalizaChequeoConformaciones.Text = "Continuar";
-            this.BT_FinalizaChequeoConformaciones.UseVisualStyleBackColor = true;
-            this.BT_FinalizaChequeoConformaciones.Click += new System.EventHandler(this.BT_FinalizaChequeoConformaciones_Click);
-            // 
-            // L_conformaciones
-            // 
-            this.L_conformaciones.AutoSize = true;
-            this.L_conformaciones.Location = new System.Drawing.Point(12, 36);
-            this.L_conformaciones.Name = "L_conformaciones";
-            this.L_conformaciones.Size = new System.Drawing.Size(35, 13);
-            this.L_conformaciones.TabIndex = 12;
-            this.L_conformaciones.Text = "label2";
-            this.L_conformaciones.Visible = false;
-            // 
-            // BT_EnviarMLCaShaper
-            // 
-            this.BT_EnviarMLCaShaper.Location = new System.Drawing.Point(15, 85);
-            this.BT_EnviarMLCaShaper.Name = "BT_EnviarMLCaShaper";
-            this.BT_EnviarMLCaShaper.Size = new System.Drawing.Size(129, 25);
-            this.BT_EnviarMLCaShaper.TabIndex = 15;
-            this.BT_EnviarMLCaShaper.Text = "Enviar MLC a Shaper";
-            this.BT_EnviarMLCaShaper.UseVisualStyleBackColor = true;
-            // 
-            // BT_AbrirKilosPb
-            // 
-            this.BT_AbrirKilosPb.Location = new System.Drawing.Point(15, 116);
-            this.BT_AbrirKilosPb.Name = "BT_AbrirKilosPb";
-            this.BT_AbrirKilosPb.Size = new System.Drawing.Size(129, 25);
-            this.BT_AbrirKilosPb.TabIndex = 16;
-            this.BT_AbrirKilosPb.Text = "Abrir KilosPb";
-            this.BT_AbrirKilosPb.UseVisualStyleBackColor = true;
             // 
             // Tratamiento
             // 
@@ -367,6 +316,58 @@
             this.patMOve.HeaderText = "patMove";
             this.patMOve.Name = "patMOve";
             this.patMOve.Width = 200;
+            // 
+            // GB_ChequeoConformaciones
+            // 
+            this.GB_ChequeoConformaciones.Controls.Add(this.BT_AbrirKilosPb);
+            this.GB_ChequeoConformaciones.Controls.Add(this.BT_EnviarMLCaShaper);
+            this.GB_ChequeoConformaciones.Controls.Add(this.L_conformaciones);
+            this.GB_ChequeoConformaciones.Controls.Add(this.BT_FinalizaChequeoConformaciones);
+            this.GB_ChequeoConformaciones.Enabled = false;
+            this.GB_ChequeoConformaciones.Location = new System.Drawing.Point(12, 192);
+            this.GB_ChequeoConformaciones.Name = "GB_ChequeoConformaciones";
+            this.GB_ChequeoConformaciones.Size = new System.Drawing.Size(200, 198);
+            this.GB_ChequeoConformaciones.TabIndex = 13;
+            this.GB_ChequeoConformaciones.TabStop = false;
+            this.GB_ChequeoConformaciones.Text = "4. Chequeo conformaciones";
+            // 
+            // BT_AbrirKilosPb
+            // 
+            this.BT_AbrirKilosPb.Location = new System.Drawing.Point(15, 116);
+            this.BT_AbrirKilosPb.Name = "BT_AbrirKilosPb";
+            this.BT_AbrirKilosPb.Size = new System.Drawing.Size(129, 25);
+            this.BT_AbrirKilosPb.TabIndex = 16;
+            this.BT_AbrirKilosPb.Text = "Abrir KilosPb";
+            this.BT_AbrirKilosPb.UseVisualStyleBackColor = true;
+            // 
+            // BT_EnviarMLCaShaper
+            // 
+            this.BT_EnviarMLCaShaper.Location = new System.Drawing.Point(15, 85);
+            this.BT_EnviarMLCaShaper.Name = "BT_EnviarMLCaShaper";
+            this.BT_EnviarMLCaShaper.Size = new System.Drawing.Size(129, 25);
+            this.BT_EnviarMLCaShaper.TabIndex = 15;
+            this.BT_EnviarMLCaShaper.Text = "Enviar MLC a Shaper";
+            this.BT_EnviarMLCaShaper.UseVisualStyleBackColor = true;
+            // 
+            // L_conformaciones
+            // 
+            this.L_conformaciones.AutoSize = true;
+            this.L_conformaciones.Location = new System.Drawing.Point(12, 36);
+            this.L_conformaciones.Name = "L_conformaciones";
+            this.L_conformaciones.Size = new System.Drawing.Size(35, 13);
+            this.L_conformaciones.TabIndex = 12;
+            this.L_conformaciones.Text = "label2";
+            this.L_conformaciones.Visible = false;
+            // 
+            // BT_FinalizaChequeoConformaciones
+            // 
+            this.BT_FinalizaChequeoConformaciones.Location = new System.Drawing.Point(94, 162);
+            this.BT_FinalizaChequeoConformaciones.Name = "BT_FinalizaChequeoConformaciones";
+            this.BT_FinalizaChequeoConformaciones.Size = new System.Drawing.Size(100, 25);
+            this.BT_FinalizaChequeoConformaciones.TabIndex = 14;
+            this.BT_FinalizaChequeoConformaciones.Text = "Continuar";
+            this.BT_FinalizaChequeoConformaciones.UseVisualStyleBackColor = true;
+            this.BT_FinalizaChequeoConformaciones.Click += new System.EventHandler(this.BT_FinalizaChequeoConformaciones_Click);
             // 
             // Main
             // 

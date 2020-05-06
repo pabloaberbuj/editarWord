@@ -1,0 +1,156 @@
+[Version]
+PPF_VER = 3
+CAT3D_VER = 7.12.17
+[Header]
+PARAM = 21
+FIELDS = 5
+TDOSE =  200.0
+TPERCENT =  100.0
+NUMFRACTIONS = 25
+NORMALDOSE =  164.0
+MODALITY = CRT-3D
+[GenData]
+PATNAME = Mendoza Chaves^Myriam Adriana 
+PATID = 1-88924-0
+DIAGNOSIS = mama
+DATE = 16042020
+DRNAME = 
+PHYSNAME = 
+HOSPNAME = Mevaterapia
+MACHINE = MEDRANO_Fotones_06MV
+[Titles]
+Field #
+Isocenter
+Y         
+X         
+Table Ang
+Gantry Ang
+Gantry Rot
+Collim Ang
+Weight
+Wedge Filt
+Wedge  Pos
+ShieldFile
+TrayFactor
+Y2        
+Y1        
+X1        
+X2        
+SSD
+Device
+Beam Type
+MON. UNITS
+[FIELD_1]
+1
+ISO1
+170
+85
+354
+235
+0
+357
+0.825
+NONE
+----
+Mendoza_Ch3ed01
+0.940
+0
+0
+0
+0
+929.3
+0
+Photon
+79.3
+[FIELD_2]
+2
+ISO1
+170
+85
+354
+239
+0
+357
+0.170
+NONE
+----
+Mendoza_Ch5b352
+0.940
+0
+0
+0
+0
+942.7
+0
+Photon
+16.8
+[FIELD_4]
+4
+ISO1
+170
+85
+6
+60
+0
+357
+1.090
+NONE
+----
+Mendoza_Ch3ed04
+0.940
+0
+0
+0
+0
+936.3
+0
+Photon
+106.2
+[FIELD_7]
+7
+ISO2
+115
+155
+355
+15
+0
+4
+1.010
+NONE
+----
+Mendoza_Ch3ed07
+0.940
+0
+0
+0
+0
+955.9
+0
+Photon
+101.0
+[FIELD_9]
+9
+ISO2
+105
+140
+7
+195
+0
+5
+0.990
+NONE
+----
+Mendoza_Ch3ed19
+0.940
+0
+0
+0
+0
+917.3
+0
+Photon
+92.1
+[Footer]
+Dose Computation Mode: Convolution - Pencil Beam 8x8mm
+Normalized at depth of maximum dose for each field
+Density correction ON

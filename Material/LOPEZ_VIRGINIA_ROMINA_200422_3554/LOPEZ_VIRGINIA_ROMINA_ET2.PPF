@@ -1,0 +1,90 @@
+[Version]
+PPF_VER = 3
+CAT3D_VER = 7.12.00
+[Header]
+PARAM = 21
+FIELDS = 2
+TDOSE =  267.0
+TPERCENT =  100.0
+NUMFRACTIONS = 5
+NORMALDOSE =  148.5
+MODALITY = CRT-3D
+[GenData]
+PATNAME = LOPEZ^VIRGINIA ROMINA         
+PATID = 1-88974-0
+DIAGNOSIS = MAMA DER
+DATE = 23042020
+DRNAME = 
+PHYSNAME = 
+HOSPNAME = Mevaterapia
+MACHINE = LOMAS_Fotones_06MV
+[Titles]
+Field #
+Isocenter
+INPLANE   
+CROSSPLANE
+Table Ang
+Gantry Ang
+Gantry Rot
+Collim Ang
+Weight
+Wedge Filt
+Wedge  Pos
+ShieldFile
+TrayFactor
+HEAD-JAW  
+FEET-JAW  
+RIGHT-JAW 
+LEFT-JAW  
+SSD
+Device
+Beam Type
+MON. UNITS
+[FIELD_1]
+1
+ISO2
+100
+100
+180
+180
+0
+270
+0.950
+W45
+IN
+LOPEZ_VIRG3d821
+0.965
+0
+0
+0
+0
+986.9
+0
+Photon
+302.7
+[FIELD_2]
+2
+ISO2
+100
+70
+180
+270
+0
+180
+1.050
+NONE
+----
+LOPEZ_VIRG3d812
+0.965
+0
+0
+0
+0
+890.0
+0
+Photon
+157.2
+[Footer]
+Dose Computation Mode: Convolution - Pencil Beam 8x8mm
+Normalized at depth of maximum dose for each field
+Density correction ON

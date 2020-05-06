@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
@@ -35,8 +36,6 @@ namespace WinForm
             {
                 carpetaPaciente = dialog.FileName;
                 llenarLB_PPFs(carpetaPaciente);
-                crearPaciente(fullPath(LB_ppfs.Items[0].ToString()));
-                GB_esquemaTratamiento.Enabled = true;
             }
 
         }
@@ -55,9 +54,18 @@ namespace WinForm
         {
             LB_ppfs.DataSource = null;
             List<string> _todosLosPPfs = todosLosPPFs(path);
-            foreach (string ppf in _todosLosPPfs)
+            if (_todosLosPPfs.Count()==0)
             {
-                LB_ppfs.Items.Add(Path.GetFileName(ppf));
+                MessageBox.Show("No se encontraron archivos ppf en la carpeta indicada");
+            }
+            else
+            {
+                foreach (string ppf in _todosLosPPfs)
+                {
+                    LB_ppfs.Items.Add(Path.GetFileName(ppf));
+                }
+                crearPaciente(fullPath(LB_ppfs.Items[0].ToString()));
+                GB_esquemaTratamiento.Enabled = true;
             }
         }
 
@@ -77,6 +85,7 @@ namespace WinForm
             return carpetaPaciente + @"\" + nombreArchivo;
         }
 
+        
         private void nuevoTratamiento(string nombreArchivo, string nombreTratamiento)
         {
             Tratamiento tratamiento = new Tratamiento();
@@ -240,6 +249,11 @@ namespace WinForm
         {
             DGV_Isos.Rows.Clear();
             List<string> listapatMoves = new List<string>();
+            List<string> _todosLosPatMove = todosLosPatMove(carpetaPaciente);
+            if (_todosLosPatMove.Count()==0)
+            {
+                MessageBox.Show("No se encontraron archivos patMove en la carpeta indicada");
+            }
             foreach (string patMove in todosLosPatMove(carpetaPaciente))
             {
                 listapatMoves.Add(Path.GetFileNameWithoutExtension(patMove).ToLower());
