@@ -335,7 +335,7 @@ namespace WinForm
         {
             foreach (Tratamiento tratamiento in paciente.tratamientos)
             {
-                FormArmarCarpetas armarCarpeta = new FormArmarCarpetas(paciente, tratamiento);
+                FormArmarCarpetas2Isos armarCarpeta = new FormArmarCarpetas2Isos(paciente, tratamiento);
                 armarCarpeta.ShowDialog();
             }
         }

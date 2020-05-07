@@ -1,6 +1,6 @@
 ﻿namespace WinForm
 {
-    partial class FormArmarCarpetas
+    partial class FormArmarCarpetas2Isos
     {
         /// <summary>
         /// Variable del diseñador necesaria.

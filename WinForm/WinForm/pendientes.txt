@@ -7,7 +7,17 @@ Pendientes:
 
 - Eliminar Iso de plan (cuando vea de hacer para varios isos)
 - En FormArmarCarpetas rediseñar iniciar()
+- En FormArmarCarpetas corregir DGVs, ver qué mostrar
+- En FormArmarCarpetas cargar carteles explicativos
+- IO CrearCarpetas
+- En main aclaración tooltip en treeview
+- Quitar en tratamiento tratamiento de
 
-Lopez Virginia
-Lezcano
-Mendoza Chavez
+Varios isos por plan.
+1. Cargar BEVs campos Iso1
+2. Cargar Bevs campos setup Iso1
+3. Cargar BEVs campos Iso2
+4. Cargar BEVs campos setup Iso2
+
+
+

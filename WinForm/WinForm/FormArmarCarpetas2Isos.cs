@@ -14,19 +14,19 @@ using System.Threading.Tasks;
 
 namespace WinForm
 {
-    public partial class FormArmarCarpetas : Form
+    public partial class FormArmarCarpetas2Isos : Form
     {
         Paciente paciente = new Paciente();
         Tratamiento tratamiento = new Tratamiento();
-        Plan plan = new Plan();
+        Plan etapa = new Plan();
         List<Label> docCreados = new List<Label>();
         Dictionary<string, string> Diccionario = Equipos.diccionario();
 
 
-        int etapaNumero = 0;
+        int etapaNumero = 1;
         int indiceLabelDocCreados = 0;
 
-        public FormArmarCarpetas(Paciente _paciente, Tratamiento _tratamiento)
+        public FormArmarCarpetas2Isos(Paciente _paciente, Tratamiento _tratamiento)
         {
             paciente = _paciente;
             tratamiento = _tratamiento;
@@ -42,7 +42,7 @@ namespace WinForm
             GB_CamposSetUp.Enabled = false;
             GB_Documentos.Enabled = false;
             TB_ProfundidadesEfectivas.Enabled = false;
-            CB_NumeroDeEtapas.SelectedIndex = tratamiento.planes.Count-1;
+            CB_NumeroDeEtapas.SelectedIndex = tratamiento.planes.Count - 1;
             CB_NumeroDeEtapas.Enabled = false;
         }
 
@@ -70,7 +70,7 @@ namespace WinForm
             docCreados.Add(L_DocCreado2);
             docCreados.Add(L_DocCreado3);
             docCreados.Add(L_DocCreado4);
-            iniciar();
+            iniciarEtapa();
         }
 
         private void BT_CargarClick(object sender, EventArgs e)
@@ -78,18 +78,19 @@ namespace WinForm
 
         }
 
-        private void iniciar()
+        private void iniciarEtapa()
         {
+            etapa = tratamiento.planes[etapaNumero-1];
             limpiarLabelsDocCreado();
-            this.Text = "Armado de carpetas " + paciente.apellidoNombre + tratamiento.nombre;
+            this.Text = "Armado de carpetas " + paciente.apellidoNombre + "-" + tratamiento.nombre + " etapa "+ (etapaNumero).ToString();
             cargarDGVdePaciente(paciente);
             BT_HacerDocumentos.Enabled = true;
             habilitarControles();
             inicializarSetUP();
             //hayMasDeUnISO();
 
-            cargarDGVdePlan(tratamiento.planes.Last());
-            escribirLabels(tratamiento.planes.Last(), paciente);
+            cargarDGVdePlan(etapa);
+            escribirLabels(etapa, paciente);
             cargarListaImagenes();
             GB_Imagenes.Enabled = true;
             GB_CamposSetUp.Enabled = true;
@@ -109,6 +110,7 @@ namespace WinForm
                 RB_SoloBEV.Checked = true;
                 RB_SoloInforme.Enabled = false;
             }
+
         }
         private void cargarDGVdePlan(Plan plan)
         {
@@ -211,29 +213,35 @@ namespace WinForm
 
         private void BT_HacerDocumentos_Click(object sender, EventArgs e)
         {
-            if (Chequear.numeroDeImagenes(imagenesEsperadas(tratamiento.planes.Last()), imagenesEncontradas(paciente)))
+            if (Chequear.numeroDeImagenes(imagenesEsperadas(etapa), imagenesEncontradas(paciente)))
             {
                 if (!celdasVacias() || (celdasVacias() && MessageBox.Show("Hay datos sin completar ¿desea continuar?", "", MessageBoxButtons.YesNo) == DialogResult.Yes))
                 {
-                    if (etapaNumero < 2)
+                    if (etapaNumero ==1)
                     {
-                        IO.crearCarpetas(paciente,tratamiento);
+                        IO.crearCarpetas(paciente, tratamiento);
                     }
-                    if (etapaNumero == 0)
+                    if (tratamiento.planes.Count()== 1)
                     {
                         unaEtapaBEVeInforme();
                     }
                     else if (etapaNumero <= tratamiento.planes.Count())
                     {
                         variasEtapasBEV(etapaNumero);
-                        etapaNumero++;
-                        if (etapaNumero > tratamiento.planes.Count())
+                        if (etapaNumero == tratamiento.planes.Count())
                         {
+                            etapaNumero++;
                             BT_Cargar.Enabled = false;
                             RB_AmbosDocumentos.Enabled = false;
                             RB_SoloBEV.Enabled = false;
                             RB_SoloInforme.Enabled = true;
                             RB_SoloInforme.Checked = true;
+                        }
+                        
+                        else
+                        {
+                            etapaNumero++;
+                            iniciarEtapa();
                         }
                     }
                     else
@@ -255,8 +263,6 @@ namespace WinForm
 
         private void crearInforme()
         {
-            //tratamiento.cantidadTotalDeCampos();
-            //tratamiento.dosisAcumulada();
             Word.crearArchivoInforme(paciente, tratamiento, hayDosImagenes3D(), hayTresImagenes3D(), hayImagenesSetUp(), imprimirBEV());
             limpiarFormulario(this);
         }
@@ -291,17 +297,22 @@ namespace WinForm
 
 
 
-        private void variasEtapasBEV(int etapa)
+        private void variasEtapasBEV(int numEtapa)
         {
             try
             {
-                guardarDGVenPaciente(paciente);
-                guardarDGVenPlan(tratamiento.planes[etapa - 1]);
-                crearBEV(etapa);
-                IO.moverImagenes(paciente, etapa);
-                MessageBox.Show("Se generó el documento y se movieron las imágenes\nSe procederá automáticamente a la siguiente etapa");
-                escribirLabelDocCreado("BEV etapa " + etapa.ToString(), indiceLabelDocCreados);
-                if (etapa < tratamiento.planes.Count())
+                //guardarDGVenPaciente(paciente);
+                //guardarDGVenPlan(etapa);
+                crearBEV(numEtapa);
+                IO.moverImagenes(paciente, numEtapa);
+                string texto = "Se generó el documento y se movieron las imágenes";
+                if (numEtapa<tratamiento.planes.Count())
+                {
+                    texto += "\nSe procederá automáticamente a la siguiente etapa";
+                }
+                MessageBox.Show(texto);
+                escribirLabelDocCreado("BEV etapa " + numEtapa.ToString(), indiceLabelDocCreados);
+                if (numEtapa < tratamiento.planes.Count())
                 {
                     //BT_Cargar.Enabled = true;
                     //BT_Cargar.Text = "Cargar PPF Etapa " + (etapa + 1).ToString();
@@ -475,7 +486,7 @@ namespace WinForm
             celdaVacia(DGV_DatosPlan);
         }
 
-        
+
         private void hayMasDeUnISO()
         {
             if (tratamiento.planes.Last().iso == "Hay más de un ISO")
@@ -487,7 +498,7 @@ namespace WinForm
 
         private void CB_NumeroDeEtapas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (numeroDeEtapas() > 1)
+            /*if (numeroDeEtapas() > 1)
             {
                 etapaNumero = 1;
                 BT_Cargar.Text = "Cargar PPF etapa 1";
@@ -496,7 +507,7 @@ namespace WinForm
             {
                 etapaNumero = 0;
                 BT_Cargar.Text = "Cargar PPF";
-            }
+            }*/
 
         }
 
@@ -604,7 +615,7 @@ namespace WinForm
             int cantidad = 0;
             foreach (Campo campo in plan.listaCampos)
             {
-                if (campo.iso==iso.ID)
+                if (campo.iso == iso.ID)
                 {
                     cantidad++;
                 }
