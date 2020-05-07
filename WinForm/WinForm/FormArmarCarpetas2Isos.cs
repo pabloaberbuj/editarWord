@@ -44,6 +44,7 @@ namespace WinForm
             TB_ProfundidadesEfectivas.Enabled = false;
             CB_NumeroDeEtapas.SelectedIndex = tratamiento.planes.Count - 1;
             CB_NumeroDeEtapas.Enabled = false;
+            limpiarLabelsDocCreado();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -81,7 +82,7 @@ namespace WinForm
         private void iniciarEtapa()
         {
             etapa = tratamiento.planes[etapaNumero-1];
-            limpiarLabelsDocCreado();
+            
             this.Text = "Armado de carpetas " + paciente.apellidoNombre + "-" + tratamiento.nombre + " etapa "+ (etapaNumero).ToString();
             cargarDGVdePaciente(paciente);
             BT_HacerDocumentos.Enabled = true;
@@ -102,6 +103,7 @@ namespace WinForm
                 RB_SoloBEV.Enabled = true;
                 RB_AmbosDocumentos.Checked = true;
                 RB_SoloInforme.Enabled = true;
+                escribirLabelDocCreado("...en proceso BEV", indiceLabelDocCreados, true);
             }
             if (numeroDeEtapas() > 1)
             {
@@ -109,6 +111,7 @@ namespace WinForm
                 RB_SoloBEV.Enabled = true;
                 RB_SoloBEV.Checked = true;
                 RB_SoloInforme.Enabled = false;
+                escribirLabelDocCreado("...en proceso BEV etapa " + etapaNumero.ToString(), indiceLabelDocCreados, true);
             }
 
         }
@@ -246,6 +249,7 @@ namespace WinForm
                     }
                     else
                     {
+                        escribirLabelDocCreado("...en proceso informe", indiceLabelDocCreados, true);
                         variasEtapasInforme();
                     }
                 }
@@ -277,12 +281,12 @@ namespace WinForm
                 if (imprimirBEV())
                 {
                     crearBEV(1);
-                    escribirLabelDocCreado("BEV", indiceLabelDocCreados);
+                    escribirLabelDocCreado("BEV", indiceLabelDocCreados,false);
                 }
                 if (imprimirInforme())
                 {
                     crearInforme();
-                    escribirLabelDocCreado("Informe", indiceLabelDocCreados);
+                    escribirLabelDocCreado("Informe", indiceLabelDocCreados,false);
                 }
                 IO.moverImagenes(paciente);
                 MessageBox.Show("Se generaron los documentos y se movieron las imágenes");
@@ -311,7 +315,7 @@ namespace WinForm
                     texto += "\nSe procederá automáticamente a la siguiente etapa";
                 }
                 MessageBox.Show(texto);
-                escribirLabelDocCreado("BEV etapa " + numEtapa.ToString(), indiceLabelDocCreados);
+                escribirLabelDocCreado("BEV etapa " + numEtapa.ToString(), indiceLabelDocCreados,false);
                 if (numEtapa < tratamiento.planes.Count())
                 {
                     //BT_Cargar.Enabled = true;
@@ -356,7 +360,7 @@ namespace WinForm
                 crearInforme();
                 IO.moverImagenes(paciente, 0, true);
                 MessageBox.Show("Se generó el documento y se movieron las imágenes");
-                escribirLabelDocCreado("Informe", indiceLabelDocCreados);
+                escribirLabelDocCreado("Informe", indiceLabelDocCreados,false);
             }
             catch (Exception)
             {
@@ -593,11 +597,20 @@ namespace WinForm
             TB_SetUp2Tam.Text = "10x10";
         }
 
-        private void escribirLabelDocCreado(string texto, int indice)
+        private void escribirLabelDocCreado(string texto, int indice, bool enProceso)
         {
             docCreados[indice].Text = texto;
             docCreados[indice].Visible = true;
-            indiceLabelDocCreados++;
+            if (enProceso)
+            {
+                docCreados[indice].ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                docCreados[indice].ForeColor = System.Drawing.Color.Green;
+                indiceLabelDocCreados++;
+            }
+            
         }
 
         private void limpiarLabelsDocCreado()
