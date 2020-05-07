@@ -104,7 +104,7 @@
             this.DGV_DatosPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_DatosPlan.ColumnHeadersVisible = false;
             this.DGV_DatosPlan.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.DGV_DatosPlan.Location = new System.Drawing.Point(476, 161);
+            this.DGV_DatosPlan.Location = new System.Drawing.Point(491, 159);
             this.DGV_DatosPlan.Name = "DGV_DatosPlan";
             this.DGV_DatosPlan.RowHeadersVisible = false;
             this.DGV_DatosPlan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -388,7 +388,7 @@
             this.DGV_DatosPaciente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_DatosPaciente.ColumnHeadersVisible = false;
             this.DGV_DatosPaciente.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.DGV_DatosPaciente.Location = new System.Drawing.Point(476, 12);
+            this.DGV_DatosPaciente.Location = new System.Drawing.Point(491, 12);
             this.DGV_DatosPaciente.Name = "DGV_DatosPaciente";
             this.DGV_DatosPaciente.RowHeadersVisible = false;
             this.DGV_DatosPaciente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -439,7 +439,7 @@
             this.GB_DocumentosCreados.Controls.Add(this.L_DocCreado1);
             this.GB_DocumentosCreados.Location = new System.Drawing.Point(252, 12);
             this.GB_DocumentosCreados.Name = "GB_DocumentosCreados";
-            this.GB_DocumentosCreados.Size = new System.Drawing.Size(195, 166);
+            this.GB_DocumentosCreados.Size = new System.Drawing.Size(233, 166);
             this.GB_DocumentosCreados.TabIndex = 48;
             this.GB_DocumentosCreados.TabStop = false;
             this.GB_DocumentosCreados.Text = "Documentos creados";
@@ -449,7 +449,7 @@
             this.L_DocCreado4.AutoSize = true;
             this.L_DocCreado4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.L_DocCreado4.ForeColor = System.Drawing.Color.Green;
-            this.L_DocCreado4.Location = new System.Drawing.Point(27, 100);
+            this.L_DocCreado4.Location = new System.Drawing.Point(13, 100);
             this.L_DocCreado4.Name = "L_DocCreado4";
             this.L_DocCreado4.Size = new System.Drawing.Size(77, 13);
             this.L_DocCreado4.TabIndex = 42;
@@ -461,7 +461,7 @@
             this.L_DocCreado3.AutoSize = true;
             this.L_DocCreado3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.L_DocCreado3.ForeColor = System.Drawing.Color.Green;
-            this.L_DocCreado3.Location = new System.Drawing.Point(27, 76);
+            this.L_DocCreado3.Location = new System.Drawing.Point(13, 76);
             this.L_DocCreado3.Name = "L_DocCreado3";
             this.L_DocCreado3.Size = new System.Drawing.Size(77, 13);
             this.L_DocCreado3.TabIndex = 41;
@@ -473,7 +473,7 @@
             this.L_DocCreado2.AutoSize = true;
             this.L_DocCreado2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.L_DocCreado2.ForeColor = System.Drawing.Color.Green;
-            this.L_DocCreado2.Location = new System.Drawing.Point(27, 53);
+            this.L_DocCreado2.Location = new System.Drawing.Point(13, 53);
             this.L_DocCreado2.Name = "L_DocCreado2";
             this.L_DocCreado2.Size = new System.Drawing.Size(77, 13);
             this.L_DocCreado2.TabIndex = 40;
@@ -485,14 +485,14 @@
             this.L_DocCreado1.AutoSize = true;
             this.L_DocCreado1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.L_DocCreado1.ForeColor = System.Drawing.Color.Green;
-            this.L_DocCreado1.Location = new System.Drawing.Point(27, 28);
+            this.L_DocCreado1.Location = new System.Drawing.Point(13, 28);
             this.L_DocCreado1.Name = "L_DocCreado1";
             this.L_DocCreado1.Size = new System.Drawing.Size(77, 13);
             this.L_DocCreado1.TabIndex = 39;
             this.L_DocCreado1.Text = "DocCreado1";
             this.L_DocCreado1.Visible = false;
             // 
-            // FormArmarCarpetas
+            // FormArmarCarpetas2Isos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -509,7 +509,7 @@
             this.Controls.Add(this.GB_CamposSetUp);
             this.Controls.Add(this.DGV_DatosPlan);
             this.Controls.Add(this.BT_Cargar);
-            this.Name = "FormArmarCarpetas";
+            this.Name = "FormArmarCarpetas2Isos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Armado de carpetas";
             this.Load += new System.EventHandler(this.Form1_Load);

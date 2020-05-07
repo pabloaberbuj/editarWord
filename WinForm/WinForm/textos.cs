@@ -16,9 +16,9 @@ namespace WinForm
             return "Nombre: " + paciente.apellidoNombre + "                                        HC:" + paciente.ID + "                                      " + DateTime.Today.ToShortDateString();
         }
         
-        public static string encabezadoBEV2(Tratamiento tratamiento, int etapa) //centrado
+        public static string encabezadoBEV2(Tratamiento tratamiento, int etapa, Iso iso) //centrado
         {
-            return "Etapa " + etapa.ToString() + "   –   " + tratamiento.planes[etapa - 1].iso + "   –   Equipo " + tratamiento.planes[etapa - 1].equipo;
+            return "Etapa " + etapa.ToString() + "   –   " + iso.ID + "   –   Equipo " + tratamiento.planes[etapa - 1].equipo;
         }
         
         public static string parametrosCampoTto(Campo campo)

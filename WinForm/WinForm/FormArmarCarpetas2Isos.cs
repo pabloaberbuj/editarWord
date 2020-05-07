@@ -103,7 +103,7 @@ namespace WinForm
                 RB_SoloBEV.Enabled = true;
                 RB_AmbosDocumentos.Checked = true;
                 RB_SoloInforme.Enabled = true;
-                escribirLabelDocCreado("...en proceso BEV", indiceLabelDocCreados, true);
+                escribirLabelDocCreado("...en proceso BEV" + agregarIsosALabel(etapa), indiceLabelDocCreados, true);
             }
             if (numeroDeEtapas() > 1)
             {
@@ -111,7 +111,7 @@ namespace WinForm
                 RB_SoloBEV.Enabled = true;
                 RB_SoloBEV.Checked = true;
                 RB_SoloInforme.Enabled = false;
-                escribirLabelDocCreado("...en proceso BEV etapa " + etapaNumero.ToString(), indiceLabelDocCreados, true);
+                escribirLabelDocCreado("...en proceso BEV etapa " + etapaNumero.ToString() + agregarIsosALabel(etapa), indiceLabelDocCreados, true);
             }
 
         }
@@ -281,7 +281,7 @@ namespace WinForm
                 if (imprimirBEV())
                 {
                     crearBEV(1);
-                    escribirLabelDocCreado("BEV", indiceLabelDocCreados,false);
+                    escribirLabelDocCreado("BEV" + agregarIsosALabel(etapa), indiceLabelDocCreados,false);
                 }
                 if (imprimirInforme())
                 {
@@ -315,7 +315,7 @@ namespace WinForm
                     texto += "\nSe procederá automáticamente a la siguiente etapa";
                 }
                 MessageBox.Show(texto);
-                escribirLabelDocCreado("BEV etapa " + numEtapa.ToString(), indiceLabelDocCreados,false);
+                escribirLabelDocCreado("BEV etapa " + numEtapa.ToString() + agregarIsosALabel(etapa), indiceLabelDocCreados,false);
                 if (numEtapa < tratamiento.planes.Count())
                 {
                     //BT_Cargar.Enabled = true;
@@ -417,10 +417,13 @@ namespace WinForm
             int aux = 0;
             if (imprimirBEV())
             {
-                aux += plan.cantidadDeCampos;
-                if (hayImagenesSetUp())
+                foreach (Iso iso in plan.isos)
                 {
-                    aux += 2;
+                    aux += iso.camposConEsteIso(plan).Count();
+                    if (hayImagenesSetUp())
+                    {
+                        aux += 2;
+                    }
                 }
             }
             if (imprimirInforme())
@@ -438,6 +441,8 @@ namespace WinForm
             return aux;
         }
 
+
+        
         private void escribirLabels(Plan plan, Paciente paciente)
         {
             L_ImagenesEsperadas.Text = imagenesEsperadas(plan).ToString();
@@ -623,17 +628,20 @@ namespace WinForm
             indiceLabelDocCreados = 0;
         }
 
-        private int camposConEsteIso(Plan plan, Iso iso)
+        private string agregarIsosALabel(Plan etapa)
         {
-            int cantidad = 0;
-            foreach (Campo campo in plan.listaCampos)
+            string texto = "";
+            if (etapa.isos.Count > 1)
             {
-                if (campo.iso == iso.ID)
+                texto += " (";
+                foreach (Iso iso in etapa.isos)
                 {
-                    cantidad++;
+                    texto += iso.ID + " ";
                 }
+                texto = texto.Remove(texto.Length - 1);
+                texto += ")";
             }
-            return cantidad;
+            return texto;
         }
     }
 }
